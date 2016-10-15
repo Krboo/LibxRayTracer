@@ -6,11 +6,44 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 14:57:25 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/07 18:14:30 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/15 16:11:49 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../includes/rtv1.h"
+
+t_vec	*new_vec(double x,double y, double z)
+{
+	t_vec	*vec;
+
+	if (!(vec = (t_vec *)malloc(sizeof(t_vec))))
+		return (NULL);
+	vec->x = x;
+	vec->y = y;
+	vec->z = z;
+
+	return(vec);
+}
+
+t_vec	*ft_vector(int fd)
+{
+	double x;
+	double y;
+	double z;
+	char	*line;
+
+	if (get_next_line(fd, &line) < 1)
+		exit(-1);
+	x = ft_atodouble(&line);
+	y = ft_atodouble(&line);
+	z = ft_atodouble(&line);
+	return (new_vec(x, y, z));
+}
+
+void	ft_deleted_vect(t_vec *vect)
+{
+	free(vect);
+}
 
 t_vec	add_vect(t_vec	*v1, t_vec	*v2)
 {
@@ -32,7 +65,7 @@ t_vec	sub_vect(t_vec *v1, t_vec *v2)
 	return (v3);
 }
 
-t_vec	mult_vect(t_vec	*v1, float fact)
+t_vec	mult_vect(t_vec	*v1, double fact)
 {
 	t_vec	v2;
 	v2.x = v1->x * fact;
@@ -41,7 +74,7 @@ t_vec	mult_vect(t_vec	*v1, float fact)
 	return (v2);
 }
 
-float	scale(t_vec *v1, t_vec *v2)
+double	scale(t_vec *v1, t_vec *v2)
 {
 	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
 }
@@ -49,7 +82,7 @@ float	scale(t_vec *v1, t_vec *v2)
 t_vec	norm_vect(t_vec *v1)
 {
 	t_vec	v2;
-	float	len;
+	double	len;
 
 	len = sqrtf((v1->x * v1->x) + (v1->y * v1->y) + (v1->z * v1->z));
 	v2.x = v1->x / len;

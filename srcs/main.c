@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/13 18:21:58 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/15 14:51:50 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	display(t_env	*e)
 		mlx_string_put(e->mlx, e->win, 5, 0, RED, "light x: ");
 		mlx_string_put(e->mlx, e->win, 5, 15, RED, "light y: ");
 		mlx_string_put(e->mlx, e->win, 5, 30, RED, "light z: ");
-		mlx_string_put(e->mlx, e->win, 95, 0, RED, ft_itoa(e->l.x));
-		mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->l.y));
-		mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->l.z));
+		mlx_string_put(e->mlx, e->win, 95, 0, RED, ft_itoa(e->l->x));
+		mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->l->y));
+		mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->l->z));
 		mlx_string_put(e->mlx, e->win, 5, 100, RED, "sphere x: ");
 		mlx_string_put(e->mlx, e->win, 5, 115, RED, "sphere y: ");
 		mlx_string_put(e->mlx, e->win, 5, 130, RED, "sphere z: ");
@@ -36,22 +36,12 @@ void	display(t_env	*e)
 		mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(e->obj.radius));
 }
 
-t_vec	init_vec(int x, int y, int z)
-{
-	t_vec	vec;
-
-	vec.x = x;
-	vec.y = y;
-	vec.z = z;
-	return (vec);
-}
-
 static t_env	init_env(char *scene)
 {
 	t_env	e;
 
 	(void)scene;
-	e.l = init_vec(0,0,0);
+	e.l = new_vec(0,0,0);
 	ft_init_sphere(&e.obj);
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, W, H, "Rtv1");

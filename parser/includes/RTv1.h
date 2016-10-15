@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 16:08:43 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/14 15:30:15 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/14 18:24:57 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef	struct		s_color
 {
 	double			red;
 	double			green;
-	double			blue;	
+	double			blue;
 }					t_color;
 
 typedef struct		s_img
@@ -42,7 +42,7 @@ typedef struct		s_img
 	int				bpp;
 	int				endian;
 	int				sl;
-	void			*img;	
+	void			*img;
 }					t_img;
 
 typedef	struct		s_cam
@@ -106,7 +106,6 @@ typedef struct		s_env
 	void			*win;
 	t_img			img;
 }					t_env;
-
 /*
 ** camera.c
 */

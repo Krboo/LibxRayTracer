@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 14:54:24 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/13 20:16:53 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/15 14:51:27 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ static void	ft_put_pixel(t_env	env, int x, int y, int color)
 static t_ray	create_ray(int x, int y)
 {
 	t_ray	ray;
-	t_vec	v1;
+	t_vec	*v1;
 	t_vec	v2;
 
-	v1 = init_vec(0,0,0);
+	v1 = new_vec(0,0,0);
 	v2.x = x - (W / 2);
 	v2.y = y - (H / 2);
 	v2.z = -(W / (2 * tan(FOV / 2)));
 	v2 = norm_vect(&v2);
-	ray.dir = sub_vect(&v2, &v1);
-	ray.pos = v1;
+	ray.dir = sub_vect(&v2, v1);
+	ray.pos = *v1;
 	return (ray);
 }
 
-int	lambert_rgb(int r, int g, int b, float lambert)
+int	lambert_rgb(int r, int g, int b, double lambert)
 {
 	r *= lambert;
 	g *= lambert;
@@ -51,16 +51,16 @@ int	lambert_rgb(int r, int g, int b, float lambert)
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 
-static float	calc_lamb(t_env	*e, t_ray *ray, float d)
+static double	calc_lamb(t_env	*e, t_ray *ray, double d)
 {
 	t_vec	vec;
 	t_vec	cam;
 	t_vec	yo;
-	float	lambert;
+	double	lambert;
 
 	cam = mult_vect(&ray->dir, d);
 	cam = add_vect(&ray->pos, &cam);
-	yo = sub_vect(&cam, &e->l);
+	yo = sub_vect(&cam, e->l);
 	yo = norm_vect(&yo);
 	vec = sub_vect(&e->obj.pos, &cam);
 	vec = norm_vect(&vec);
@@ -73,7 +73,7 @@ int	draw(t_env	env)
 {
 	int		x;
 	int		y;
-	float	d;
+	double	d;
 	t_ray	ray;
 
 	y = 0;
