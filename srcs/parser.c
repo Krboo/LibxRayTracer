@@ -30,7 +30,7 @@ t_scene		*ft_get_scene(void)
 	return (s);
 }
 
-void		ft_init_scene(char *scene)
+t_scene		*ft_init_scene(char *scene)
 {
 	char	*line;
 	int		fd;
@@ -56,4 +56,5 @@ void		ft_init_scene(char *scene)
 	}
 	if (ret == -1)
 		exit (-1);
+	return (s);
 }

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/15 16:39:55 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/15 17:58:56 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,11 +151,11 @@ void                ft_deleted_vect(t_vec *vect);
 */
 t_cam	*ft_new_camera(t_vec *pos, t_vec *dir);
 t_scene	*ft_get_scene(void);
-void	ft_init_scene(char *scene);
+t_scene	*ft_init_scene(char *scene);
 /*
 ** objects.c
 */
-void	ft_init_sphere(t_obj *s);
+void	ft_init_sphere(t_obj *s, t_scene *sc);
 void	ft_init_plan(t_obj *s);
 int		ft_sphere(t_obj *s, t_ray *r, double *d);
 int		ft_plan(t_obj *s, t_ray *r, double *d);

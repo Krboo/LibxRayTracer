@@ -6,18 +6,18 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/15 14:34:50 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/15 18:00:40 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
 
-void ft_init_sphere(t_obj *s)
+void ft_init_sphere(t_obj *s, t_scene *sc)
 {
-	s->pos.x = 0;
-	s->pos.y = 0;
-	s->pos.z = 45;
-	s->radius = 15;
+	s->pos.x = sc->sphere->pos->x;
+	s->pos.y = sc->sphere->pos->y;
+	s->pos.z = sc->sphere->pos->z;
+	s->radius = sc->sphere->radius;
 	s->color = RED;
 }
 

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/15 14:51:50 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/15 17:59:06 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ void	display(t_env	*e)
 static t_env	init_env(char *scene)
 {
 	t_env	e;
+	t_scene	*s;
 
-	(void)scene;
-	e.l = new_vec(0,0,0);
-	ft_init_sphere(&e.obj);
+	s = ft_init_scene(scene);
+	ft_putnbr(s->cam->pos->x);
+	ft_putnbr(s->cam->pos->y);
+	ft_putnbr(s->cam->pos->z);
+	e.l = new_vec(s->spot->pos->x,s->spot->pos->y,s->spot->pos->z);
+	ft_init_sphere(&e.obj, s);
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, W, H, "Rtv1");
 	e.img = mlx_new_image(e.mlx, W, H);
