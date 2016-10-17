@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/17 12:02:13 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/17 17:22:32 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ void	display(t_env	*e)
 		mlx_string_put(e->mlx, e->win, 95, 115, RED, ft_itoa(e->s->sphere->pos->y));
 		mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(e->s->sphere->pos->z));
 		mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(e->s->sphere->radius));
+		mlx_string_put(e->mlx, e->win, 5, 200, RED, "camera x: ");
+		mlx_string_put(e->mlx, e->win, 5, 215, RED, "camera y: ");
+		mlx_string_put(e->mlx, e->win, 5, 230, RED, "camera z: ");
+		mlx_string_put(e->mlx, e->win, 95, 200, RED, ft_itoa(e->s->cam->pos->x));
+		mlx_string_put(e->mlx, e->win, 95, 215, RED, ft_itoa(e->s->cam->pos->y));
+		mlx_string_put(e->mlx, e->win, 95, 230, RED, ft_itoa(e->s->cam->pos->z));
 }
 
 static t_env	init_env(char *map)
