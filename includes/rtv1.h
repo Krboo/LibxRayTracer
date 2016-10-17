@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/17 11:59:50 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/17 13:41:06 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,6 @@ typedef	struct		s_ray
 	t_vec			dir;
 }					t_ray;
 
-typedef struct		s_obj
-{
-	int				type;
-	double			size;
-	int				radius;
-	double			d;
-	int				color;
-	t_vec			dir;
-	t_vec			pos;
-	t_vec			scale;
-}					t_obj;
 
 typedef struct		s_env
 {
@@ -126,7 +115,6 @@ typedef struct		s_env
 	int				bpp;
 	int				s_line;
 	char			*data;
-	t_obj			obj;
 }					t_env;
 
 int		draw(t_env env);
@@ -156,7 +144,7 @@ t_scene	*ft_init_scene(char *scene);
 */
 int		ft_sphere(t_scene *s, t_ray *r, double *d);
 int		ft_plan(t_scene *s, t_ray *r, double *d);
-void	ft_init_light(t_obj *l);
+//int		ft_cylindre(t_scene *s, t_ray *r, double *d);
 /*
 ** camera.c
 */

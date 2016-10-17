@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 14:54:24 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/17 11:55:41 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/17 13:40:44 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	draw(t_env	env)
 		{
 			d = 20000.0;
 			ray = create_ray(x, y);
-			if (ft_sphere(env.s, &ray, &d) == 1)
+			if ((ft_sphere(env.s, &ray, &d) == 1) || (ft_plan(env.s, &ray, &d) == 1))
 				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(&env, &ray, d)));
 			else
 				ft_put_pixel(env, x, y, BLACK);
