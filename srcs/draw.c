@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 14:54:24 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/15 14:51:27 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/17 11:55:41 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static double	calc_lamb(t_env	*e, t_ray *ray, double d)
 
 	cam = mult_vect(&ray->dir, d);
 	cam = add_vect(&ray->pos, &cam);
-	yo = sub_vect(&cam, e->l);
+	yo = sub_vect(&cam, e->s->spot->pos);
 	yo = norm_vect(&yo);
-	vec = sub_vect(&e->obj.pos, &cam);
+	vec = sub_vect(e->s->sphere->pos, &cam);
 	vec = norm_vect(&vec);
 	lambert = scale(&yo, &vec);
 	lambert = lambert < EPSI ? 0 : lambert;
@@ -84,7 +84,7 @@ int	draw(t_env	env)
 		{
 			d = 20000.0;
 			ray = create_ray(x, y);
-			if (ft_sphere(&env.obj, &ray, &d) == 1)
+			if (ft_sphere(env.s, &ray, &d) == 1)
 				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(&env, &ray, d)));
 			else
 				ft_put_pixel(env, x, y, BLACK);

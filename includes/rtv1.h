@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/15 17:58:56 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/17 11:59:50 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,10 @@ typedef struct		s_env
 	void			*win;
 //	t_img			img;
 	void			*img;
-	int				display;
+	t_scene			*s;
 	int				endian;
 	int				bpp;
 	int				s_line;
-	t_vec				*l;
 	char			*data;
 	t_obj			obj;
 }					t_env;
@@ -155,10 +154,8 @@ t_scene	*ft_init_scene(char *scene);
 /*
 ** objects.c
 */
-void	ft_init_sphere(t_obj *s, t_scene *sc);
-void	ft_init_plan(t_obj *s);
-int		ft_sphere(t_obj *s, t_ray *r, double *d);
-int		ft_plan(t_obj *s, t_ray *r, double *d);
+int		ft_sphere(t_scene *s, t_ray *r, double *d);
+int		ft_plan(t_scene *s, t_ray *r, double *d);
 void	ft_init_light(t_obj *l);
 /*
 ** camera.c

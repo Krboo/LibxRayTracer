@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/15 17:59:06 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/17 12:02:13 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,35 +23,28 @@ void	display(t_env	*e)
 		mlx_string_put(e->mlx, e->win, 5, 0, RED, "light x: ");
 		mlx_string_put(e->mlx, e->win, 5, 15, RED, "light y: ");
 		mlx_string_put(e->mlx, e->win, 5, 30, RED, "light z: ");
-		mlx_string_put(e->mlx, e->win, 95, 0, RED, ft_itoa(e->l->x));
-		mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->l->y));
-		mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->l->z));
+		mlx_string_put(e->mlx, e->win, 95, 0, RED, ft_itoa(e->s->spot->pos->x));
+		mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->s->spot->pos->y));
+		mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->s->spot->pos->z));
 		mlx_string_put(e->mlx, e->win, 5, 100, RED, "sphere x: ");
 		mlx_string_put(e->mlx, e->win, 5, 115, RED, "sphere y: ");
 		mlx_string_put(e->mlx, e->win, 5, 130, RED, "sphere z: ");
 		mlx_string_put(e->mlx, e->win, 5, 145, RED, "sphere r: ");
-		mlx_string_put(e->mlx, e->win, 95, 100, RED, ft_itoa(e->obj.pos.x));
-		mlx_string_put(e->mlx, e->win, 95, 115, RED, ft_itoa(e->obj.pos.y));
-		mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(e->obj.pos.z));
-		mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(e->obj.radius));
+		mlx_string_put(e->mlx, e->win, 95, 100, RED, ft_itoa(e->s->sphere->pos->x));
+		mlx_string_put(e->mlx, e->win, 95, 115, RED, ft_itoa(e->s->sphere->pos->y));
+		mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(e->s->sphere->pos->z));
+		mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(e->s->sphere->radius));
 }
 
-static t_env	init_env(char *scene)
+static t_env	init_env(char *map)
 {
 	t_env	e;
-	t_scene	*s;
 
-	s = ft_init_scene(scene);
-	ft_putnbr(s->cam->pos->x);
-	ft_putnbr(s->cam->pos->y);
-	ft_putnbr(s->cam->pos->z);
-	e.l = new_vec(s->spot->pos->x,s->spot->pos->y,s->spot->pos->z);
-	ft_init_sphere(&e.obj, s);
+	e.s = ft_init_scene(map);
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, W, H, "Rtv1");
 	e.img = mlx_new_image(e.mlx, W, H);
 	e.data = mlx_get_data_addr(e.img, &e.bpp, &e.s_line, &e.endian);
-	e.display = 1;
 	return (e);
 }
 
