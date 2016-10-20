@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:19:33 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/17 17:39:12 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/13 19:10:51 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@
 # define Z_PLUS 121
 # define ESC 53
 # define RESET 71
-
-# define KEY2 84
-# define KEY4 86 
-# define KEY6 88
-# define KEY8 91
 
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 14:54:24 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/17 17:28:52 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:48:57 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static void	ft_put_pixel(t_env	env, int x, int y, int color)
 	}
 }
 
-static t_ray	create_ray(t_env env, int x, int y)
+static t_ray	create_ray(int x, int y)
 {
 	t_ray	ray;
 	t_vec	*v1;
 	t_vec	v2;
 
-	v1 = env.s->cam->pos;
+	v1 = new_vec(0,0,0);
 	v2.x = x - (W / 2);
 	v2.y = y - (H / 2);
 	v2.z = -(W / (2 * tan(FOV / 2)));
@@ -83,8 +83,8 @@ int	draw(t_env	env)
 		while (x < W)
 		{
 			d = 20000.0;
-			ray = create_ray(env, x, y);
-			if ((ft_sphere(env.s, &ray, &d) == 1) /*|| (ft_plan(env.s, &ray, &d) == 1)*/)
+			ray = create_ray(x, y);
+			if ((ft_cylindre(env.s, &ray, &d) == 1) || (ft_plan(env.s, &ray, &d) == 1))
 				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(&env, &ray, d)));
 			else
 				ft_put_pixel(env, x, y, BLACK);

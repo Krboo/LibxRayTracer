@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/17 17:22:32 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:28:39 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,20 @@ int		ft_error(char *str)
 
 void	display(t_env	*e)
 {
-		mlx_string_put(e->mlx, e->win, 5, 0, RED, "light x: ");
-		mlx_string_put(e->mlx, e->win, 5, 15, RED, "light y: ");
-		mlx_string_put(e->mlx, e->win, 5, 30, RED, "light z: ");
-		mlx_string_put(e->mlx, e->win, 95, 0, RED, ft_itoa(e->s->spot->pos->x));
-		mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->s->spot->pos->y));
-		mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->s->spot->pos->z));
-		mlx_string_put(e->mlx, e->win, 5, 100, RED, "sphere x: ");
-		mlx_string_put(e->mlx, e->win, 5, 115, RED, "sphere y: ");
-		mlx_string_put(e->mlx, e->win, 5, 130, RED, "sphere z: ");
-		mlx_string_put(e->mlx, e->win, 5, 145, RED, "sphere r: ");
-		mlx_string_put(e->mlx, e->win, 95, 100, RED, ft_itoa(e->s->sphere->pos->x));
-		mlx_string_put(e->mlx, e->win, 95, 115, RED, ft_itoa(e->s->sphere->pos->y));
-		mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(e->s->sphere->pos->z));
-		mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(e->s->sphere->radius));
-		mlx_string_put(e->mlx, e->win, 5, 200, RED, "camera x: ");
-		mlx_string_put(e->mlx, e->win, 5, 215, RED, "camera y: ");
-		mlx_string_put(e->mlx, e->win, 5, 230, RED, "camera z: ");
-		mlx_string_put(e->mlx, e->win, 95, 200, RED, ft_itoa(e->s->cam->pos->x));
-		mlx_string_put(e->mlx, e->win, 95, 215, RED, ft_itoa(e->s->cam->pos->y));
-		mlx_string_put(e->mlx, e->win, 95, 230, RED, ft_itoa(e->s->cam->pos->z));
+	mlx_string_put(e->mlx, e->win, 5, 0, RED, "light x: ");
+	mlx_string_put(e->mlx, e->win, 5, 15, RED, "light y: ");
+	mlx_string_put(e->mlx, e->win, 5, 30, RED, "light z: ");
+	mlx_string_put(e->mlx, e->win, 95, 0, RED, ft_itoa(e->s->spot->pos->x));
+	mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->s->spot->pos->y));
+	mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->s->spot->pos->z));
+	mlx_string_put(e->mlx, e->win, 5, 100, RED, "sphere x: ");
+	mlx_string_put(e->mlx, e->win, 5, 115, RED, "sphere y: ");
+	mlx_string_put(e->mlx, e->win, 5, 130, RED, "sphere z: ");
+	mlx_string_put(e->mlx, e->win, 5, 145, RED, "sphere r: ");
+	mlx_string_put(e->mlx, e->win, 95, 100, RED, ft_itoa(e->s->sphere->pos->x));
+	mlx_string_put(e->mlx, e->win, 95, 115, RED, ft_itoa(e->s->sphere->pos->y));
+	mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(e->s->sphere->pos->z));
+	mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(e->s->sphere->radius));
 }
 
 static t_env	init_env(char *map)
@@ -59,7 +53,7 @@ int		main(int ac,char **av)
 	t_env	env;
 
 	if (ac != 2)
-		ft_error("Merci bien de rentrer un argument");
+		ft_error("Usage : ./RTv1 scene_file (ex: ./RTv1 scene/demo.1)");
 	env = init_env(av[1]);
 	draw(env);
 	display(&env);

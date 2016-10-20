@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/17 13:41:06 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:47:25 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,9 @@ t_scene	*ft_init_scene(char *scene);
 /*
 ** objects.c
 */
-int		ft_sphere(t_scene *s, t_ray *r, double *d);
+int		ft_sphere(t_sphere *s, t_ray *r, double *d);
 int		ft_plan(t_scene *s, t_ray *r, double *d);
-//int		ft_cylindre(t_scene *s, t_ray *r, double *d);
+int		ft_cylindre(t_scene *s, t_ray *r, double *d);
 /*
 ** camera.c
 */
