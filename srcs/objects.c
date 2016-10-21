@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/21 13:28:03 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/21 16:48:22 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int ft_sphere(t_scene *s, t_ray *r, double *d)
 	discr = b * b - 4 * a * c;
 	if (discr > EPSI)
 	{
-		discr = mini(((-b - sqrtf(discr)) / (2 * a)),(-b +sqrtf(discr) / (2 * a)));
+		c = ((-b - sqrtf(discr)) / (2 * a));
+		discr = ((-b + sqrtf(discr)) / (2 * a));
+		discr = discr < c ? discr : c;
 		if ((discr > EPSI) && (discr < *d))
 		{
 			*d = discr;
@@ -55,7 +57,7 @@ int	ft_plan(t_scene *s, t_ray *r, double *d)
 	//denum = scale(s->plan->pos, &r->dir);
 	//t = num / denum;
 	t = ((s->plan->dis - dot_vect(s->plan->pos, &r->pos)) / dot_vect(s->plan->pos, &r->dir));
-	if (t > EPSI)
+	if (t > EPSI && t < *d)
 	{
 		*d = t;
 		return (1);
@@ -78,7 +80,7 @@ int     ft_cylindre(t_scene *s, t_ray *r, double *d)
 	t = b * b - 4 * (a * c);
 	if (t > EPSI)
 	{
-		t = (-b - sqrtf(t) * s->cylind->radius) / a;
+		t = (-b + sqrtf(t) * s->cylind->radius) / a;
 		if ((t > EPSI) && (t < *d))
 		{
 			*d = t;
@@ -90,5 +92,7 @@ int     ft_cylindre(t_scene *s, t_ray *r, double *d)
 
 int		ft_intersections(t_scene *s, double *d)
 {
-	return(ft_sphere(s,s->ray,d));
+	if (ft_sphere(s,s->ray,d) == 1 || ft_plan(s,s->ray,d) == 1)
+		return (1);
+	return (0);
 }

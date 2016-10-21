@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 17:00:42 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/17 12:02:55 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/21 16:55:47 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ int		ft_keyhook(int	keycode, t_env *env)
 		exit(0);
 	}
 	if (keycode == RIGHT)
-		env->s->spot->pos->x += 5;
+		env->s->spot->pos->x += 2;
 	if (keycode == LEFT)
-		env->s->spot->pos->x -= 5;
+		env->s->spot->pos->x -= 2;
 	if (keycode == UP)
-		env->s->spot->pos->y -= 5;
+		env->s->spot->pos->y -= 2;
 	if (keycode == DOWN)
-		env->s->spot->pos->y += 5;
+		env->s->spot->pos->y += 2;
 	if (keycode == DEZOOM)
-		env->s->spot->pos->z -= 5;
+		env->s->spot->pos->z -= 2;
 	if (keycode == ZOOM)
-		env->s->spot->pos->z += 5;
+		env->s->spot->pos->z += 2;
 	draw((*env));
 	display(env);
 	return (0);
