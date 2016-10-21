@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/20 17:00:01 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/21 12:38:11 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	mini(double d1, double d2)
 		return (d1);
 }
 
-int ft_sphere(t_sphere *sphere, t_ray *r, double *d)
+int ft_sphere(t_scene *s, t_ray *r, double *d)
 {
 	double	a;
 	double	b;
@@ -28,10 +28,10 @@ int ft_sphere(t_sphere *sphere, t_ray *r, double *d)
 	double	discr;
 	t_vec	dist;
 
-	dist = sub_vect(&r->pos, sphere->pos);
-	a = scale(&r->dir ,&r->dir);
-	b = 2 * scale(&r->dir, &dist);
-	c = scale(&dist, &dist) - (sphere->radius * sphere->radius);
+	dist = sub_vect(s->cam->pos, s->sphere->pos);
+	a = dot_vect(&r->dir ,&r->dir);
+	b = 2 * dot_vect(&r->dir, &dist);
+	c = dot_vect(&dist, &dist) - (s->sphere->radius * s->sphere->radius);
 	discr = b * b - 4 * a * c;
 	if (discr > EPSI)
 	{
@@ -54,7 +54,7 @@ int	ft_plan(t_scene *s, t_ray *r, double *d)
 	//num = s->plan->dis - scale(s->plan->pos, &r->pos);
 	//denum = scale(s->plan->pos, &r->dir);
 	//t = num / denum;
-	t = ((s->plan->dis - scale(s->plan->pos, &r->pos)) / scale(s->plan->pos, &r->dir));
+	t = ((s->plan->dis - dot_vect(s->plan->pos, &r->pos)) / dot_vect(s->plan->pos, &r->dir));
 	if (t > EPSI)
 	{
 		*d = t;
@@ -86,4 +86,9 @@ int     ft_cylindre(t_scene *s, t_ray *r, double *d)
 		}
 	}
 	return (0);
+}
+
+int		ft_intersections(t_scene *s, t_ray *r, double *d)
+{
+	return(ft_sphere(s,r,d));
 }

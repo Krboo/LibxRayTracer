@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 14:57:25 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/15 16:11:49 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/21 12:40:33 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,17 @@ t_vec	*new_vec(double x,double y, double z)
 	return(vec);
 }
 
-t_vec	*ft_vector(int fd)
+t_vec	add_vect(t_vec	*v1, t_vec	*v2)
+{
+	t_vec	v3;
+
+	v3.x = v1->x + v2->x;
+	v3.y = v1->y + v2->y;
+	v3.z = v1->z + v2->z;
+	return (v3);
+}
+
+t_vec *ft_vector(int fd)
 {
 	double x;
 	double y;
@@ -40,21 +50,6 @@ t_vec	*ft_vector(int fd)
 	return (new_vec(x, y, z));
 }
 
-void	ft_deleted_vect(t_vec *vect)
-{
-	free(vect);
-}
-
-t_vec	add_vect(t_vec	*v1, t_vec	*v2)
-{
-	t_vec	v3;
-
-	v3.x = v1->x + v2->x;
-	v3.y = v1->y + v2->y;
-	v3.z = v1->z + v2->z;
-	return (v3);
-}
-
 t_vec	sub_vect(t_vec *v1, t_vec *v2)
 {
 	t_vec	v3;
@@ -65,38 +60,43 @@ t_vec	sub_vect(t_vec *v1, t_vec *v2)
 	return (v3);
 }
 
-t_vec	mult_vect(t_vec	*v1, double fact)
+t_vec	scale_vect(t_vec *v1, double fact)
 {
 	t_vec	v2;
+
 	v2.x = v1->x * fact;
 	v2.y = v1->y * fact;
 	v2.z = v1->z * fact;
 	return (v2);
 }
 
-double	scale(t_vec *v1, t_vec *v2)
+
+void	ft_deleted_vect(t_vec *vect)
+{
+		free(vect);
+}
+
+double	dot_vect(t_vec *v1, t_vec *v2)
 {
 	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
 }
 
-t_vec	norm_vect(t_vec *v1)
+void	norm_vect(t_vec *v)
 {
-	t_vec	v2;
 	double	len;
 
-	len = sqrtf((v1->x * v1->x) + (v1->y * v1->y) + (v1->z * v1->z));
-	v2.x = v1->x / len;
-	v2.y = v1->y / len;
-	v2.z = v1->z / len;
-	return (v2);
+	len = 1.0 / sqrtf(v->x * v->x + v->y * v->y + v->z * v->z);
+	v->x *= len;
+	v->y *= len;
+	v->z *= len;
 }
 
-t_vec	cross_vec(t_vec v1, t_vec v2)
+t_vec	cross_vect(t_vec *v1, t_vec *v2)
 {
 	t_vec		result;
 
-	result.x = v1.y * v2.z - v2.y - v1.z;
-	result.y = v1.z * v2.x - v2.z * v1.x;
-	result.z = v1.x * v2.y - v2.x * v1.y;
+	result.x = v1->y * v2->z - v1->z * v2->y;
+	result.y = v1->z * v2->x - v1->x * v2->z;
+	result.z = v1->x * v2->y - v1->y * v2->x;
 	return (result);
 }

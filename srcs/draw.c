@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/20 17:58:44 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/21 12:36:59 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_ray	create_ray(int x, int y)
 	v2.x = x - (W / 2);
 	v2.y = y - (H / 2);
 	v2.z = -(W / (2 * tan(FOV / 2)));
-	v2 = norm_vect(&v2);
+	norm_vect(&v2);
 	ray.dir = sub_vect(&v2, v1);
 	ray.pos = *v1;
 	return (ray);
@@ -58,13 +58,13 @@ static double	calc_lamb(t_env	*e, t_ray *ray, double d)
 	t_vec	yo;
 	double	lambert;
 
-	cam = mult_vect(&ray->dir, d);
+	cam = scale_vect(&ray->dir, d);
 	cam = add_vect(&ray->pos, &cam);
 	yo = sub_vect(&cam, e->s->spot->pos);
-	yo = norm_vect(&yo);
+	norm_vect(&yo);
 	vec = sub_vect(e->s->sphere->pos, &cam);
-	vec = norm_vect(&vec);
-	lambert = scale(&yo, &vec);
+	norm_vect(&vec);
+	lambert = dot_vect(&yo, &vec);
 	lambert = lambert < EPSI ? 0 : lambert;
 	return (lambert);
 }
@@ -84,7 +84,7 @@ int	draw(t_env	env)
 		{
 			d = 20000.0;
 			ray = create_ray(x, y);
-			if ((ft_sphere(env.s->sphere, &ray, &d) == 1) || (ft_plan(env.s, &ray, &d) == 1))
+			if (ft_intersections(env.s, &ray, &d) == 1)
 				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(&env, &ray, d)));
 			else
 				ft_put_pixel(env, x, y, BLACK);

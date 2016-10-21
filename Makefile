@@ -6,7 +6,7 @@
 #    By: pmartine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/02 15:47:16 by pmartine          #+#    #+#              #
-#    Updated: 2016/10/15 17:26:49 by pmartine         ###   ########.fr        #
+#    Updated: 2016/10/21 11:13:01 by pmartine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ fclean : clean
 
 re : fclean all
 
-yo :
-	./Rtv1 yo
+demo :
+	./Rtv1 scene/demo.1
 
 .PHONY: all clean fclean re

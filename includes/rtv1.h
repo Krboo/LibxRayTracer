@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/20 16:47:25 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/21 12:40:52 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ typedef struct		s_spot
 	struct s_spot	*next;
 }					t_spot;
 
+typedef	struct		s_ray
+{
+	t_vec			pos;
+	t_vec			dir;
+}					t_ray;
+
 typedef struct		s_scene
 {
 	t_cam			*cam;
@@ -95,14 +101,8 @@ typedef struct		s_scene
 	t_plan			*plan;
 	t_sphere		*sphere;
 	t_spot			*spot;
+	t_ray			*ray;
 }					t_scene;
-
-typedef	struct		s_ray
-{
-	t_vec			pos;
-	t_vec			dir;
-}					t_ray;
-
 
 typedef struct		s_env
 {
@@ -125,13 +125,15 @@ int		ft_red_cross(int keycode, t_env *env);
 /*
 ** vectors.c
 */
+void	ft_deleted_vect(t_vec *vect);
 t_vec	sub_vect(t_vec *v1, t_vec *v2);
+t_vec	scale_vect(t_vec *v1, double fact);
 t_vec	add_vect(t_vec *v1, t_vec *v2);
-t_vec	mult_vect(t_vec *v1, double fact);
-t_vec	norm_vect(t_vec *v1);
-double	scale(t_vec *v1, t_vec *v2);
+void	norm_vect(t_vec *v);
+double	dot_vect(t_vec *v1, t_vec *v2);
 t_vec	*new_vec(double x, double y, double z);
 t_vec	*ft_vector(int fd);
+t_vec	cross_vect(t_vec *v1, t_vec *v2);
 void                ft_deleted_vect(t_vec *vect);
 /*
 ** parser.c
@@ -142,9 +144,10 @@ t_scene	*ft_init_scene(char *scene);
 /*
 ** objects.c
 */
-int		ft_sphere(t_sphere *s, t_ray *r, double *d);
+int		ft_sphere(t_scene *s, t_ray *r, double *d);
 int		ft_plan(t_scene *s, t_ray *r, double *d);
 int		ft_cylindre(t_scene *s, t_ray *r, double *d);
+int		ft_intersections(t_scene *s, t_ray *r, double *d);
 /*
 ** camera.c
 */
