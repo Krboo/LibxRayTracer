@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/21 12:36:59 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/21 13:28:37 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ static void	ft_put_pixel(t_env	env, int x, int y, int color)
 	}
 }
 
-static t_ray	create_ray(int x, int y)
+void create_ray(t_scene *s, int x, int y)
 {
-	t_ray	ray;
 	t_vec	*v1;
 	t_vec	v2;
 
@@ -38,9 +37,8 @@ static t_ray	create_ray(int x, int y)
 	v2.y = y - (H / 2);
 	v2.z = -(W / (2 * tan(FOV / 2)));
 	norm_vect(&v2);
-	ray.dir = sub_vect(&v2, v1);
-	ray.pos = *v1;
-	return (ray);
+	s->ray->dir = sub_vect(&v2, v1);
+	s->ray->pos = *v1;
 }
 
 int	lambert_rgb(int r, int g, int b, double lambert)
@@ -74,7 +72,6 @@ int	draw(t_env	env)
 	int		x;
 	int		y;
 	double	d;
-	t_ray	ray;
 
 	y = 0;
 	while (y < H)
@@ -83,9 +80,9 @@ int	draw(t_env	env)
 		while (x < W)
 		{
 			d = 20000.0;
-			ray = create_ray(x, y);
-			if (ft_intersections(env.s, &ray, &d) == 1)
-				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(&env, &ray, d)));
+			create_ray(env.s, x, y);
+			if (ft_intersections(env.s, &d) == 1)
+				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(&env, env.s->ray, d)));
 			else
 				ft_put_pixel(env, x, y, BLACK);
 			x++;

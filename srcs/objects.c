@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/21 12:38:11 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/21 13:28:03 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int     ft_cylindre(t_scene *s, t_ray *r, double *d)
 	return (0);
 }
 
-int		ft_intersections(t_scene *s, t_ray *r, double *d)
+int		ft_intersections(t_scene *s, double *d)
 {
-	return(ft_sphere(s,r,d));
+	return(ft_sphere(s,s->ray,d));
 }
