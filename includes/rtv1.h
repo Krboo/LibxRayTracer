@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/21 13:27:56 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/23 16:00:23 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct		s_env
 	char			*data;
 }					t_env;
 
-int		draw(t_env env);
+int		draw(t_env *env);
 int		ft_error(char *str);
 void	display(t_env *e);
 int		ft_keyhook(int keycode, t_env *env);

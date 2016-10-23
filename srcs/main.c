@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/20 17:53:29 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/23 15:59:20 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,29 +36,28 @@ void	display(t_env	*e)
 	mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(e->s->sphere->radius));
 }
 
-static t_env	init_env(char *map)
+static void	init_env(t_env *e, char *map)
 {
-	t_env	e;
 
-	e.s = ft_init_scene(map);
-	e.mlx = mlx_init();
-	e.win = mlx_new_window(e.mlx, W, H, "Rtv1");
-	e.img = mlx_new_image(e.mlx, W, H);
-	e.data = mlx_get_data_addr(e.img, &e.bpp, &e.s_line, &e.endian);
-	return (e);
+	e->s = ft_init_scene(map);
+	e->mlx = mlx_init();
+	e->win = mlx_new_window(e->mlx, W, H, "Rtv1");
+	e->img = mlx_new_image(e->mlx, W, H);
+	e->data = mlx_get_data_addr(e->img, &e->bpp, &e->s_line, &e->endian);
 }
 
 int		main(int ac,char **av)
 {
-	t_env	env;
+	t_env	*env;
 
+	env = (t_env *)malloc(sizeof(t_env *));
 	if (ac != 2)
 		ft_error("Usage : ./RTv1 scene_file (ex: ./RTv1 scene/demo.1)");
-	env = init_env(av[1]);
+	init_env(env, av[1]);
 	draw(env);
-	display(&env);
-	mlx_hook(env.win, 2, 1L << 0, ft_keyhook, &env);
-	mlx_hook(env.win, 17, (1L << 17), ft_red_cross, 0);
-	mlx_loop(env.mlx);
+	display(env);
+	mlx_hook(env->win, 2, 1L << 0, ft_keyhook, env);
+	mlx_hook(env->win, 17, (1L << 17), ft_red_cross, 0);
+	mlx_loop(env->mlx);
 	return (0);
 }

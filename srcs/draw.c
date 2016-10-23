@@ -6,22 +6,22 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/21 17:54:38 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/23 16:06:14 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	<../includes/rtv1.h>
 
-static void	ft_put_pixel(t_env	env, int x, int y, int color)
+static void	ft_put_pixel(t_env	*env, int x, int y, int color)
 {
 	int		i;
 	unsigned int	p;
 
 	i = 0;
-	p = x * (env.bpp / 8) + y * (env.s_line);
-	while (i < (env.bpp / 8))
+	p = x * (env->bpp / 8) + y * (env->s_line);
+	while (i < (env->bpp / 8))
 	{
-		env.data[p + i] = color;
+		env->data[p + i] = color;
 		color >>= 8;
 		i++;
 	}
@@ -67,7 +67,7 @@ static double	calc_lamb(t_env	*e, t_ray *ray, double d, t_vec	*pos)
 	return (lambert);
 }
 
-int	draw(t_env	env)
+int	draw(t_env	*env)
 {
 	int		x;
 	int		y;
@@ -80,17 +80,17 @@ int	draw(t_env	env)
 		while (x < W)
 		{
 			d = 20000.0;
-			create_ray(env.s, x, y);
-			if (ft_sphere(env.s, env.s->ray, &d) == 1)
-				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(&env, env.s->ray, d, env.s->sphere->pos)));
-			else if (ft_plan(env.s, env.s->ray, &d) == 1)
-				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(&env, env.s->ray, d, env.s->plan->pos)));
+			create_ray(env->s, x, y);
+			if (ft_sphere(env->s, env->s->ray, &d) == 1)
+				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, env->s->ray, d, env->s->sphere->pos)));
+			else if (ft_plan(env->s, env->s->ray, &d) == 1)
+				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, env->s->ray, d, env->s->plan->pos)));
 			else
 				ft_put_pixel(env, x, y, BLACK);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(env.mlx, env.win, env.img, 0, 0);
+	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	return (0);
 }
