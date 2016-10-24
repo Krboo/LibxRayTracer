@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 17:48:47 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:15:28 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,21 @@ typedef struct		s_obj
 	struct s_obj	*next;
 }					t_obj;
 
+typedef struct		s_spot
+{
+	t_color			col;
+	t_vec			pos;
+	double			size;
+	struct s_spots	*next;
+}					t_spot;
+
 typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
 	t_img			*img;
 	t_obj			*obj;
+	t_spots			*spots;
 	t_vec			cam_pos;
 	t_vec			cam_dir;
 	t_vec			ray_dir;

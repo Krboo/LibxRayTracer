@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 18:12:25 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:15:51 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static double	calc_lamb(t_env	*env, double d, t_vec	pos)
 
 	cam = scale_vect(env->ray_dir, d);
 	cam = add_vect(env->ray_pos, cam);
-	yo = sub_vect(cam, e->spots->pos);
+	yo = sub_vect(cam, e->spot->pos);
 	yo = norm_vect(yo);
 	vec = sub_vect(pos, cam);
 	vec = norm_vect(vec);
