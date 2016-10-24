@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 17:00:42 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 14:12:52 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:20:25 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_keyhook(int	keycode, t_env *env)
 		mlx_destroy_window(env->mlx, env->win);
 		exit(0);
 	}
-	if (keycode == RIGHT)
+/*	if (keycode == RIGHT)
 		env->s->spot->pos.x += 2;
 	if (keycode == LEFT)
 		env->s->spot->pos.x -= 2;
@@ -31,7 +31,7 @@ int		ft_keyhook(int	keycode, t_env *env)
 		env->s->spot->pos.z -= 2;
 	if (keycode == ZOOM)
 		env->s->spot->pos.z += 2;
-	draw(env);
+*/	draw(env);
 	display(env);
 	return (0);
 }

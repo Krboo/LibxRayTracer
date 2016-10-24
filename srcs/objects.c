@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 12:45:05 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:25:01 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	mini(double d1, double d2)
 		return (d1);
 }
 
-int ft_sphere(t_scene *s, t_ray *r, double *d)
+int ft_sphere(t_env *e, double *d)
 {
 	double	a;
 	double	b;
@@ -28,10 +28,10 @@ int ft_sphere(t_scene *s, t_ray *r, double *d)
 	double	discr;
 	t_vec	dist;
 
-	dist = sub_vect(s->cam->pos, s->sphere->pos);
-	a = dot_vect(r->dir ,r->dir);
-	b = 2 * dot_vect(r->dir, dist);
-	c = dot_vect(dist, dist) - (s->sphere->radius * s->sphere->radius);
+	//dist = sub_vect(e->cam_pos, e->s->sphere->pos);
+	a = dot_vect(e->ray_dir ,e->ray_dir);
+	b = 2 * dot_vect(e->ray_dir, dist);
+//	c = dot_vect(dist, dist) - (s->sphere->radius * s->sphere->radius);
 	discr = b * b - 4 * a * c;
 	if (discr > EPSI)
 	{
@@ -47,11 +47,11 @@ int ft_sphere(t_scene *s, t_ray *r, double *d)
 	return (0);
 }
 
-int	ft_plan(t_scene *s, t_ray *r, double *d)
+int	ft_plan(t_env *e, double *d)
 {
 	double	t;
 
-	t = ((s->plan->dis - dot_vect(s->plan->pos, r->pos)) / dot_vect(s->plan->pos, r->dir));
+	//t = ((s->plan->dis - dot_vect(s->plan->pos, r->pos)) / dot_vect(s->plan->pos, r->dir));
 	if (t > EPSI && t < *d)
 	{
 		*d = t;
@@ -60,7 +60,7 @@ int	ft_plan(t_scene *s, t_ray *r, double *d)
 	return (0);
 }
 
-int     ft_cylindre(t_scene *s, t_ray *r, double *d)
+int     ft_cylindre(t_env *e, double *d)
 {
 	t_vec  dist;
 	double   a;
@@ -68,14 +68,14 @@ int     ft_cylindre(t_scene *s, t_ray *r, double *d)
 	double   c;
 	double   t;
 
-	dist = sub_vect(r->pos, s->cylind->pos);
-	a = r->dir.x * r->dir.x + r->dir.y * r->dir.y;
-	b = 2 * (r->pos.x * r->dir.x + r->pos.y * r->dir.y);
-	c = r->pos.x * r->pos.x + r->pos.y * r->pos.y - 1;
+//	dist = sub_vect(e->ray_pos, e->s->cylind->pos);
+//	a = r->dir.x * r->dir.x + r->dir.y * r->dir.y;
+	b = 2 * (e->ray_pos.x * e->ray_dir.x + e->ray_pos.y * e->ray_dir.y);
+	c = e->ray_pos.x * e->ray_pos.x + e->ray_pos.y * e->ray_pos.y - 1;
 	t = b * b - 4 * (a * c);
 	if (t > EPSI)
 	{
-		t = (-b + sqrtf(t) * s->cylind->radius) / a;
+//		t = (-b + sqrtf(t) * s->cylind->radius) / a;
 		if ((t > EPSI) && (t < *d))
 		{
 			*d = t;
