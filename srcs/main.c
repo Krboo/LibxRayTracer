@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 14:46:43 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 17:46:55 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_error(char *str)
 	exit(0);
 }
 
-void	display(t_env	*e)
+/*void	display(t_env	*e)
 {
 	mlx_string_put(e->mlx, e->win, 5, 0, RED, "light x: ");
 	mlx_string_put(e->mlx, e->win, 5, 15, RED, "light y: ");
@@ -34,21 +34,19 @@ void	display(t_env	*e)
 	mlx_string_put(e->mlx, e->win, 95, 115, RED, ft_itoa(e->s->sphere->pos.y));
 	mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(e->s->sphere->pos.z));
 	mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(e->s->sphere->radius));
-}
+}*/
 
 static t_env *init_env(char *map)
 {
 	t_env	*e;
 	if (!(e = (t_env *)malloc(sizeof(t_env*))))
 		return (NULL);
-	e->s = ft_init_scene(map);
+	ft_init_scene(map, e);          //parsing file + add t_obj *obj and cam vects in env
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, W, H, "Rtv1");
 	e->img = (t_img *)malloc(sizeof(t_img));
 	e->img->img = mlx_new_image(e->mlx, W, H);
 	e->img->data = mlx_get_data_addr(e->img->img, &e->img->bpp, &e->img->s_line, &e->img->endian);
-	e->cam_pos = new_vec(0.0,0.0,0.0);
-	e->cam_dir = new_vec(0.0,0.0,0.0);
 	return (e);
 }
 
@@ -61,7 +59,7 @@ int		main(int ac,char **av)
 	else if ((env = init_env(av[1])) != NULL)
 	{
 		draw(env);
-		display(env);
+		//display(env);
 		mlx_hook(env->win, 2, 1L << 0, ft_keyhook, env);
 		mlx_hook(env->win, 17, (1L << 17), ft_red_cross, 0);
 		mlx_loop(env->mlx);

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 14:12:31 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:12:25 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	ft_put_pixel(t_env	*env, int x, int y, int color)
 	}
 }
 
-void create_ray(t_scene *s, int x, int y)
+void create_ray(t_env *e, int x, int y)
 {
 	t_vec	v1;
 	t_vec	v2;
@@ -37,8 +37,8 @@ void create_ray(t_scene *s, int x, int y)
 	v2.y = y - (H / 2);
 	v2.z = -(W / (2 * tan(FOV / 2)));
 	v2 = norm_vect(v2);
-	s->ray->dir = sub_vect(v2, v1);
-	s->ray->pos = v1;
+	e->ray_dir = sub_vect(v2, v1);
+	e->ray_pos = v1;
 }
 
 int	lambert_rgb(int r, int g, int b, double lambert)
@@ -49,16 +49,16 @@ int	lambert_rgb(int r, int g, int b, double lambert)
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 
-static double	calc_lamb(t_env	*e, t_ray *ray, double d, t_vec	pos)
+static double	calc_lamb(t_env	*env, double d, t_vec	pos)
 {
 	t_vec	vec;
 	t_vec	cam;
 	t_vec	yo;
 	double	lambert;
 
-	cam = scale_vect(ray->dir, d);
-	cam = add_vect(ray->pos, cam);
-	yo = sub_vect(cam, e->s->spot->pos);
+	cam = scale_vect(env->ray_dir, d);
+	cam = add_vect(env->ray_pos, cam);
+	yo = sub_vect(cam, e->spots->pos);
 	yo = norm_vect(yo);
 	vec = sub_vect(pos, cam);
 	vec = norm_vect(vec);
@@ -67,26 +67,32 @@ static double	calc_lamb(t_env	*e, t_ray *ray, double d, t_vec	pos)
 	return (lambert);
 }
 
+static void	trace(t_env *env, t_obj *node, int x, int y)
+{
+	create_ray(env, x, y);
+//	ft_inter(env, &d);
+//	if (ft_sphere(env->s, env->s->ray, &d) == 1)
+//		ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, env->s->ray, d, env->s->sphere->pos)));
+	//	else if (ft_plan(env->s, env->s->ray, &d) == 1)
+	//		ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, env->s->ray, d, env->s->plan->pos)));
+//	else
+		ft_put_pixel(env, x, y, BLACK);
+}
+
 int	draw(t_env	*env)
 {
 	int		x;
 	int		y;
-	double	d;
+	t_obj	*node;
 
+	node = env->obj;
 	y = 0;
 	while (y < H)
 	{
 		x = 0;
 		while (x < W)
 		{
-			d = 20000.0;
-			create_ray(env->s, x, y);
-			if (ft_sphere(env->s, env->s->ray, &d) == 1)
-				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, env->s->ray, d, env->s->sphere->pos)));
-			else if (ft_plan(env->s, env->s->ray, &d) == 1)
-				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, env->s->ray, d, env->s->plan->pos)));
-			else
-				ft_put_pixel(env, x, y, BLACK);
+			trace(env, node, x, y);
 			x++;
 		}
 		y++;

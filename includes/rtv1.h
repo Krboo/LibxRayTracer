@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 17:37:36 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/24 17:48:47 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct		s_env
 	t_obj			*obj;
 	t_vec			cam_pos;
 	t_vec			cam_dir;
+	t_vec			ray_dir;
+	t_vec			ray_pos;
 }					t_env;
 
 int		draw(t_env *env);
