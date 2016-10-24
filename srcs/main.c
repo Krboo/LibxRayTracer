@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 14:11:26 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:46:43 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static t_env *init_env(char *map)
 	e->img = (t_img *)malloc(sizeof(t_img));
 	e->img->img = mlx_new_image(e->mlx, W, H);
 	e->img->data = mlx_get_data_addr(e->img->img, &e->img->bpp, &e->img->s_line, &e->img->endian);
+	e->cam_pos = new_vec(0.0,0.0,0.0);
+	e->cam_dir = new_vec(0.0,0.0,0.0);
 	return (e);
 }
 
