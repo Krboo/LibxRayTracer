@@ -6,78 +6,19 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 16:58:32 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 13:21:53 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 17:37:44 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rtv1.h"
 
-void		ft_clear_cone(t_cone **start)
+void		ft_clear_obj(t_obj **start)
 {
-	t_cone	*tmp;
+	t_obj	*tmp;
 
 	while (*start != NULL)
 	{
 		tmp = (*start)->next;
-		ft_deleted_vect((*start)->pos);
-		ft_deleted_color((*start)->color);
-		(*start)->next = NULL;
-		free(*start);
-		*start = tmp;
-	}
-}
-void		ft_deleted_cylindre(t_cylind **start)
-{
-	t_cylind	*tmp;
-
-	while (*start != NULL)
-	{
-		tmp = (*start)->next;
-		ft_deleted_vect((*start)->pos);
-		ft_deleted_color((*start)->color);
-		(*start)->next = NULL;
-		free(*start);
-		*start = tmp;
-	}
-}
-
-void		ft_deleted_plan(t_plan **start)
-{
-	t_plan	*tmp;
-
-	while (*start != NULL)
-	{
-		tmp = (*start)->next;
-		ft_deleted_vect((*start)->pos);
-		ft_deleted_color((*start)->color);
-		(*start)->next = NULL;
-		free(*start);
-		*start = tmp;
-	}
-}
-void		ft_deleted_sphere(t_sphere **start)
-{
-	t_sphere	*tmp;
-
-	while (*start != NULL)
-	{
-		tmp = (*start)->next;
-		ft_deleted_vect((*start)->pos);
-		ft_deleted_color((*start)->color);
-		(*start)->next = NULL;
-		free(*start);
-		*start = tmp;
-	}
-}
-void		ft_deleted_spot(t_spot **start)
-{
-	t_spot	*tmp;
-
-	while (*start != NULL)
-	{
-		tmp = (*start)->next;
-		ft_deleted_vect((*start)->pos);
-		ft_deleted_color((*start)->color);
 		(*start)->next = NULL;
 		free(*start);
 		*start = tmp;

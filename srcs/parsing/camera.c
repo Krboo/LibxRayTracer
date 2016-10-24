@@ -6,25 +6,22 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:57:26 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 13:21:45 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 15:07:24 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rtv1.h"
 
-t_cam		*ft_get_camera(int fd)
+void		ft_get_camera(int fd, t_env *env)
 {
 	char		*line;
 	int 		ret;
-	t_cam		*c;
 
-	c = (t_cam *)malloc(sizeof(c));
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{
 		if (ft_strstr(line, "pos:"))
-			c->pos = ft_vector(fd);
+			env->cam_pos = ft_vector(fd);
 		if (ft_strstr(line, "dir:"))
-			c->dir = ft_vector(fd);
+			env->cam_dir = ft_vector(fd);
 	}
-	return (c);
 }

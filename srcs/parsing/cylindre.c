@@ -6,32 +6,13 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:50:13 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 13:22:21 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:44:37 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rtv1.h"
 
-t_cylind		*ft_new_cylind(double radius, t_color color, t_vec pos)
-{
-	t_cylind	*c;
-
-	if (!(c = (t_cylind *)malloc(sizeof(t_cylind))))
-		return (NULL);
-	c->radius = radius;
-	c->color = color;
-	c->pos = pos;
-	return (c);
-}
-
-void			ft_add_cylind(t_cylind	*start, t_cylind *new)
-{
-	while (start->next)
-		start = start->next;
-	start->next = new;
-}
-
-t_cylind		*ft_get_cylind(int fd)
+t_obj		*ft_get_cylind(int fd, t_vec rot)
 {
 	char	*line;
 	double	radius;
@@ -50,30 +31,34 @@ t_cylind		*ft_get_cylind(int fd)
 		}
 		if (ft_strstr(line, "color:"))
 			color = ft_color(fd);
+		if (ft_strstr(line, "rot:"))
+			rot = ft_vector(fd);
 	}
 	if (ret == -1)
 		exit(-1);
-	return (ft_new_cylind(radius, color, pos));
+	return (ft_new_obj4(radius, pos, rot, color));
 }
 
-t_cylind		*ft_get_cylinds(int fd)
+t_obj		*ft_get_cylinds(int fd)
 {
 	char		*line;
 	int			ret;
-	t_cylind	*c;
+	t_obj		*obj;
+	t_vec		rot;
 
-	c = NULL;
+	obj = NULL;
+	rot = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
 		if (ft_strstr(line, "new:"))
 		{
-			if (c == NULL)
-				c = ft_get_cylind(fd);
+			if (obj == NULL)
+				obj = ft_get_cylind(fd, rot);
 			else
-				ft_add_cylind(c, ft_get_cylind(fd));
+				ft_add_obj(obj, ft_get_cylind(fd, rot));
 		}
 		if (ret == -1)
 			exit(-1);
 	}
-	return (c);
+	return (obj);
 }

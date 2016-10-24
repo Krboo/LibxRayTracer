@@ -6,32 +6,13 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 13:22:42 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:58:30 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rtv1.h"
 
-t_plan			*ft_new_plan(double dis, t_color color, t_vec pos)
-{
-	t_plan	*p;
-
-	if (!(p = (t_plan *)malloc(sizeof(t_plan))))
-		return (NULL);
-	p->dis = dis;
-	p->color = color;
-	p->pos = pos;
-	return (p);
-}
-
-void			ft_add_plan(t_plan *start, t_plan *new)
-{
-	while (start->next)
-		start = start->next;
-	start->next = new;
-}
-
-t_plan			*ft_get_plan(int fd)
+t_obj			*ft_get_plan(int fd, t_vec rot)
 {
 	char	*line;
 	double	dis;
@@ -50,30 +31,34 @@ t_plan			*ft_get_plan(int fd)
 		}
 		if (ft_strstr(line, "color:"))
 			color = ft_color(fd);
+		if (ft_strstr(line, "rot:"))
+			rot = ft_vector(fd);
 	}
 	if (ret == -1)
 		exit(-1);
-	return (ft_new_plan(dis, color, pos));
+	return (ft_new_obj(dis, pos, rot, color));
 }
 
-t_plan			*ft_get_plans(int fd)
+t_obj			*ft_get_plans(int fd)
 {
 	char	*line;
 	int		ret;
-	t_plan	*p;
+	t_obj	*obj;
+	t_vec	rot;
 
-	p = NULL;
+	obj = NULL;
+	rot = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
 		if (ft_strstr(line, "new:"))
 		{
-			if (p == NULL)
-				p = ft_get_plan(fd);
+			if (obj == NULL)
+				obj = ft_get_plan(fd, rot);
 			else
-				ft_add_plan(p, ft_get_plan(fd));
+				ft_add_obj(obj, ft_get_plan(fd, rot));
 		}
 		if (ret == -1)
 			exit(-1);
 	}
-	return (p);
+	return (obj);
 }

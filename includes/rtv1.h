@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 14:45:46 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 17:37:36 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,84 +42,22 @@ typedef	struct		s_img
 	void			*img;
 }					t_img;
 
-typedef struct		s_cam
-{
-	t_vec			pos;
-	t_vec			dir;
-}					t_cam;
-
-typedef struct		s_cone
-{
-	double			alpha;
-	t_color			color;
-	t_vec			pos;
-	struct s_cone	*next;
-}					t_cone;
-
-typedef struct		s_cylind
-{
-	double			radius;
-	t_color			color;
-	t_vec			pos;
-	struct s_cylind	*next;
-}					t_cylind;
-
-typedef struct		s_plan
-{
-	double			dis;
-	t_color			color;
-	t_vec			pos;
-	struct s_plan	*next;
-}					t_plan;
-
-typedef struct		s_sphere
-{
-	double			radius;
-	t_color			color;
-	t_vec			pos;
-	struct s_sphere	*next;
-}					t_sphere;
-
-typedef struct		s_spot
-{
-	t_color			color;
-	t_vec			pos;
-	struct s_spot	*next;
-}					t_spot;
-
-typedef	struct		s_ray
-{
-	t_vec			pos;
-	t_vec			dir;
-}					t_ray;
-
 typedef struct		s_obj
 {
 	int				type;
 	double			size;
-	t_vec			rot;
-	t_vec			pos;
 	t_color			col;
+	t_vec			pos;
+	t_vec			rot;
 	struct s_obj	*next;
 }					t_obj;
-
-typedef struct		s_scene
-{
-	t_cam			*cam;
-	t_cone			*cone;
-	t_cylind		*cylind;
-	t_plan			*plan;
-	t_sphere		*sphere;
-	t_spot			*spot;
-	t_ray			*ray;
-}					t_scene;
 
 typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
 	t_img			*img;
-	t_scene			*s;
+	t_obj			*obj;
 	t_vec			cam_pos;
 	t_vec			cam_dir;
 }					t_env;
@@ -158,55 +96,50 @@ int		ft_intersections(t_scene *s, double *d);
 /*
 ** camera.c
 */
-t_cam	*ft_get_camera(int fd);
+void	ft_get_camera(int fd, t_env *env);
 /*
 ** clear.c
 */
-void	ft_deleted_cone(t_cone **start);
-void	ft_deleted_cylindre(t_cylind **start);
-void	ft_deleted_plan(t_plan **start);
-void	ft_deleted_sphere(t_sphere **start);
-void	ft_deleted_spot(t_spot **start);
+void	ft_clear_obj(t_obj **start);
 /*
 ** color.c
 */
-t_color	ft_color(int fd);
-t_color	ft_new_color(double r, double g, double b);
-void	ft_deleted_color(t_color color);
+t_color				ft_color(int fd);
+t_color				ft_new_color(double r, double g, double b);
+void				ft_deleted_color(t_color color);
 /*
 ** cone.c
 */
-t_cone	*ft_get_cone(int fd);
-t_cone	*ft_get_cones(int fd);
-t_cone	*ft_new_cone(double alpha, t_color color, t_vec pos);
-void	ft_add_cone(t_cone *start, t_cone *new);
+t_obj				*ft_get_cone(int fd, t_vec rot);
+t_obj				*ft_get_cones(int fd);
 /*
 ** cylindre.c
 */
-t_cylind	*ft_get_cylind(int fd);
-t_cylind	*ft_get_cylinds(int fd);
-t_cylind	*ft_new_cylind(double radius, t_color color, t_vec pos);
-void		ft_add_cylind(t_cylind *start, t_cylind *new);
+t_obj				*ft_get_cylind(int fd, t_vec rot);
+t_obj				*ft_get_cylinds(int fd);
+/*
+* new.c
+*/
+t_obj				*ft_new_obj(double size, t_vec pos, t_vec rot, t_color col);
+t_obj				*ft_new_obj2(double size, t_vec pos, t_vec rot, t_color col);
+t_obj				*ft_new_obj3(double size, t_vec pos, t_vec rot, t_color col);
+t_obj				*ft_new_obj4(double size, t_vec pos, t_vec rot, t_color col);
+t_obj				*ft_new_obj5(t_vec pos, t_vec rot, t_color col);
 /*
 ** plan.c
 */
-t_plan              *ft_get_plans(int fd);
-t_plan              *ft_new_plan(double dis, t_color color, t_vec pos);
-void                ft_add_plan(t_plan *start, t_plan *new);
+t_obj				*ft_get_plans(int fd);
+t_obj				*ft_new_plan(double dis, t_color color, t_vec pos);
 /*
 ** sphere.c
 */
-t_sphere            *ft_get_sphere(int fd);
-t_sphere            *ft_get_spheres(int fd);
-t_sphere            *ft_new_sphere(double radius, t_color color, t_vec pos);
-void                ft_add_sphere(t_sphere *start, t_sphere *new);
+t_obj	            *ft_get_sphere(int fd);
+t_obj	            *ft_get_spheres(int fd);
 /*
 ** spot.c
 */
-t_spot              *ft_get_spot(int fd);
-t_spot              *ft_get_spots(int fd);
-t_spot              *ft_new_spot(t_color color, t_vec pos);
-void                ft_add_spot(t_spot *start, t_spot *new);
+t_obj				*ft_get_spot(int fd, t_vec rot);
+t_obj				*ft_get_spots(int fd);
 /*
 ** tools_vect.c
 */
