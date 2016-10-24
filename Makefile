@@ -6,7 +6,7 @@
 #    By: pmartine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/02 15:47:16 by pmartine          #+#    #+#              #
-#    Updated: 2016/10/24 13:44:35 by pmartine         ###   ########.fr        #
+#    Updated: 2016/10/24 17:41:10 by qduperon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS = -Wall -Werror -Wextra -I includes
 SRC = srcs/parsing/camera.c srcs/parsing/clear.c srcs/parsing/color.c \
 	  srcs/parsing/cone.c srcs/parsing/cylindre.c srcs/parsing/init.c\
 	  srcs/parsing/plan.c srcs/parsing/tools_vect.c srcs/parsing/sphere.c\
-	  srcs/parsing/spot.c \
+	  srcs/parsing/spot.c srcs/parsing/new.c\
 	  srcs/draw.c srcs/hook.c srcs/main.c srcs/objects.c srcs/vectors.c\
 
 OBJ = $(SRC:.c=.o)
