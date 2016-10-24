@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 12:34:08 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:17:46 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ typedef struct		s_color
 	double			b;
 }					t_color;
 
-//typedef	struct		s_img
-//{
-//	char			*data;
-//	int				bpp;
-//	int				endian;
-//	int				sl;
-//	void			*img;
-//}					t_img
+typedef	struct		s_img
+{
+	char			*data;
+	int				bpp;
+	int				endian;
+	int				s_line;
+	void			*img;
+}					t_img;
 
 typedef struct		s_cam
 {
@@ -93,6 +93,16 @@ typedef	struct		s_ray
 	t_vec			dir;
 }					t_ray;
 
+typedef struct		s_obj
+{
+	int				type;
+	double			size;
+	t_vec			rot;
+	t_vec			pos;
+	t_color			col;
+	struct s_obj	*next;
+}					t_obj;
+
 typedef struct		s_scene
 {
 	t_cam			*cam;
@@ -108,13 +118,10 @@ typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
-//	t_img			img;
-	void			*img;
+	t_img			*img;
 	t_scene			*s;
-	int				endian;
-	int				bpp;
-	int				s_line;
-	char			*data;
+	t_vec			cam_pos;
+	t_vec			cam_dir;
 }					t_env;
 
 int		draw(t_env *env);

@@ -6,11 +6,11 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 16:58:32 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/15 16:26:19 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 13:21:53 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/rtv1.h"
+#include "../../includes/rtv1.h"
 
 void		ft_clear_cone(t_cone **start)
 {

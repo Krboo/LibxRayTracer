@@ -6,11 +6,11 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:57:26 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 12:26:08 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 13:21:45 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/rtv1.h"
+#include "../../includes/rtv1.h"
 
 t_cam		*ft_get_camera(int fd)
 {

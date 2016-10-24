@@ -1,43 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   tools_vect.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/11 15:31:49 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 12:27:12 by pmartine         ###   ########.fr       */
+/*   Created: 2016/10/10 19:58:20 by qduperon          #+#    #+#             */
+/*   Updated: 2016/10/24 13:23:12 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/rtv1.h"
+#include "../../includes/rtv1.h"
 
-t_color		ft_new_color(double r, double g, double b)
+t_vec		ft_neg(t_vec v)
 {
-	t_color	c;
+	t_vec	v2;
 
-	c.r = r;
-	c.g = g;
-	c.b = b;
-	return (c);
+	v2 = new_vec(v.x * -1, v.y * -1,  v.z * -1);
+	return (v2);
 }
 
-t_color		ft_color(int fd)
+t_vec		ft_norm(t_vec v)
 {
-	char	*line;
-	double	r;
-	double	g;
-	double	b;
+	double m;
+	t_vec v2;
 
-	if (get_next_line(fd, &line) < 1)
-		exit(-1);
-	r = ft_atodouble(&line);
-	g = ft_atodouble(&line);
-	b = ft_atodouble(&line);
-	return (ft_new_color(r, g, b));
+	m = ft_magnitude(v);
+	v2 = new_vec(v.x / m, v.y / m, v.z /m);
+	return (v2);
 }
 
-void		ft_deleted_color(t_color color)
+double		ft_magnitude(t_vec v)
 {
-	free(&color);
+	return (sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z)));
 }

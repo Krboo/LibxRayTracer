@@ -6,7 +6,7 @@
 #    By: pmartine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/02 15:47:16 by pmartine          #+#    #+#              #
-#    Updated: 2016/10/21 11:13:01 by pmartine         ###   ########.fr        #
+#    Updated: 2016/10/24 13:44:35 by pmartine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,11 @@ NAME = Rtv1
 
 CFLAGS = -Wall -Werror -Wextra -I includes
 
-SRC = srcs/camera.c srcs/clear.c srcs/color.c srcs/cone.c srcs/cylindre.c \
-	  srcs/draw.c srcs/hook.c srcs/main.c srcs/objects.c srcs/parser.c \
-	  srcs/plan.c srcs/sphere.c srcs/spot.c srcs/tools_vect.c srcs/vectors.c
+SRC = srcs/parsing/camera.c srcs/parsing/clear.c srcs/parsing/color.c \
+	  srcs/parsing/cone.c srcs/parsing/cylindre.c srcs/parsing/init.c\
+	  srcs/parsing/plan.c srcs/parsing/tools_vect.c srcs/parsing/sphere.c\
+	  srcs/parsing/spot.c \
+	  srcs/draw.c srcs/hook.c srcs/main.c srcs/objects.c srcs/vectors.c\
 
 OBJ = $(SRC:.c=.o)
 

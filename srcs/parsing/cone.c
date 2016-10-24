@@ -1,79 +1,79 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plan.c                                             :+:      :+:    :+:   */
+/*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 12:22:12 by pmartine         ###   ########.fr       */
+/*   Created: 2016/10/11 14:39:39 by qduperon          #+#    #+#             */
+/*   Updated: 2016/10/24 13:22:12 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/rtv1.h"
+#include "../../includes/rtv1.h"
 
-t_plan			*ft_new_plan(double dis, t_color color, t_vec pos)
+t_cone			*ft_new_cone(double alpha, t_color color, t_vec pos)
 {
-	t_plan	*p;
+	t_cone	*c;
 
-	if (!(p = (t_plan *)malloc(sizeof(t_plan))))
+	if (!(c = (t_cone *)malloc(sizeof(t_cone))))
 		return (NULL);
-	p->dis = dis;
-	p->color = color;
-	p->pos = pos;
-	return (p);
+	c->alpha = alpha;
+	c->color = color;
+	c->pos = pos;
+	return (c);
 }
 
-void			ft_add_plan(t_plan *start, t_plan *new)
+void			ft_add_cone(t_cone *start, t_cone *new)
 {
 	while (start->next)
 		start = start->next;
 	start->next = new;
 }
 
-t_plan			*ft_get_plan(int fd)
+t_cone			*ft_get_cone(int fd)
 {
 	char	*line;
-	double	dis;
+	double	alpha;
 	int		ret;
 	t_color	color;
 	t_vec	pos;
 
-	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
+	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "--------"))
 	{
 		if (ft_strstr(line, "pos:"))
 			pos = ft_vector(fd);
-		if (ft_strstr(line, "dis:"))
+		if (ft_strstr(line, "alpha:"))
 		{
 			ret = get_next_line(fd, &line);
-			dis = ft_atodouble(&line);
+			alpha = ft_atodouble(&line);
 		}
 		if (ft_strstr(line, "color:"))
 			color = ft_color(fd);
 	}
 	if (ret == -1)
 		exit(-1);
-	return (ft_new_plan(dis, color, pos));
+	return (ft_new_cone(alpha, color, pos));
 }
 
-t_plan			*ft_get_plans(int fd)
+t_cone			*ft_get_cones(int fd)
 {
 	char	*line;
 	int		ret;
-	t_plan	*p;
+	t_cone	*c;
 
-	p = NULL;
+	c = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
 		if (ft_strstr(line, "new:"))
 		{
-			if (p == NULL)
-				p = ft_get_plan(fd);
+			if (c == NULL)
+				c = ft_get_cone(fd);
 			else
-				ft_add_plan(p, ft_get_plan(fd));
+				ft_add_cone(c, ft_get_cone(fd));
 		}
 		if (ret == -1)
 			exit(-1);
 	}
-	return (p);
+	return (c);
 }

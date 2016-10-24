@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylindre.c                                         :+:      :+:    :+:   */
+/*   plan.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/11 15:50:13 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 12:23:19 by pmartine         ###   ########.fr       */
+/*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
+/*   Updated: 2016/10/24 13:22:42 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/rtv1.h"
+#include "../../includes/rtv1.h"
 
-t_cylind		*ft_new_cylind(double radius, t_color color, t_vec pos)
+t_plan			*ft_new_plan(double dis, t_color color, t_vec pos)
 {
-	t_cylind	*c;
+	t_plan	*p;
 
-	if (!(c = (t_cylind *)malloc(sizeof(t_cylind))))
+	if (!(p = (t_plan *)malloc(sizeof(t_plan))))
 		return (NULL);
-	c->radius = radius;
-	c->color = color;
-	c->pos = pos;
-	return (c);
+	p->dis = dis;
+	p->color = color;
+	p->pos = pos;
+	return (p);
 }
 
-void			ft_add_cylind(t_cylind	*start, t_cylind *new)
+void			ft_add_plan(t_plan *start, t_plan *new)
 {
 	while (start->next)
 		start = start->next;
 	start->next = new;
 }
 
-t_cylind		*ft_get_cylind(int fd)
+t_plan			*ft_get_plan(int fd)
 {
 	char	*line;
-	double	radius;
+	double	dis;
 	int		ret;
 	t_color	color;
 	t_vec	pos;
@@ -43,37 +43,37 @@ t_cylind		*ft_get_cylind(int fd)
 	{
 		if (ft_strstr(line, "pos:"))
 			pos = ft_vector(fd);
-		if (ft_strstr(line, "radius:"))
+		if (ft_strstr(line, "dis:"))
 		{
 			ret = get_next_line(fd, &line);
-			radius = ft_atodouble(&line);
+			dis = ft_atodouble(&line);
 		}
 		if (ft_strstr(line, "color:"))
 			color = ft_color(fd);
 	}
 	if (ret == -1)
 		exit(-1);
-	return (ft_new_cylind(radius, color, pos));
+	return (ft_new_plan(dis, color, pos));
 }
 
-t_cylind		*ft_get_cylinds(int fd)
+t_plan			*ft_get_plans(int fd)
 {
-	char		*line;
-	int			ret;
-	t_cylind	*c;
+	char	*line;
+	int		ret;
+	t_plan	*p;
 
-	c = NULL;
+	p = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
 		if (ft_strstr(line, "new:"))
 		{
-			if (c == NULL)
-				c = ft_get_cylind(fd);
+			if (p == NULL)
+				p = ft_get_plan(fd);
 			else
-				ft_add_cylind(c, ft_get_cylind(fd));
+				ft_add_plan(p, ft_get_plan(fd));
 		}
 		if (ret == -1)
 			exit(-1);
 	}
-	return (c);
+	return (p);
 }

@@ -1,47 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   cylindre.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/11 17:46:23 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 12:21:07 by pmartine         ###   ########.fr       */
+/*   Created: 2016/10/11 15:50:13 by qduperon          #+#    #+#             */
+/*   Updated: 2016/10/24 13:22:21 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/rtv1.h"
+#include "../../includes/rtv1.h"
 
-t_sphere		*ft_new_sphere(double radius, t_color color, t_vec pos)
+t_cylind		*ft_new_cylind(double radius, t_color color, t_vec pos)
 {
-	t_sphere *s;
+	t_cylind	*c;
 
-	if (!(s = (t_sphere *)malloc(sizeof(t_sphere))))
+	if (!(c = (t_cylind *)malloc(sizeof(t_cylind))))
 		return (NULL);
-	s->radius = radius;
-	s->color = color;
-	s->pos = pos;
-	return (s);
+	c->radius = radius;
+	c->color = color;
+	c->pos = pos;
+	return (c);
 }
 
-void			ft_add_sphere(t_sphere *start, t_sphere *new)
+void			ft_add_cylind(t_cylind	*start, t_cylind *new)
 {
 	while (start->next)
 		start = start->next;
 	start->next = new;
 }
 
-t_sphere		*ft_get_sphere(int fd)
+t_cylind		*ft_get_cylind(int fd)
 {
 	char	*line;
 	double	radius;
-	int 	ret;
+	int		ret;
 	t_color	color;
 	t_vec	pos;
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{
-		if (ft_strstr(line, "pos"))
+		if (ft_strstr(line, "pos:"))
 			pos = ft_vector(fd);
 		if (ft_strstr(line, "radius:"))
 		{
@@ -53,27 +53,27 @@ t_sphere		*ft_get_sphere(int fd)
 	}
 	if (ret == -1)
 		exit(-1);
-	return (ft_new_sphere(radius, color, pos));
+	return (ft_new_cylind(radius, color, pos));
 }
 
-t_sphere		*ft_get_spheres(int fd)
+t_cylind		*ft_get_cylinds(int fd)
 {
 	char		*line;
 	int			ret;
-	t_sphere	*s;
+	t_cylind	*c;
 
-	s = NULL;
+	c = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
 		if (ft_strstr(line, "new:"))
 		{
-			if (s == NULL)
-				s = ft_get_sphere(fd);
+			if (c == NULL)
+				c = ft_get_cylind(fd);
 			else
-				ft_add_sphere(s, ft_get_sphere(fd));
+				ft_add_cylind(c, ft_get_cylind(fd));
 		}
 		if (ret == -1)
 			exit(-1);
 	}
-	return (s);
+	return (c);
 }

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 12:35:31 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:12:31 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	ft_put_pixel(t_env	*env, int x, int y, int color)
 	unsigned int	p;
 
 	i = 0;
-	p = x * (env->bpp / 8) + y * (env->s_line);
-	while (i < (env->bpp / 8))
+	p = x * (env->img->bpp / 8) + y * (env->img->s_line);
+	while (i < (env->img->bpp / 8))
 	{
-		env->data[p + i] = color;
+		env->img->data[p + i] = color;
 		color >>= 8;
 		i++;
 	}
@@ -91,6 +91,6 @@ int	draw(t_env	*env)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
+	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
 	return (0);
 }

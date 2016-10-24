@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 12:28:50 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:45:05 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,8 @@ int ft_sphere(t_scene *s, t_ray *r, double *d)
 
 int	ft_plan(t_scene *s, t_ray *r, double *d)
 {
-	//double	num;
-	//double	denum;
 	double	t;
 
-	//num = s->plan->dis - scale(s->plan->pos, &r->pos);
-	//denum = scale(s->plan->pos, &r->dir);
-	//t = num / denum;
 	t = ((s->plan->dis - dot_vect(s->plan->pos, r->pos)) / dot_vect(s->plan->pos, r->dir));
 	if (t > EPSI && t < *d)
 	{
