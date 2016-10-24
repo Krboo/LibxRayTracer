@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 18:15:28 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 19:47:45 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	ft_get_camera(int fd, t_env *env);
 ** clear.c
 */
 void	ft_clear_obj(t_obj **start);
+void	ft_clear_spot(t_spot **start);
 /*
 ** color.c
 */
@@ -129,13 +130,19 @@ t_obj				*ft_get_cones(int fd);
 t_obj				*ft_get_cylind(int fd, t_vec rot);
 t_obj				*ft_get_cylinds(int fd);
 /*
+** init.c
+*/
+void				ft_add_obj(t_obj *start, t_obj *new);
+void				ft_add_spot(t_spot *start, t_spot *new);
+void				ft_init_scene(char *scene, t_env *env);
+/*
 * new.c
 */
 t_obj				*ft_new_obj(double size, t_vec pos, t_vec rot, t_color col);
 t_obj				*ft_new_obj2(double size, t_vec pos, t_vec rot, t_color col);
 t_obj				*ft_new_obj3(double size, t_vec pos, t_vec rot, t_color col);
 t_obj				*ft_new_obj4(double size, t_vec pos, t_vec rot, t_color col);
-t_obj				*ft_new_obj5(t_vec pos, t_vec rot, t_color col);
+t_spot				*ft_new_spot(double size, t_vec pos, t_color col);
 /*
 ** plan.c
 */

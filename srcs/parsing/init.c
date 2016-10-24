@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 13:44:17 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 16:59:12 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/24 19:41:07 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	ft_add_obj(t_obj *start, t_obj *new)
 		start = start->next;
 	start->next = new;
 }
+
+void	ft_add_spot(t_spot *start, t_spot *new)
+{
+	while (start->next)
+		start = start->next;
+	start->next = new;
 
 void	ft_init_scene(char *scene, t_env *env)
 {
@@ -39,7 +45,7 @@ void	ft_init_scene(char *scene, t_env *env)
 		if (ft_strstr(line, "sphere:"))
 			env->obj = ft_get_spheres(fd);
 		if (ft_strstr(line, "spot:"))
-			env->obj = ft_get_spots(fd);
+			env->spots = ft_get_spots(fd);
 	}
 	if (ret == -1)
 		exit (-1);

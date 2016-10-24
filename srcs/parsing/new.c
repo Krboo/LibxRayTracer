@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 16:19:05 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 17:22:37 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/24 19:39:21 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,14 @@ t_obj		*ft_new_obj4(double size, t_vec pos, t_vec rot, t_color col)
 	obj->type = 3;
 }
 
-t_obj		*ft_new_obj5(t_vec pos, t_vec rot, t_color col)
+t_spot		*ft_new_spot(double size, t_vec pos, t_color col)
 {
-	t_obj	*obj;
+	t_spot	*spot;
 
-	if (!(obj = (t_obj *)malloc(sizeof(t_obj))))
+	if (!(spot = (t_spot *)malloc(sizeof(t_spot))))
 		return (NULL);
-	obj->size = 0;
-	obj->col = col;
-	obj->pos = pos;
-	obj->rot = rot;
-	obj->type = 4;
+	spot->size = 0;
+	spot->col = col;
+	spot->pos = pos;
+	return (spot);
 }
