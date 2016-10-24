@@ -6,13 +6,13 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 14:39:39 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/15 16:30:22 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:23:01 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
 
-t_cone			*ft_new_cone(double alpha, t_color *color, t_vec *pos)
+t_cone			*ft_new_cone(double alpha, t_color color, t_vec pos)
 {
 	t_cone	*c;
 
@@ -36,8 +36,8 @@ t_cone			*ft_get_cone(int fd)
 	char	*line;
 	double	alpha;
 	int		ret;
-	t_color	*color;
-	t_vec	*pos;
+	t_color	color;
+	t_vec	pos;
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "--------"))
 	{

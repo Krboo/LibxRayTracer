@@ -6,13 +6,13 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:46:23 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/15 16:34:04 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:21:07 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
 
-t_sphere		*ft_new_sphere(double radius, t_color *color, t_vec *pos)
+t_sphere		*ft_new_sphere(double radius, t_color color, t_vec pos)
 {
 	t_sphere *s;
 
@@ -36,8 +36,8 @@ t_sphere		*ft_get_sphere(int fd)
 	char	*line;
 	double	radius;
 	int 	ret;
-	t_color	*color;
-	t_vec	*pos;
+	t_color	color;
+	t_vec	pos;
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{

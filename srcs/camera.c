@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:57:26 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/21 12:31:53 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:26:08 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_cam		*ft_get_camera(int fd)
 	int 		ret;
 	t_cam		*c;
 
-	c = ft_new_camera(NULL, NULL);
+	c = (t_cam *)malloc(sizeof(c));
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{
 		if (ft_strstr(line, "pos:"))

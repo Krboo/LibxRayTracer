@@ -6,13 +6,13 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:50:13 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/15 16:30:58 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:23:19 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
 
-t_cylind		*ft_new_cylind(double radius, t_color *color, t_vec *pos)
+t_cylind		*ft_new_cylind(double radius, t_color color, t_vec pos)
 {
 	t_cylind	*c;
 
@@ -36,8 +36,8 @@ t_cylind		*ft_get_cylind(int fd)
 	char	*line;
 	double	radius;
 	int		ret;
-	t_color	*color;
-	t_vec	*pos;
+	t_color	color;
+	t_vec	pos;
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{

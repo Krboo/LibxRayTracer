@@ -6,13 +6,13 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:00:12 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/15 16:41:24 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:22:34 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
 
-t_spot			*ft_new_spot(t_color *color, t_vec *pos)
+t_spot			*ft_new_spot(t_color color, t_vec pos)
 {
 	t_spot		*s;
 
@@ -34,8 +34,8 @@ t_spot			*ft_get_spot(int fd)
 {
 	char	*line;
 	int		ret;
-	t_color	*color;
-	t_vec	*pos;
+	t_color	color;
+	t_vec	pos;
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{

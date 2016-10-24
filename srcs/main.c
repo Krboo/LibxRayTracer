@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 12:03:28 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:18:42 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	display(t_env	*e)
 	mlx_string_put(e->mlx, e->win, 5, 0, RED, "light x: ");
 	mlx_string_put(e->mlx, e->win, 5, 15, RED, "light y: ");
 	mlx_string_put(e->mlx, e->win, 5, 30, RED, "light z: ");
-	mlx_string_put(e->mlx, e->win, 95, 0, RED, ft_itoa(e->s->spot->pos->x));
-	mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->s->spot->pos->y));
-	mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->s->spot->pos->z));
+	mlx_string_put(e->mlx, e->win, 95, 0, RED, ft_itoa(e->s->spot->pos.x));
+	mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->s->spot->pos.y));
+	mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->s->spot->pos.z));
 	mlx_string_put(e->mlx, e->win, 5, 100, RED, "sphere x: ");
 	mlx_string_put(e->mlx, e->win, 5, 115, RED, "sphere y: ");
 	mlx_string_put(e->mlx, e->win, 5, 130, RED, "sphere z: ");
 	mlx_string_put(e->mlx, e->win, 5, 145, RED, "sphere r: ");
-	mlx_string_put(e->mlx, e->win, 95, 100, RED, ft_itoa(e->s->sphere->pos->x));
-	mlx_string_put(e->mlx, e->win, 95, 115, RED, ft_itoa(e->s->sphere->pos->y));
-	mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(e->s->sphere->pos->z));
+	mlx_string_put(e->mlx, e->win, 95, 100, RED, ft_itoa(e->s->sphere->pos.x));
+	mlx_string_put(e->mlx, e->win, 95, 115, RED, ft_itoa(e->s->sphere->pos.y));
+	mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(e->s->sphere->pos.z));
 	mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(e->s->sphere->radius));
 }
 

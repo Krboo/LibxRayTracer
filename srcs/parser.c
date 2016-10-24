@@ -1,6 +1,6 @@
 #include "../includes/rtv1.h"
 
-t_cam		*ft_new_camera(t_vec *pos, t_vec *dir)
+t_cam		*ft_new_camera(t_vec pos, t_vec dir)
 {
 	t_cam	*c;
 

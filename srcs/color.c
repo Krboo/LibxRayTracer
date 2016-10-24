@@ -6,25 +6,23 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:31:49 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/15 17:25:53 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:27:12 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
 
-t_color		*ft_new_color(double r, double g, double b)
+t_color		ft_new_color(double r, double g, double b)
 {
-	t_color	*c;
+	t_color	c;
 
-	if (!(c = (t_color *)malloc(sizeof(t_color))))
-		return (NULL);
-	c->r = r;
-	c->g = g;
-	c->b = b;
+	c.r = r;
+	c.g = g;
+	c.b = b;
 	return (c);
 }
 
-t_color		*ft_color(int fd)
+t_color		ft_color(int fd)
 {
 	char	*line;
 	double	r;
@@ -39,7 +37,7 @@ t_color		*ft_color(int fd)
 	return (ft_new_color(r, g, b));
 }
 
-void		ft_deleted_color(t_color *color)
+void		ft_deleted_color(t_color color)
 {
-	free(color);
+	free(&color);
 }

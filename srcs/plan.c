@@ -6,13 +6,13 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/15 16:33:34 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:22:12 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rtv1.h"
 
-t_plan			*ft_new_plan(double dis, t_color *color, t_vec *pos)
+t_plan			*ft_new_plan(double dis, t_color color, t_vec pos)
 {
 	t_plan	*p;
 
@@ -36,8 +36,8 @@ t_plan			*ft_get_plan(int fd)
 	char	*line;
 	double	dis;
 	int		ret;
-	t_color	*color;
-	t_vec	*pos;
+	t_color	color;
+	t_vec	pos;
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{

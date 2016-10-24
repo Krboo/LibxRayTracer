@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/21 17:53:50 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:28:50 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int ft_sphere(t_scene *s, t_ray *r, double *d)
 	t_vec	dist;
 
 	dist = sub_vect(s->cam->pos, s->sphere->pos);
-	a = dot_vect(&r->dir ,&r->dir);
-	b = 2 * dot_vect(&r->dir, &dist);
-	c = dot_vect(&dist, &dist) - (s->sphere->radius * s->sphere->radius);
+	a = dot_vect(r->dir ,r->dir);
+	b = 2 * dot_vect(r->dir, dist);
+	c = dot_vect(dist, dist) - (s->sphere->radius * s->sphere->radius);
 	discr = b * b - 4 * a * c;
 	if (discr > EPSI)
 	{
@@ -56,7 +56,7 @@ int	ft_plan(t_scene *s, t_ray *r, double *d)
 	//num = s->plan->dis - scale(s->plan->pos, &r->pos);
 	//denum = scale(s->plan->pos, &r->dir);
 	//t = num / denum;
-	t = ((s->plan->dis - dot_vect(s->plan->pos, &r->pos)) / dot_vect(s->plan->pos, &r->dir));
+	t = ((s->plan->dis - dot_vect(s->plan->pos, r->pos)) / dot_vect(s->plan->pos, r->dir));
 	if (t > EPSI && t < *d)
 	{
 		*d = t;
@@ -73,7 +73,7 @@ int     ft_cylindre(t_scene *s, t_ray *r, double *d)
 	double   c;
 	double   t;
 
-	dist = sub_vect(&r->pos, s->cylind->pos);
+	dist = sub_vect(r->pos, s->cylind->pos);
 	a = r->dir.x * r->dir.x + r->dir.y * r->dir.y;
 	b = 2 * (r->pos.x * r->dir.x + r->pos.y * r->dir.y);
 	c = r->pos.x * r->pos.x + r->pos.y * r->pos.y - 1;
