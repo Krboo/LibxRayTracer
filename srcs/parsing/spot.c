@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:00:12 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 19:48:42 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:13:35 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_spot			*ft_get_spot(int fd)
 		{
 			ret = get_next_line(fd, &line);
 			size = ft_atodouble(&line);
-		}	
+		}
 	}
 	if (ret == -1)
 		exit(-1);
@@ -41,7 +41,7 @@ t_spot			*ft_get_spots(int fd)
 {
 	char	*line;
 	int		ret;
-	t_obj	*s;
+	t_spot	*s;
 
 	s = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))

@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 16:58:30 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/25 11:58:09 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_obj			*ft_get_plans(int fd)
 	t_vec	rot;
 
 	obj = NULL;
-	rot = NULL;
+	rot = new_vec(0.0,0.0,0.0); //?
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
 		if (ft_strstr(line, "new:"))

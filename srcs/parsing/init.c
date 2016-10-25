@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 13:44:17 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 19:41:07 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:37:15 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_add_spot(t_spot *start, t_spot *new)
 	while (start->next)
 		start = start->next;
 	start->next = new;
-
+}
 void	ft_init_scene(char *scene, t_env *env)
 {
 	char	*line;

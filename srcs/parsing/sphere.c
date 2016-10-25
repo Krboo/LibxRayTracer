@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:46:23 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/24 17:14:26 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/25 11:57:35 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_obj		*ft_get_spheres(int fd)
 	t_vec		rot;
 
 	s = NULL;
-	rot = NULL;
+	rot = new_vec(0.0,0.0,0.0);   //?
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
 		if (ft_strstr(line, "new:"))

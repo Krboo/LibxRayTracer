@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 18:25:01 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:50:31 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	mini(double d1, double d2)
 		return (d1);
 }
 
-int ft_sphere(t_env *e, double *d)
+int ft_sphere(t_obj *obj, t_env *e, double *d)
 {
 	double	a;
 	double	b;
@@ -28,10 +28,10 @@ int ft_sphere(t_env *e, double *d)
 	double	discr;
 	t_vec	dist;
 
-	//dist = sub_vect(e->cam_pos, e->s->sphere->pos);
+	dist = sub_vect(e->cam_pos, obj->pos);
 	a = dot_vect(e->ray_dir ,e->ray_dir);
 	b = 2 * dot_vect(e->ray_dir, dist);
-//	c = dot_vect(dist, dist) - (s->sphere->radius * s->sphere->radius);
+	c = dot_vect(dist, dist) - (obj->size * obj->size);
 	discr = b * b - 4 * a * c;
 	if (discr > EPSI)
 	{
@@ -46,7 +46,7 @@ int ft_sphere(t_env *e, double *d)
 	}
 	return (0);
 }
-
+/*
 int	ft_plan(t_env *e, double *d)
 {
 	double	t;
@@ -90,4 +90,4 @@ int		ft_intersections(t_scene *s, double *d)
 	if (ft_sphere(s,s->ray,d) == 1 || ft_plan(s,s->ray,d) == 1)
 		return (1);
 	return (0);
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 19:47:45 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:25:59 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct		s_spot
 	t_color			col;
 	t_vec			pos;
 	double			size;
-	struct s_spots	*next;
+	struct s_spot	*next;
 }					t_spot;
 
 typedef struct		s_env
@@ -66,7 +66,7 @@ typedef struct		s_env
 	void			*win;
 	t_img			*img;
 	t_obj			*obj;
-	t_spots			*spots;
+	t_spot			*spots;
 	t_vec			cam_pos;
 	t_vec			cam_dir;
 	t_vec			ray_dir;
@@ -90,20 +90,24 @@ double	dot_vect(t_vec v1, t_vec v2);
 t_vec	new_vec(double x, double y, double z);
 t_vec	ft_vector(int fd);
 t_vec	cross_vect(t_vec v1, t_vec v2);
-void    ft_deleted_vect(t_vec vect);
 /*
-** parser.c
+** init.c
 */
-t_cam	*ft_new_camera(t_vec pos, t_vec dir);
-t_scene	*ft_get_scene(void);
-t_scene	*ft_init_scene(char *scene);
+void	ft_add_obj(t_obj *start, t_obj *new);
+void	ft_add_spot(t_spot *start, t_spot *new);
+void	ft_init_scene(char *scene, t_env *env);
+/*
+** spots.c
+*/
+t_spot	*ft_get_spot(int fd);
+t_spot	*ft_get_spots(int fd);
 /*
 ** objects.c
 */
-int		ft_sphere(t_scene *s, t_ray *r, double *d);
-int		ft_plan(t_scene *s, t_ray *r, double *d);
-int		ft_cylindre(t_scene *s, t_ray *r, double *d);
-int		ft_intersections(t_scene *s, double *d);
+int		ft_sphere(t_obj *obj, t_env *e, double *d);
+//int		ft_plan(t_scene *s, t_ray *r, double *d);
+//int		ft_cylindre(t_scene *s, t_ray *r, double *d);
+//int		ft_intersections(t_scene *s, double *d);
 /*
 ** camera.c
 */
@@ -151,17 +155,6 @@ t_obj				*ft_new_plan(double dis, t_color color, t_vec pos);
 /*
 ** sphere.c
 */
-t_obj	            *ft_get_sphere(int fd);
+t_obj	            *ft_get_sphere(int fd, t_vec rot);
 t_obj	            *ft_get_spheres(int fd);
-/*
-** spot.c
-*/
-t_obj				*ft_get_spot(int fd, t_vec rot);
-t_obj				*ft_get_spots(int fd);
-/*
-** tools_vect.c
-*/
-double              ft_magnitude(t_vec v);
-t_vec               ft_neg(t_vec v);
-t_vec               ft_norm(t_vec v);
 #endif
