@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:46:23 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/25 18:41:38 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:13:20 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void		ft_get_spheres(int fd, t_env *env)
 			if (env->obj == NULL)
 				env->obj = ft_get_sphere(fd, rot);
 			else
+			{
 				ft_add_obj(env->obj, ft_get_sphere(fd, rot));
+			}
 		}
 		if (ret == -1)
 			exit(-1);

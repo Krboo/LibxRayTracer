@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/25 16:03:59 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:13:53 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void			ft_get_plans(int fd, t_env *env)
 			if (env->obj == NULL)
 				env->obj = ft_get_plan(fd, rot);
 			else
+			{
 				ft_add_obj(env->obj, ft_get_plan(fd, rot));
+			}
 		}
 		if (ret == -1)
 			exit(-1);

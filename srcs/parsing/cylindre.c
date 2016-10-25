@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:50:13 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/25 18:42:06 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:13:38 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void		ft_get_cylinds(int fd, t_env *env)
 			if (env->obj == NULL)
 				env->obj = ft_get_cylind(fd, rot);
 			else
+			{
 				ft_add_obj(env->obj, ft_get_cylind(fd, rot));
+			}
 		}
 		if (ret == -1)
 			exit(-1);

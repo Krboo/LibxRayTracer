@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/25 14:24:04 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:09:33 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ static t_env *init_env(char *map)
 
 	if (!(e = (t_env *)malloc(sizeof(t_env))))
 		return (NULL);
+
+	ft_putendl("before ft_init_scene OK");
 	ft_init_scene(map, e);
+	ft_putendl("after ft_init_scene OK");
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, W, H, "Rtv1");
 	e->img = (t_img *)malloc(sizeof(t_img));

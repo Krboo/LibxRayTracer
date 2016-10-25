@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 14:39:39 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/25 18:41:32 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:13:22 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void			ft_get_cones(int fd, t_env *env)
 			if (env->obj == NULL)
 				env->obj = ft_get_cone(fd, rot);
 			else
-				ft_add_obj(env->obj, ft_get_cone(fd, rot));
+				{
+					ft_add_obj(env->obj, ft_get_cone(fd, rot));
+				}
 		}
 		if (ret == -1)
 			exit(-1);
