@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 13:44:17 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/25 18:52:26 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:18:18 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	ft_init_scene(char *scene, t_env *env)
 	fd = open(scene, O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if (ft_strstr(line, "camera:"))
-			ft_get_camera(fd, env);
 		if (ft_strstr(line, "cone:"))
 			ft_get_cones(fd, env);
 		if (ft_strstr(line, "cylindre:"))
@@ -44,6 +42,8 @@ void	ft_init_scene(char *scene, t_env *env)
 			ft_get_plans(fd, env);
 		if (ft_strstr(line, "sphere:"))
 			ft_get_spheres(fd, env);
+		if (ft_strstr(line, "camera:"))
+			ft_get_camera(fd, env);
 		if (ft_strstr(line, "spot:"))
 			env->spots = ft_get_spots(fd);
 	}
