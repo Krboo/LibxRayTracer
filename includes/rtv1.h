@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/25 14:25:59 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/25 16:04:34 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,12 @@ void				ft_deleted_color(t_color color);
 ** cone.c
 */
 t_obj				*ft_get_cone(int fd, t_vec rot);
-t_obj				*ft_get_cones(int fd);
+void				ft_get_cones(int fd, t_env *env);
 /*
 ** cylindre.c
 */
 t_obj				*ft_get_cylind(int fd, t_vec rot);
-t_obj				*ft_get_cylinds(int fd);
+void				ft_get_cylinds(int fd, t_env *env);
 /*
 ** init.c
 */
@@ -150,11 +150,11 @@ t_spot				*ft_new_spot(double size, t_vec pos, t_color col);
 /*
 ** plan.c
 */
-t_obj				*ft_get_plans(int fd);
-t_obj				*ft_new_plan(double dis, t_color color, t_vec pos);
+t_obj				*ft_get_plan(int fd, t_vec rot);
+void				ft_get_plans(int fd, t_env *env);
 /*
 ** sphere.c
 */
 t_obj	            *ft_get_sphere(int fd, t_vec rot);
-t_obj	            *ft_get_spheres(int fd);
+void	            ft_get_spheres(int fd, t_env *env);
 #endif
