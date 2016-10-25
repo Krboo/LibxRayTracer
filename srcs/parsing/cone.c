@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 14:39:39 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/25 15:59:17 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/25 18:41:32 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_obj			*ft_get_cone(int fd, t_vec rot)
 	return (ft_new_obj3(alpha, pos, rot, color));
 }
 
-void			ft_get_cones(int fd)
+void			ft_get_cones(int fd, t_env *env)
 {
 	char	*line;
 	int		ret;

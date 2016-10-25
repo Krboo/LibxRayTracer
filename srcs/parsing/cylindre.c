@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:50:13 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/25 16:00:07 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/25 18:42:06 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_obj		*ft_get_cylind(int fd, t_vec rot)
 	return (ft_new_obj4(radius, pos, rot, color));
 }
 
-void		ft_get_cylinds(int fd)
+void		ft_get_cylinds(int fd, t_env *env)
 {
 	char		*line;
 	int			ret;
