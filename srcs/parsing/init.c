@@ -30,7 +30,12 @@ void	ft_init_scene(char *scene, t_env *env)
 	char	*line;
 	int		fd;
 	int		ret;
+	t_obj		*first;
+	
 
+	env->obj = (t_obj *)malloc(sizeof(t_obj));
+	env->obj->next = NULL;
+	first = env->obj;
 	fd = open(scene, O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
@@ -47,6 +52,7 @@ void	ft_init_scene(char *scene, t_env *env)
 		if (ft_strstr(line, "spot:"))
 			env->spots = ft_get_spots(fd);
 	}
+	env->obj = first;
 	if (ret == -1)
 		exit (-1);
 }

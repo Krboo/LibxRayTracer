@@ -19,7 +19,9 @@ t_obj		*ft_get_sphere(int fd, t_vec rot)
 	int 	ret;
 	t_color	color;
 	t_vec	pos;
+	t_obj	*obj;
 
+	obj = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{
 		if (ft_strstr(line, "pos"))
@@ -33,9 +35,10 @@ t_obj		*ft_get_sphere(int fd, t_vec rot)
 			color = ft_color(fd);
 		rot = new_vec(0, 0, 0);
 	}
+	obj = ft_new_obj2(radius, pos, rot, color);
 	if (ret == -1)
 		exit(-1);
-	return (ft_new_obj2(radius, pos, rot, color));
+	return (obj);
 }
 
 void		ft_get_spheres(int fd, t_env *env)
