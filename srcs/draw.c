@@ -91,16 +91,27 @@ int	draw(t_env	*env)
 	double	d;
 	t_obj	*node;
 
-	ft_putnbr(env->obj->type);
 	//ft_putendl("^ok^");
 	node = env->obj;
-	node = node->next;
+
 	ft_putnbr(node->type);
-	//ft_putendl("fru");
-	//ft_putnbr(env->obj->next->type);
-	//while (env->obj->type != 1)
-	//	env->obj = env->obj->next;
-	//ft_putnbr(env->obj->type);
+	ft_putchar('\n');
+
+	node = node->next;
+
+	ft_putnbr(node->type);
+	ft_putchar('\n');
+
+	node = node->next;
+
+	ft_putnbr(node->type);
+	ft_putchar('\n');
+
+	node = node->next;
+
+	ft_putnbr(node->type);
+	ft_putchar('\n');
+	env->obj = node;
 	y = 0;
 	while (y < H)
 	{
