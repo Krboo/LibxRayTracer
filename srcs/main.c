@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/25 19:09:33 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/27 14:07:40 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,16 @@ int		ft_error(char *str)
 static t_env *init_env(char *map)
 {
 	t_env	*e;
-
-	if (!(e = (t_env *)malloc(sizeof(t_env))))
+	if (!(e = (t_env *)malloc(sizeof(t_env*))))
 		return (NULL);
-
-	ft_putendl("before ft_init_scene OK");
-	ft_init_scene(map, e);
-	ft_putendl("after ft_init_scene OK");
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, W, H, "Rtv1");
 	e->img = (t_img *)malloc(sizeof(t_img));
 	e->img->img = mlx_new_image(e->mlx, W, H);
 	e->img->data = mlx_get_data_addr(e->img->img, &e->img->bpp, &e->img->s_line, &e->img->endian);
+	ft_putendl("before ft_init_scene OK");
+	ft_init_scene(map, e);
+	ft_putendl("after ft_init_scene OK");
 	return (e);
 }
 

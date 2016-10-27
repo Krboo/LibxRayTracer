@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/25 15:24:17 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/27 11:36:18 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,12 @@ int	draw(t_env	*env)
 
 	ft_putnbr(node->type);
 	ft_putchar('\n');
+	while (node->type != 1)
+		node = node->next;
 
-	node = node->next;
-
-	ft_putnbr(node->type);
+	ft_putnbr(node->size);
 	ft_putchar('\n');
 
-	node = node->next;
-
-	ft_putnbr(node->type);
-	ft_putchar('\n');
-
-	node = node->next;
-
-	ft_putnbr(node->type);
-	ft_putchar('\n');
-	env->obj = node;
 	y = 0;
 	while (y < H)
 	{
@@ -120,8 +110,8 @@ int	draw(t_env	*env)
 		{
 		d = 20000.0;
 		create_ray(env, x , y);
-		if (ft_sphere(env->obj, env, &d) == 1)
-			ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env,  &d, env->obj->pos)));
+		if (ft_sphere(node, env, &d) == 1)
+			ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env,  &d, node->pos)));
 			x++;
 		}
 		y++;
