@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/27 14:07:40 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/27 14:28:30 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		ft_error(char *str)
 static t_env *init_env(char *map)
 {
 	t_env	*e;
-	if (!(e = (t_env *)malloc(sizeof(t_env*))))
+	if (!(e = (t_env *)malloc(sizeof(t_env))))
 		return (NULL);
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, W, H, "Rtv1");
