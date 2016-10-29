@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/29 15:53:40 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/29 16:53:04 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,12 @@ int	draw(t_env	*env)
 	int		y;
 	t_obj	*node;
 
-	//ft_putendl("^ok^");
 	node = env->obj;
 
-	ft_putnbr(node->type);
-	ft_putchar('\n');
 	while (node->next != NULL)
 	{
 		if (node->type == 1)
 		{
-			ft_putendl("node->type == 1");
 			y = 0;
 			while (y < H)
 			{
