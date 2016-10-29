@@ -27,7 +27,7 @@ static void	ft_put_pixel(t_env	*env, int x, int y, int color)
 	}
 }
 
-void create_ray(t_env *e, int x, int y)
+static void create_ray(t_env *e, int x, int y)
 {
 	t_vec	v1;
 	t_vec	v2;
@@ -41,7 +41,7 @@ void create_ray(t_env *e, int x, int y)
 	e->ray_pos = v1;
 }
 
-int	lambert_rgb(int r, int g, int b, double lambert)
+static int	lambert_rgb(int r, int g, int b, double lambert)
 {
 	r *= lambert;
 	g *= lambert;
@@ -67,68 +67,38 @@ static double	calc_lamb(t_env	*env, t_vec	pos)
 	return (lambert);
 }
 
-/*static void	trace(t_env *env, t_obj *node, int x, int y)
-  {
-  double	d;
+void	trace(t_env *env, int x, int y)
+{
+	t_obj	*node;
 
-  create_ray(env, x, y);
-//	ft_inter(env, &d);
-while(node->type != 2)
-node = node->next;
-if (ft_sphere(node, env, d) == 1)
-ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, d, node->pos)));
-//	else if (ft_plan(env->s, env->s->ray, &d) == 1)
-ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, env->s->ray, d, env->s->plan->pos)));
-else
-ft_put_pixel(env, x, y, BLACK);
-ft_putendl("test");
-}*/
+	env->d = 20000.0;
+	create_ray(env, x , y);
+	node = env->obj;
+	while (node != NULL)
+	{
+		if (node->type == 1)
+			if (ft_sphere(node, env) == 1)
+				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, node->pos)));
+		node = node->next;
+	}
+}
 
 int	draw(t_env	*env)
 {
 	int		x;
 	int		y;
-	t_obj	*node;
 
-	node = env->obj;
-
-	while (node->next != NULL)
+	y = 0;
+	while (y < H)
 	{
-		if (node->type == 1)
+		x = 0;
+		while (x < W)
 		{
-			y = 0;
-			while (y < H)
-			{
-				x = 0;
-				while (x < W)
-				{
-					env->d = 20000.0;
-					create_ray(env, x , y);
-					if (ft_sphere(node, env) == 1)
-						ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, node->pos)));
-					x++;
-				}
-				y++;
-			}
-			mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
+		trace(env, x, y);
+		x++;
 		}
-		node = node->next;
+		y++;
 	}
-	/*
-	   y = 0;
-	   while (y < H)
-	   {
-	   x = 0;
-	   while (x < W)
-	   {
-	   d = 20000.0;
-	   create_ray(env, x , y);
-	   if (ft_sphere(node, env, &d) == 1)
-	   ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env,  &d, node->pos)));
-	   x++;
-	   }
-	   y++;
-	   }
-	   mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
-	   */return (0);
+   	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
+   	return (0);
 }

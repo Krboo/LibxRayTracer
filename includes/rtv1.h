@@ -14,9 +14,9 @@
 # define RTV1_H
 
 # include <math.h>
-# include "../minilibx_macos/mlx.h"
+# include "../minilibx/mlx.h"
 # include "../libft/includes/libft.h"
-# include "defines.h"
+# include "defines_ubuntu.h"
 # include <fcntl.h>
 
 typedef struct		s_vec
@@ -75,8 +75,13 @@ typedef struct		s_env
 }					t_env;
 
 int		draw(t_env *env);
+//double		calc_lamb(t_env *env, t_vec pos);
+//int		lambert_rgb(int r, int g, int b, double lambert);
+//void		ft_put_pixel(t_env *env, int x, int y, int color);
+
+void		trace(t_env *env, int x, int y);
 int		ft_error(char *str);
-void	display(t_env *e);
+void		display(t_env *e);
 int		ft_keyhook(int keycode, t_env *env);
 int		ft_red_cross(int keycode, t_env *env);
 /*
@@ -107,7 +112,7 @@ t_spot	*ft_get_spots(int fd);
 */
 double		ft_sphere(t_obj *obj, t_env *e);
 double		ft_plan(t_obj *obj, t_env *e);
-//int		ft_intersections(t_scene *s, double *d);
+//void		ft_intersections(t_env *e, int x, int y);
 /*
 ** camera.c
 */

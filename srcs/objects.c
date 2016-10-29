@@ -83,10 +83,15 @@ int     ft_cylindre(t_env *e, double *d)
 	}
 	return (0);
 }
-
-int		ft_intersections(t_scene *s, double *d)
+*/
+/*void		ft_intersections(t_env *e, int x, int y)
 {
-	if (ft_sphere(s,s->ray,d) == 1 || ft_plan(s,s->ray,d) == 1)
-		return (1);
-	return (0);
+	t_obj	*node;
+
+	node = e->obj;
+	while (node->type != 1)
+		node = node->next;
+	ft_putendl("yo");
+	if (ft_sphere(node, e) == 1)
+		ft_put_pixel(e, x, y, lambert_rgb(255,0,0, calc_lamb(e, node->pos)));	
 }*/

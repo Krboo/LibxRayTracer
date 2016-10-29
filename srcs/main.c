@@ -18,7 +18,7 @@ int		ft_error(char *str)
 	exit(0);
 }
 
-void	display(t_env	*e)
+/*void	display(t_env	*e)
 {
 	t_obj	*node;
 
@@ -40,7 +40,7 @@ void	display(t_env	*e)
 	mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(node->pos.z));
 	mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(node->size));
 }
-
+*/
 static t_env *init_env(char *map)
 {
 	t_env	*e;
@@ -65,7 +65,7 @@ int		main(int ac,char **av)
 	else if ((env = init_env(av[1])) != NULL)
 	{
 		draw(env);
-		display(env);
+//		display(env);
 		mlx_hook(env->win, 2, 1L << 0, ft_keyhook, env);
 		mlx_hook(env->win, 17, (1L << 17), ft_red_cross, 0);
 		mlx_loop(env->mlx);
