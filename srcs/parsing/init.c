@@ -50,6 +50,7 @@ void	ft_init_scene(char *scene, t_env *env)
 			ft_putendl("spot");
 			env->spots = ft_get_spots(fd);
 			ft_putendl("spot");
+			env->obj = first;
 		}
 		else if (ft_strstr(line, "cone:"))
 		{

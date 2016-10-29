@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/27 11:36:18 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/29 15:53:40 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int	lambert_rgb(int r, int g, int b, double lambert)
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 
-static double	calc_lamb(t_env	*env, double *d, t_vec	pos)
+static double	calc_lamb(t_env	*env, t_vec	pos)
 {
 	t_vec	vec;
 	t_vec	cam;
 	t_vec	yo;
 	double	lambert;
 
-	cam = scale_vect(env->ray_dir, *d);
+	cam = scale_vect(env->ray_dir, env->d);
 	cam = add_vect(env->ray_pos, cam);
 	yo = sub_vect(cam, env->spots->pos);
 	yo = norm_vect(yo);
@@ -68,27 +68,26 @@ static double	calc_lamb(t_env	*env, double *d, t_vec	pos)
 }
 
 /*static void	trace(t_env *env, t_obj *node, int x, int y)
-{
-	double	d;
+  {
+  double	d;
 
-	create_ray(env, x, y);
+  create_ray(env, x, y);
 //	ft_inter(env, &d);
-	while(node->type != 2)
-		node = node->next;
-	if (ft_sphere(node, env, d) == 1)
-		ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, d, node->pos)));
-	//	else if (ft_plan(env->s, env->s->ray, &d) == 1)
-		ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, env->s->ray, d, env->s->plan->pos)));
-	else
-		ft_put_pixel(env, x, y, BLACK);
-	ft_putendl("test");
+while(node->type != 2)
+node = node->next;
+if (ft_sphere(node, env, d) == 1)
+ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, d, node->pos)));
+//	else if (ft_plan(env->s, env->s->ray, &d) == 1)
+ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, env->s->ray, d, env->s->plan->pos)));
+else
+ft_put_pixel(env, x, y, BLACK);
+ft_putendl("test");
 }*/
 
 int	draw(t_env	*env)
 {
 	int		x;
 	int		y;
-	double	d;
 	t_obj	*node;
 
 	//ft_putendl("^ok^");
@@ -96,26 +95,44 @@ int	draw(t_env	*env)
 
 	ft_putnbr(node->type);
 	ft_putchar('\n');
-	while (node->type != 1)
-		node = node->next;
-
-	ft_putnbr(node->size);
-	ft_putchar('\n');
-
-	y = 0;
-	while (y < H)
+	while (node->next != NULL)
 	{
-		x = 0;
-		while (x < W)
+		if (node->type == 1)
 		{
-		d = 20000.0;
-		create_ray(env, x , y);
-		if (ft_sphere(node, env, &d) == 1)
-			ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env,  &d, node->pos)));
-			x++;
+			ft_putendl("node->type == 1");
+			y = 0;
+			while (y < H)
+			{
+				x = 0;
+				while (x < W)
+				{
+					env->d = 20000.0;
+					create_ray(env, x , y);
+					if (ft_sphere(node, env) == 1)
+						ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, node->pos)));
+					x++;
+				}
+				y++;
+			}
+			mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
 		}
-		y++;
+		node = node->next;
 	}
-	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
-	return (0);
+	/*
+	   y = 0;
+	   while (y < H)
+	   {
+	   x = 0;
+	   while (x < W)
+	   {
+	   d = 20000.0;
+	   create_ray(env, x , y);
+	   if (ft_sphere(node, env, &d) == 1)
+	   ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env,  &d, node->pos)));
+	   x++;
+	   }
+	   y++;
+	   }
+	   mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
+	   */return (0);
 }

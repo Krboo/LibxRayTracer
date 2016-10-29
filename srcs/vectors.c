@@ -68,11 +68,11 @@ t_vec	scale_vect(t_vec v1, double fact)
 	return (v2);
 }
 
-
+/*
 void	ft_deleted_vect(t_vec vect)
 {
 		free(&vect);
-}
+}*/
 
 double	dot_vect(t_vec v1, t_vec v2)
 {

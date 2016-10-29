@@ -14,24 +14,26 @@
 
 int		ft_keyhook(int	keycode, t_env *env)
 {
+	ft_putnbr(keycode);
+	ft_putchar('n');
 	if (keycode == ESC)
 	{
 		mlx_destroy_window(env->mlx, env->win);
 		exit(0);
 	}
-/*	if (keycode == RIGHT)
-		env->s->spot->pos.x += 2;
+	if (keycode == RIGHT)
+		env->spots->pos.x += 2;
 	if (keycode == LEFT)
-		env->s->spot->pos.x -= 2;
+		env->spots->pos.x -= 2;
 	if (keycode == UP)
-		env->s->spot->pos.y -= 2;
+		env->spots->pos.y -= 2;
 	if (keycode == DOWN)
-		env->s->spot->pos.y += 2;
+		env->spots->pos.y += 2;
 	if (keycode == DEZOOM)
-		env->s->spot->pos.z -= 2;
+		env->spots->pos.z += 0.5;
 	if (keycode == ZOOM)
-		env->s->spot->pos.z += 2;
-*/	draw(env);
+		env->spots->pos.z -= 0.5;
+	draw(env);
 //	display(env);
 	return (0);
 }

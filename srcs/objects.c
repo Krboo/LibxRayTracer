@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/27 11:38:20 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/29 15:46:50 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	mini(double d1, double d2)
 		return (d1);
 }
 
-int ft_sphere(t_obj *obj, t_env *e, double *d)
+double ft_sphere(t_obj *obj, t_env *e)
 {
 	double	a;
 	double	b;
@@ -38,28 +38,27 @@ int ft_sphere(t_obj *obj, t_env *e, double *d)
 		c = ((-b - sqrtf(discr)) / (2 * a));
 		discr = ((-b + sqrtf(discr)) / (2 * a));
 		discr = discr < c ? discr : c;
-		if ((discr > EPSI) && (discr < *d))
+		if ((discr > EPSI) && (discr < e->d))
 		{
-			*d = discr;
+			e->d = discr;
 			return (1);
 		}
 	}
 	return (0);
 }
-/*
-int	ft_plan(t_env *e, double *d)
-{
+double	ft_plan(t_obj	*node, t_env *env)
+	{
 	double	t;
 
-	//t = ((s->plan->dis - dot_vect(s->plan->pos, r->pos)) / dot_vect(s->plan->pos, r->dir));
-	if (t > EPSI && t < *d)
+	t = ((node->size - dot_vect(node->pos, env->ray_pos)) / dot_vect(node->pos, env->ray_dir));
+	if (t > EPSI && t < env->d)
 	{
-		*d = t;
+		env->d = t;
 		return (1);
 	}
 	return (0);
 }
-
+/*
 int     ft_cylindre(t_env *e, double *d)
 {
 	t_vec  dist;

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/25 16:04:34 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/10/29 15:02:51 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
+	double			d;
 	t_img			*img;
 	t_obj			*obj;
 	t_spot			*spots;
@@ -104,9 +105,8 @@ t_spot	*ft_get_spots(int fd);
 /*
 ** objects.c
 */
-int		ft_sphere(t_obj *obj, t_env *e, double *d);
-//int		ft_plan(t_scene *s, t_ray *r, double *d);
-//int		ft_cylindre(t_scene *s, t_ray *r, double *d);
+double		ft_sphere(t_obj *obj, t_env *e);
+double		ft_plan(t_obj *obj, t_env *e);
 //int		ft_intersections(t_scene *s, double *d);
 /*
 ** camera.c
