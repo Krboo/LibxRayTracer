@@ -20,7 +20,7 @@ double	mini(double d1, double d2)
 		return (d1);
 }
 
-double ft_sphere(t_obj *obj, t_env *e)
+double	ft_sphere(t_obj *obj, t_env *e)
 {
 	double	a;
 	double	b;
@@ -33,30 +33,21 @@ double ft_sphere(t_obj *obj, t_env *e)
 	b = 2 * dot_vect(e->ray_dir, dist);
 	c = dot_vect(dist, dist) - (obj->size * obj->size);
 	discr = b * b - 4 * a * c;
-	if (discr > EPSI)
-	{
-		c = ((-b - sqrtf(discr)) / (2 * a));
-		discr = ((-b + sqrtf(discr)) / (2 * a));
-		discr = discr < c ? discr : c;
-		if ((discr > EPSI) && (discr < e->d))
-		{
-			e->d = discr;
-			return (1);
-		}
-	}
-	return (0);
+	c = ((-b + sqrtf(discr)) / (2 * a));
+	discr = ((-b - sqrtf(discr)) / (2 * a));
+	if (discr > c)
+		discr = c;
+	return (discr);
 }
+
 double	ft_plan(t_obj	*node, t_env *env)
-	{
+{
 	double	t;
 
-	t = ((node->size - dot_vect(node->pos, env->ray_pos)) / dot_vect(node->pos, env->ray_dir));
-	if (t > EPSI && t < env->d)
-	{
-		env->d = t;
-		return (1);
-	}
-	return (0);
+	t = ((dot_vect(node->rot, node->pos) - dot_vect(node->rot, env->cam_pos)) / dot_vect(node->rot, env->ray_dir));
+	if (t < EPSI)
+		return (-1);
+	return (t);
 }
 /*
 int     ft_cylindre(t_env *e, double *d)

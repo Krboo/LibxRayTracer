@@ -32,7 +32,7 @@ int		ft_keyhook(int	keycode, t_env *env)
 	if (keycode == ZOOM)
 		env->spots->pos.z -= 0.5;
 	draw(env);
-//	display(env);
+	display(env);
 	return (0);
 }
 

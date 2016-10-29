@@ -18,19 +18,19 @@ int		ft_error(char *str)
 	exit(0);
 }
 
-/*void	display(t_env	*e)
+void	display(t_env	*e)
 {
 	t_obj	*node;
 
 	node = e->obj;
 	while (node->type != 1)
 		node = node->next;
-	mlx_string_put(e->mlx, e->win, 5, 0, RED, "light x: ");
-	mlx_string_put(e->mlx, e->win, 5, 15, RED, "light y: ");
-	mlx_string_put(e->mlx, e->win, 5, 30, RED, "light z: ");
-	mlx_string_put(e->mlx, e->win, 95, 0, RED, ft_itoa(e->spots->pos.x));
-	mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->spots->pos.y));
-	mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->spots->pos.z));
+	mlx_string_put(e->mlx, e->win, 5, 15, RED, "light x: ");
+	mlx_string_put(e->mlx, e->win, 5, 30, RED, "light y: ");
+	mlx_string_put(e->mlx, e->win, 5, 45, RED, "light z: ");
+	mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->spots->pos.x));
+	mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->spots->pos.y));
+	mlx_string_put(e->mlx, e->win, 95, 45, RED, ft_itoa(e->spots->pos.z));
 	mlx_string_put(e->mlx, e->win, 5, 100, RED, "sphere x: ");
 	mlx_string_put(e->mlx, e->win, 5, 115, RED, "sphere y: ");
 	mlx_string_put(e->mlx, e->win, 5, 130, RED, "sphere z: ");
@@ -40,7 +40,7 @@ int		ft_error(char *str)
 	mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(node->pos.z));
 	mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(node->size));
 }
-*/
+
 static t_env *init_env(char *map)
 {
 	t_env	*e;
@@ -65,7 +65,7 @@ int		main(int ac,char **av)
 	else if ((env = init_env(av[1])) != NULL)
 	{
 		draw(env);
-//		display(env);
+		display(env);
 		mlx_hook(env->win, 2, 1L << 0, ft_keyhook, env);
 		mlx_hook(env->win, 17, (1L << 17), ft_red_cross, 0);
 		mlx_loop(env->mlx);

@@ -67,34 +67,49 @@ static double	calc_lamb(t_env	*env, t_vec	pos)
 	return (lambert);
 }
 
-void	trace(t_env *env, int x, int y)
+void	trace(t_env *env, t_obj *node, int x, int y)
 {
-	t_obj	*node;
+	t_obj	*tmp;
+	double	dist;
 
+	tmp = NULL;
 	env->d = 20000.0;
 	create_ray(env, x , y);
-	node = env->obj;
 	while (node != NULL)
 	{
+//		if (node->type == 0)
+//			dist = ft_plan(node, env);
 		if (node->type == 1)
-			if (ft_sphere(node, env) == 1)
-				ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, node->pos)));
+		{
+			dist = ft_sphere(node, env);
+		//if (dist < env->d)
+//		{
+			if (dist > EPSI)
+			{
+				tmp = node;
+				env->d = dist;
+			}
+		}
 		node = node->next;
 	}
+	if (tmp != NULL)
+		ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, tmp->pos)));
 }
 
 int	draw(t_env	*env)
 {
 	int		x;
 	int		y;
+	t_obj 		*node;
 
+	node = env->obj;
 	y = 0;
 	while (y < H)
 	{
 		x = 0;
 		while (x < W)
 		{
-		trace(env, x, y);
+		trace(env, node, x, y);
 		x++;
 		}
 		y++;
