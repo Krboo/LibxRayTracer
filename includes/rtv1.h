@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/29 15:02:51 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/30 13:38:32 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define RTV1_H
 
 # include <math.h>
-# include "../minilibx/mlx.h"
+# include "../minilibx_macos/mlx.h"
 # include "../libft/includes/libft.h"
-# include "defines_ubuntu.h"
+# include "defines.h"
 # include <fcntl.h>
 
 typedef struct		s_vec

@@ -26,16 +26,15 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@make -C libft
-	@make -C minilibx
+	@make -C minilibx_macos
 	@gcc $(CFLAGS) -o $(NAME) $(OBJ) -I libft/includes/libft.h -lmlx \
--I./minilibx -lm -Lminilibx \
--lXext -lX11 libft/libft.a minilibx/libmlx.a
+	-framework OpenGl -framework Appkit libft/libft.a minilibx_macos/libmlx.a
 	@echo "Make libmlx.a: \033[1;32m DONE !\033[m"
 	@echo "Make $(NAME) : \033[1;32m DONE !\033[m"
 
 clean :
 	@make -C libft clean
-	@make -C minilibx clean
+	@make -C minilibx_macos clean
 	@rm -rf $(OBJ)
 	@echo "Clean Libft, Minilibx and $(NAME) : \033[1;32m DONE !\033[m"
 
