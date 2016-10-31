@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/29 16:53:04 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/10/30 15:37:44 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,20 @@ static void create_ray(t_env *e, int x, int y)
 {
 	t_vec	v1;
 	t_vec	v2;
+/*	t_vec	v3;
+	double	u;
+	double	v;
 
+	u = (W - (double)x * 2.0) / H;
+	v = (H - (double)y * 2.0) / W;
+	v1 = sub_vect(e->cam_dir, e->cam_pos);
+	v1 = norm_vect(v1);
+	v2 = cross_vect(v1, (t_vec){0.0, 1.0, 0.0});
+	v2 = norm_vect(v2);
+	v3 = cross_vect(v2, v1);
+	e->ray_dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * v3.y + FOV * v1.y, u *v2.z + v * v3.z + FOV * v1.z};
+	e->ray_dir = norm_vect(e->ray_dir);
+	e->ray_pos = (t_vec){0.0,0.0,0.0};*/
 	v1 = new_vec(0,0,0);
 	v2.x = x - (W / 2);
 	v2.y = y - (H / 2);
@@ -77,14 +90,19 @@ void	trace(t_env *env, t_obj *node, int x, int y)
 	create_ray(env, x , y);
 	while (node != NULL)
 	{
-//		if (node->type == 0)
-//			dist = ft_plan(node, env);
+	/*	if (node->type == 0)
+		{
+			dist = ft_plan(node, env);
+			if (dist > EPSI && dist < env->d)
+			{
+				tmp = node;
+				env->d = dist;
+			}
+		}*/
 		if (node->type == 1)
 		{
 			dist = ft_sphere(node, env);
-		//if (dist < env->d)
-//		{
-			if (dist > EPSI)
+			if (dist > EPSI && dist < env->d)
 			{
 				tmp = node;
 				env->d = dist;
