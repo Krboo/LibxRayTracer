@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/29 16:55:30 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/02 20:02:29 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		main(int ac,char **av)
 	{
 		draw(env);
 		display(env);
+	//	putdisplay(env);
 		mlx_hook(env->win, 2, 1L << 0, ft_keyhook, env);
 		mlx_hook(env->win, 17, (1L << 17), ft_red_cross, 0);
 		mlx_loop(env->mlx);

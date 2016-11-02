@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/30 13:38:32 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/02 17:28:34 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,41 +87,24 @@ int		ft_red_cross(int keycode, t_env *env);
 /*
 ** vectors.c
 */
-void	ft_deleted_vect(t_vec vect);
-t_vec	sub_vect(t_vec v1, t_vec v2);
-t_vec	scale_vect(t_vec v1, double fact);
-t_vec	add_vect(t_vec v1, t_vec v2);
-t_vec	norm_vect(t_vec v);
-double	dot_vect(t_vec v1, t_vec v2);
-t_vec	new_vec(double x, double y, double z);
-t_vec	ft_vector(int fd);
-t_vec	cross_vect(t_vec v1, t_vec v2);
-/*
-** init.c
-*/
-void	ft_add_obj(t_obj *start, t_obj *new);
-void	ft_add_spot(t_spot *start, t_spot *new);
-void	ft_init_scene(char *scene, t_env *env);
-/*
-** spots.c
-*/
-t_spot	*ft_get_spot(int fd);
-t_spot	*ft_get_spots(int fd);
-/*
-** objects.c
-*/
-double		ft_sphere(t_obj *obj, t_env *e);
-double		ft_plan(t_obj *obj, t_env *e);
-//void		ft_intersections(t_env *e, int x, int y);
+void				ft_deleted_vect(t_vec vect);
+t_vec				sub_vect(t_vec v1, t_vec v2);
+t_vec				scale_vect(t_vec v1, double fact);
+t_vec				add_vect(t_vec v1, t_vec v2);
+t_vec				norm_vect(t_vec v);
+double				dot_vect(t_vec v1, t_vec v2);
+t_vec				new_vec(double x, double y, double z);
+t_vec				ft_vector(int fd);
+t_vec				cross_vect(t_vec v1, t_vec v2);
 /*
 ** camera.c
 */
-void	ft_get_camera(int fd, t_env *env);
+void				ft_get_camera(int fd, t_env *env);
 /*
 ** clear.c
 */
-void	ft_clear_obj(t_obj **start);
-void	ft_clear_spot(t_spot **start);
+void				ft_clear_obj(t_obj **start);
+void				ft_clear_spot(t_spot **start);
 /*
 ** color.c
 */
@@ -139,6 +122,14 @@ void				ft_get_cones(int fd, t_env *env);
 t_obj				*ft_get_cylind(int fd, t_vec rot);
 void				ft_get_cylinds(int fd, t_env *env);
 /*
+** display.c
+*/
+char				*type_obj(t_obj *obj);
+void				putcam(t_env *env);
+void				putlight(t_env *env);
+void				putobj(t_env *env);
+void				putobj2(t_obj *obj);
+/*
 ** init.c
 */
 void				ft_add_obj(t_obj *start, t_obj *new);
@@ -153,6 +144,12 @@ t_obj				*ft_new_obj3(double size, t_vec pos, t_vec rot, t_color col);
 t_obj				*ft_new_obj4(double size, t_vec pos, t_vec rot, t_color col);
 t_spot				*ft_new_spot(double size, t_vec pos, t_color col);
 /*
+** objects.c
+*/
+double				ft_plan(t_obj *obj, t_env *e);
+double				ft_sphere(t_obj *obj, t_env *e);
+//void				ft_intersections(t_env *e, int x, int y);
+/*
 ** plan.c
 */
 t_obj				*ft_get_plan(int fd, t_vec rot);
@@ -162,4 +159,14 @@ void				ft_get_plans(int fd, t_env *env);
 */
 t_obj	            *ft_get_sphere(int fd, t_vec rot);
 void	            ft_get_spheres(int fd, t_env *env);
+/*
+** spots.c
+*/
+t_spot				*ft_get_spot(int fd);
+t_spot				*ft_get_spots(int fd);
+/*
+** tools_display.c
+*/
+void				putdisplay(t_env *env);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 17:00:42 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/29 16:54:39 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/02 20:02:46 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		ft_keyhook(int	keycode, t_env *env)
 		env->spots->pos.z -= 0.5;
 	draw(env);
 	display(env);
+//	putdisplay(env);
 	return (0);
 }
 
