@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/02 20:02:29 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/06 14:57:49 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	display(t_env	*e)
 	mlx_string_put(e->mlx, e->win, 95, 115, RED, ft_itoa(node->pos.y));
 	mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(node->pos.z));
 	mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(node->size));
+	mlx_string_put(e->mlx, e->win, 5, 175, RED, "cam_pos z: ");
+	mlx_string_put(e->mlx, e->win, 105, 175, RED, ft_itoa(e->cam_pos.z));
 }
 
 static t_env *init_env(char *map)

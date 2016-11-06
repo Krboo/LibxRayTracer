@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/30 15:37:44 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/06 17:01:26 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void create_ray(t_env *e, int x, int y)
 	e->ray_dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * v3.y + FOV * v1.y, u *v2.z + v * v3.z + FOV * v1.z};
 	e->ray_dir = norm_vect(e->ray_dir);
 	e->ray_pos = (t_vec){0.0,0.0,0.0};*/
+	//v1 = new_vec(e->cam_pos.x,e->cam_pos.y,e->cam_pos.z);
 	v1 = new_vec(0,0,0);
 	v2.x = x - (W / 2);
 	v2.y = y - (H / 2);
@@ -90,7 +91,7 @@ void	trace(t_env *env, t_obj *node, int x, int y)
 	create_ray(env, x , y);
 	while (node != NULL)
 	{
-	/*	if (node->type == 0)
+/*		if (node->type == 0)
 		{
 			dist = ft_plan(node, env);
 			if (dist > EPSI && dist < env->d)
@@ -121,16 +122,12 @@ int	draw(t_env	*env)
 	t_obj 		*node;
 
 	node = env->obj;
-	y = 0;
-	while (y < H)
+	y = -1;
+	while (++y < H)
 	{
-		x = 0;
-		while (x < W)
-		{
-		trace(env, node, x, y);
-		x++;
-		}
-		y++;
+		x = -1;
+		while (++x < W)
+			trace(env, node, x, y);
 	}
    	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
    	return (0);
