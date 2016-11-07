@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 13:49:14 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 16:19:45 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,33 +84,11 @@ static double	calc_lamb(t_env	*env, t_vec	pos)
 void	trace(t_env *env, t_obj *node, int x, int y)
 {
 	t_obj	*tmp;
-	double	dist;
 
 	tmp = NULL;
 	env->d = 20000.0;
 	create_ray(env, x , y);
-	while (node != NULL)
-	{
-/*		if (node->type == 0)
-		{
-			dist = ft_plan(node, env);
-			if (dist > EPSI && dist < env->d)
-			{
-				tmp = node;
-				env->d = dist;
-			}
-		}*/
-		if (node->type == 1)
-		{
-			dist = ft_sphere(node, env);
-			if (dist > EPSI && dist < env->d)
-			{
-				tmp = node;
-				env->d = dist;
-			}
-		}
-		node = node->next;
-	}
+	tmp = ft_intersection(env, node);
 	if (tmp != NULL)
 		ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, tmp->pos)));
 }
