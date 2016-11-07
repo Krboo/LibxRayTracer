@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 13:44:17 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/29 16:54:24 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/04 19:36:23 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ void	ft_init_scene(char *scene, t_env *env)
 			ft_get_plans(fd, env);
 		else if (ft_strstr(line, "sphere:"))
 			ft_get_spheres(fd, env);
+		free(line);
 	}
+	free(line);
 	if (ret == -1)
 		exit (-1);
 	env->obj = first;

@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:46:23 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/27 14:26:36 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 15:55:05 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,25 @@ t_obj		*ft_get_sphere(int fd, t_vec rot)
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{
 		if (ft_strstr(line, "pos"))
+		{
 			pos = ft_vector(fd);
+			free(line);
+		}
 		if (ft_strstr(line, "radius:"))
 		{
+			free(line);
 			ret = get_next_line(fd, &line);
 			radius = ft_atodouble(&line);
+			//free(line);
 		}
 		if (ft_strstr(line, "color:"))
+		{
 			color = ft_color(fd);
+			free(line);
+		}
 		rot = new_vec(0, 0, 0);
 	}
+	free(line);
 	obj = ft_new_obj2(radius, pos, rot, color);
 	if (ret == -1)
 		exit(-1);
@@ -59,7 +68,9 @@ void		ft_get_spheres(int fd, t_env *env)
 				ft_add_obj(env->obj, ft_get_sphere(fd, rot));
 //			}
 		}
+		free(line);
 		if (ret == -1)
 			exit(-1);
 	}
+	free(line);
 }

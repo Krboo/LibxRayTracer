@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 14:39:39 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/27 12:24:22 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 15:44:56 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,28 @@ t_obj			*ft_get_cone(int fd, t_vec rot)
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "--------"))
 	{
 		if (ft_strstr(line, "pos:"))
+		{
 			pos = ft_vector(fd);
+			free(line);
+		}
 		if (ft_strstr(line, "alpha:"))
 		{
+			free(line);
 			ret = get_next_line(fd, &line);
 			alpha = ft_atodouble(&line);
 		}
 		if (ft_strstr(line, "color:"))
+		{
 			color = ft_color(fd);
+			free(line);
+		}
 		if (ft_strstr(line, "rot:"))
+		{
 			rot = ft_vector(fd);
+			free(line);
+		}
 	}
+	free(line);
 	if (ret == -1)
 		exit(-1);
 	return (ft_new_obj3(alpha, pos, rot, color));
@@ -57,6 +68,7 @@ void			ft_get_cones(int fd, t_env *env)
 					ft_add_obj(env->obj, ft_get_cone(fd, rot));
 		//		}
 		}
+		free(line);
 		if (ret == -1)
 			exit(-1);
 	}

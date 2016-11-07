@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/27 14:26:04 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 15:52:25 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,28 @@ t_obj			*ft_get_plan(int fd, t_vec rot)
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{
 		if (ft_strstr(line, "pos:"))
+		{
 			pos = ft_vector(fd);
+			free(line);
+		}
 		if (ft_strstr(line, "dis:"))
 		{
+			free(line);
 			ret = get_next_line(fd, &line);
 			dis = ft_atodouble(&line);
 		}
 		if (ft_strstr(line, "color:"))
+		{
 			color = ft_color(fd);
+			free(line);
+		}
 		if (ft_strstr(line, "rot:"))
+		{
 			rot = ft_vector(fd);
+			free(line);
+		}
 	}
+	free(line);
 	if (ret == -1)
 		exit(-1);
 	return (ft_new_obj(dis, pos, rot, color));
@@ -57,7 +68,9 @@ void			ft_get_plans(int fd, t_env *env)
 				ft_add_obj(env->obj, ft_get_plan(fd, rot));
 //		}
 		}
+		free(line);
 		if (ret == -1)
 			exit(-1);
 	}
+	free(line);
 }

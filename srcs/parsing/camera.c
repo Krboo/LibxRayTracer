@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 16:57:26 by qduperon          #+#    #+#             */
-/*   Updated: 2016/10/25 13:31:06 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 15:56:56 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ void		ft_get_camera(int fd, t_env *env)
 			env->cam_pos = ft_vector(fd);
 		if (ft_strstr(line, "dir:"))
 			env->cam_dir = ft_vector(fd);
+		free(line);
 	}
+	free(line);
 }
