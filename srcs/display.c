@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 15:37:59 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/02 17:56:41 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/07 19:24:59 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void		putcam(t_env *env)
 
 void		putlight(t_env *env)
 {
+	t_spot	*first;
+
+	first = env->spots;
 	if (env->spots)
 	{
 		while (env->spots->next)
@@ -60,6 +63,7 @@ void		putlight(t_env *env)
 		ft_putdouble(env->spots->pos.z, 4);
 		ft_putchar('\n');
 	}
+	env->spots = first;
 }
 
 char		*type_obj(t_obj *obj)
@@ -98,9 +102,12 @@ void		putobj2(t_obj *obj)
 
 void		putobj(t_env *env)
 {
+	t_obj	*first;
+
+	first = env->obj;
 	if (env->obj)
 	{
-		env->obj = env->obj->next;
+		//env->obj = env->obj->next;
 		while (env->obj->next)
 		{
 			putobj2(env->obj);
@@ -108,4 +115,5 @@ void		putobj(t_env *env)
 		}
 		putobj2(env->obj);
 	}
+	env->obj = first;
 }
