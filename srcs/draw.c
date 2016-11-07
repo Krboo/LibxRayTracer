@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/06 17:01:26 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 13:49:14 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,24 @@ void	trace(t_env *env, t_obj *node, int x, int y)
 		ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, tmp->pos)));
 }
 
+
+
 int	draw(t_env	*env)
 {
 	int		x;
 	int		y;
 	t_obj 		*node;
 
+
 	node = env->obj;
+	y = -1;
+	while (++y < H)
+	{
+		x = -1;
+		while (++x < W)
+			ft_put_pixel(env, x, y, BLACK);
+	}
+   	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
 	y = -1;
 	while (++y < H)
 	{

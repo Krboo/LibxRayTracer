@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/30 14:49:23 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 13:48:43 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ double	ft_plan(t_obj	*node, t_env *env)
 {
 	double	t;
 
-	//t = ((dot_vect(node->rot, node->pos) - dot_vect(node->rot, env->cam_pos)) / dot_vect(node->rot, env->ray_dir));
-	t = ((node->size - dot_vect(node->pos, env->ray_pos)) / dot_vect(node->pos, env->ray_dir));
+	t = ((dot_vect(node->rot, node->pos) - dot_vect(node->rot, env->cam_pos)) / dot_vect(node->rot, env->ray_dir));
+//	t = ((node->size - dot_vect(node->pos, env->ray_pos)) / dot_vect(node->pos, env->ray_dir));
 	return (t);
 }
 
