@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 16:19:45 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 17:08:36 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void create_ray(t_env *e, int x, int y)
 {
 	t_vec	v1;
 	t_vec	v2;
-/*	t_vec	v3;
+	t_vec	v3;
 	double	u;
 	double	v;
 
@@ -44,15 +44,7 @@ static void create_ray(t_env *e, int x, int y)
 	v3 = cross_vect(v2, v1);
 	e->ray_dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * v3.y + FOV * v1.y, u *v2.z + v * v3.z + FOV * v1.z};
 	e->ray_dir = norm_vect(e->ray_dir);
-	e->ray_pos = (t_vec){0.0,0.0,0.0};*/
-	//v1 = new_vec(e->cam_pos.x,e->cam_pos.y,e->cam_pos.z);
-	v1 = new_vec(0,0,0);
-	v2.x = x - (W / 2);
-	v2.y = y - (H / 2);
-	v2.z = -(W / (2 * tan(FOV / 2)));
-	v2 = norm_vect(v2);
-	e->ray_dir = sub_vect(v2, v1);
-	e->ray_pos = v1;
+	e->ray_pos = e->cam_pos;
 }
 
 static int	lambert_rgb(int r, int g, int b, double lambert)

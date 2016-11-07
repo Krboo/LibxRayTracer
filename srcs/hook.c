@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 17:00:42 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 13:18:35 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 17:21:36 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int		ft_keyhook(int	keycode, t_env *env)
 	if (keycode == DOWN)
 		env->spots->pos.y += 2;
 	if (keycode == DEZOOM)
-		env->cam_pos.z -= 0.5;
+		env->cam_pos.z -= 10;
 	if (keycode == ZOOM)
-		env->cam_pos.z += 0.5;
+		env->cam_pos.z += 10;
 	draw(env);
 	display(env);
 //	putdisplay(env);

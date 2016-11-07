@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 16:20:41 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 17:36:08 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ double	ft_plan(t_obj	*node, t_env *env)
 	double	t;
 
 	t = ((dot_vect(node->rot, node->pos) - dot_vect(node->rot, env->cam_pos)) / dot_vect(node->rot, env->ray_dir));
-	//	t = ((node->size - dot_vect(node->pos, env->ray_pos)) / dot_vect(node->pos, env->ray_dir));
+	if (t < EPSI)
+		return (-1);
 	return (t);
 }
-
 /*double	ft_cylindre(t_obj *obj, t_env *e)
   {
   double	a;
@@ -75,16 +75,17 @@ t_obj	*ft_intersection(t_env *e, t_obj *node)
 	t_obj	*tmp;
 	double	dist;
 
+	dist = 0;
 	tmp = NULL;
-	e->d = 820000.0;
+	e->d = 80000.0;
 	while (node != NULL)
 	{
 		//if (node->type == 3)
 	//		dist = ft_inter_cone(mlx, node, ray, pos);
 	//	else if (node->type == 2)
 	//		dist = ft_inter_cylinder(mlx, node, ray, pos);
-	//	else if (node->type == 0)
-	//		dist = ft_inter_plane(mlx, node, ray, pos);
+		if (node->type == 0)
+			dist = ft_plan(node, e);
 		if (node->type == 1)
 			dist = ft_sphere(node, e);
 		if (dist > EPSI && dist < e->d)

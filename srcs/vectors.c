@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 14:57:25 by pmartine          #+#    #+#             */
-/*   Updated: 2016/10/24 12:33:29 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 16:57:25 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,6 @@ t_vec	scale_vect(t_vec v1, double fact)
 	v2.z = v1.z * fact;
 	return (v2);
 }
-
-/*
-void	ft_deleted_vect(t_vec vect)
-{
-		free(&vect);
-}*/
 
 double	dot_vect(t_vec v1, t_vec v2)
 {

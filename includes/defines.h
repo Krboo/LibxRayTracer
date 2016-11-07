@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:19:33 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 13:32:50 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 17:06:10 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define RED 0xFF0000
 
 # define EPSI 0.0000001f
-# define FOV 42
+# define FOV 2.0
 # define W 750
 # define H 750
 # define XCENTER (WIDTH / 2)
