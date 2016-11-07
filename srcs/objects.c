@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 17:47:00 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 18:52:34 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,31 @@ double	ft_plan(t_obj	*node, t_env *env)
   return (discr);
   }*/
 
+double	ft_cylindre(t_obj *node, t_env *e)
+{
+	double	disc;
+	double	a;
+	double	b;
+	double	c;
+	t_vec	dist;
+	double	t0;
+	double	t1;
+
+	dist = sub_vect(e->cam_pos, node->pos);
+	node->rot = norm_vect(node->rot);
+	a = dot_vect(e->ray_dir, e->ray_dir) - pow(dot_vect(e->ray_dir, node->rot), 2);
+	b = 2 * (dot_vect(e->ray_dir, dist) - dot_vect(e->ray_dir, node->rot) * dot_vect(dist, node->rot));
+	c = dot_vect(dist, dist) - pow(dot_vect(dist, node->rot), 2) - pow(node->size, 2);
+	disc = b * b - 4 * a * c;
+	if (disc < 0)
+		return (-1);
+	t0 = (-b + sqrtf(disc)) / (2 * a);
+	t1 = (-b - sqrtf(disc)) / (2 * a);
+	if (t0 > t1)
+		t0 = t1;
+	return (t0);
+}
+
 t_obj	*ft_intersection(t_env *e, t_obj *node)
 {
 	t_obj	*tmp;
@@ -80,12 +105,12 @@ t_obj	*ft_intersection(t_env *e, t_obj *node)
 	e->d = 80000.0;
 	while (node != NULL)
 	{
-		//if (node->type == 3)
-	//		dist = ft_inter_cone(mlx, node, ray, pos);
-	//	else if (node->type == 2)
-	//		dist = ft_inter_cylinder(mlx, node, ray, pos);
-//		if (node->type == 0)
-//			dist = ft_plan(node, e);
+		if (node->type == 3)
+			dist = ft_cylindre(node, e);
+		//	else if (node->type == 2)
+		//		dist = ft_inter_cylinder(mlx, node, ray, pos);
+		//		if (node->type == 0)
+		//			dist = ft_plan(node, e);
 		if (node->type == 1)
 			dist = ft_sphere(node, e);
 		if (dist > EPSI && dist < e->d)

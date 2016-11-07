@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 16:18:11 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 18:45:02 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ t_spot				*ft_new_spot(double size, t_vec pos, t_color col);
 t_obj				*ft_intersection(t_env *e, t_obj *node);
 double				ft_plan(t_obj *obj, t_env *e);
 double				ft_sphere(t_obj *obj, t_env *e);
+double				ft_cylindre(t_obj *obj, t_env *e);
 //void				ft_intersections(t_env *e, int x, int y);
 /*
 ** plan.c
