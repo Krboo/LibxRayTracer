@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 17:08:36 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 19:14:47 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	trace(t_env *env, t_obj *node, int x, int y)
 	create_ray(env, x , y);
 	tmp = ft_intersection(env, node);
 	if (tmp != NULL)
-		ft_put_pixel(env, x, y, lambert_rgb(255,0,0, calc_lamb(env, tmp->pos)));
+		ft_put_pixel(env, x, y, lambert_rgb(tmp->col.r,tmp->col.g, tmp->col.b, calc_lamb(env, tmp->pos)));
 }
 
 

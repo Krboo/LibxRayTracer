@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 18:52:34 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/07 19:05:20 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,6 @@ double	ft_plan(t_obj	*node, t_env *env)
 		return (-1);
 	return (t);
 }
-/*double	ft_cylindre(t_obj *obj, t_env *e)
-  {
-  double	a;
-  double	b;
-  double	c;
-  double	discr;
-  t_vec	dist;
-
-  dist = sub_vect(e->cam_pos, obj->pos);
-  dist = norm_vect(dist);
-  a = dot_vect(e->ray_dir ,e->ray_dir) - pow;
-  b = 2 * dot_vect(e->ray_dir, dist);
-  c = dot_vect(dist, dist) - (obj->size * obj->size);
-  discr = b * b - 4 * a * c;
-  c = ((-b + sqrtf(discr)) / (2 * a));
-  discr = ((-b - sqrtf(discr)) / (2 * a));
-  if (discr > c)
-  discr = c;
-  return (discr);
-  }*/
 
 double	ft_cylindre(t_obj *node, t_env *e)
 {
@@ -107,11 +87,11 @@ t_obj	*ft_intersection(t_env *e, t_obj *node)
 	{
 		if (node->type == 3)
 			dist = ft_cylindre(node, e);
-		//	else if (node->type == 2)
-		//		dist = ft_inter_cylinder(mlx, node, ray, pos);
-		//		if (node->type == 0)
-		//			dist = ft_plan(node, e);
-		if (node->type == 1)
+//		else if (node->type == 2)
+//			dist = ft_cylindre(node, e);
+	//	else if (node->type == 0)
+	//		dist = ft_plan(node, e);
+		else if (node->type == 1)
 			dist = ft_sphere(node, e);
 		if (dist > EPSI && dist < e->d)
 		{
