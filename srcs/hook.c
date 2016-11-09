@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 17:00:42 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 19:44:39 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 09:04:41 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ int		ft_keyhook(int	keycode, t_env *env)
 		env->cam_pos.z -= 10;
 	if (keycode == ZOOM)
 		env->cam_pos.z += 10;
+	if (keycode == PRINT)
+	{
+		putdisplay(env);
+		return (0);
+	}
 	draw(env);
-	putdisplay(env);
 	display(env);
 	return (0);
 }

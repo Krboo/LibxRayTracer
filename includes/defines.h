@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:19:33 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 17:06:10 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 08:27:32 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define Z_MINE 116
 # define Z_PLUS 121
 # define ESC 53
-# define RESET 71
+# define PRINT 71
 
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
