@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:46:23 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/09 17:55:24 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 18:29:04 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ t_obj		*ft_get_spheres(int fd, t_env *env)
 		if (ret == -1)
 			exit(-1);
 	}
+	if (line)
+		free(line);
 	return (first);
 }

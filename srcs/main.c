@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/09 08:28:56 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 18:22:54 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,17 @@ int		ft_error(char *str)
 void	display(t_env	*e)
 {
 	t_obj	*node;
+	char	*str;
 
+	str = NULL;
 	node = e->obj;
 	while (node->type != 1)
 		node = node->next;
 	mlx_string_put(e->mlx, e->win, 5, 15, RED, "light x: ");
 	mlx_string_put(e->mlx, e->win, 5, 30, RED, "light y: ");
 	mlx_string_put(e->mlx, e->win, 5, 45, RED, "light z: ");
-	mlx_string_put(e->mlx, e->win, 95, 15, RED, ft_itoa(e->spots->pos.x));
+	mlx_string_put(e->mlx, e->win, 95, 15, RED, str = ft_itoa(e->spots->pos.x));
+	free(str);
 	mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->spots->pos.y));
 	mlx_string_put(e->mlx, e->win, 95, 45, RED, ft_itoa(e->spots->pos.z));
 	mlx_string_put(e->mlx, e->win, 5, 100, RED, "sphere x: ");

@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:50:13 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/09 17:56:16 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 18:28:03 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ t_obj			*ft_get_cylinds(int fd, t_env *env)
 		if (ret == -1)
 			exit(-1);
 	}
+	if (line)
+		free(line);
 	return (first);
 }
