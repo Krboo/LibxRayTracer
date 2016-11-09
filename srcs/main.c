@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/09 18:22:54 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 19:50:07 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,25 @@ void	display(t_env	*e)
 	mlx_string_put(e->mlx, e->win, 5, 45, RED, "light z: ");
 	mlx_string_put(e->mlx, e->win, 95, 15, RED, str = ft_itoa(e->spots->pos.x));
 	free(str);
-	mlx_string_put(e->mlx, e->win, 95, 30, RED, ft_itoa(e->spots->pos.y));
-	mlx_string_put(e->mlx, e->win, 95, 45, RED, ft_itoa(e->spots->pos.z));
+	mlx_string_put(e->mlx, e->win, 95, 30, RED, str = ft_itoa(e->spots->pos.y));
+	free(str);
+	mlx_string_put(e->mlx, e->win, 95, 45, RED, str = ft_itoa(e->spots->pos.z));
+	free(str);
 	mlx_string_put(e->mlx, e->win, 5, 100, RED, "sphere x: ");
 	mlx_string_put(e->mlx, e->win, 5, 115, RED, "sphere y: ");
 	mlx_string_put(e->mlx, e->win, 5, 130, RED, "sphere z: ");
 	mlx_string_put(e->mlx, e->win, 5, 145, RED, "sphere r: ");
-	mlx_string_put(e->mlx, e->win, 95, 100, RED, ft_itoa(node->pos.x));
-	mlx_string_put(e->mlx, e->win, 95, 115, RED, ft_itoa(node->pos.y));
-	mlx_string_put(e->mlx, e->win, 95, 130, RED, ft_itoa(node->pos.z));
-	mlx_string_put(e->mlx, e->win, 95, 145, RED, ft_itoa(node->size));
+	mlx_string_put(e->mlx, e->win, 95, 100, RED, str = ft_itoa(node->pos.x));
+	free(str);
+	mlx_string_put(e->mlx, e->win, 95, 115, RED, str = ft_itoa(node->pos.y));
+	free(str);
+	mlx_string_put(e->mlx, e->win, 95, 130, RED, str = ft_itoa(node->pos.z));
+	free(str);
+	mlx_string_put(e->mlx, e->win, 95, 145, RED, str = ft_itoa(node->size));
+	free(str);
 	mlx_string_put(e->mlx, e->win, 5, 175, RED, "cam_pos z: ");
-	mlx_string_put(e->mlx, e->win, 105, 175, RED, ft_itoa(e->cam_pos.z));
+	mlx_string_put(e->mlx, e->win, 105, 175, RED, str = ft_itoa(e->cam_pos.z));
+	free(str);
 }
 
 static t_env *init_env(char *map)
