@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 13:44:17 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/09 09:24:24 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 17:03:04 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_init_scene(char *scene, t_env *env)
 	t_obj		*first;
 
 	env->obj = (t_obj *)malloc(sizeof(t_obj));
+	//env->obj->type = 8;
 	env->obj->next = NULL;
 	first = env->obj;
 	fd = open(scene, O_RDONLY);

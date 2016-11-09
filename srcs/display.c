@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 15:37:59 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/07 19:53:22 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 16:21:23 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void		putobj(t_env *env)
 	first = env->obj;
 	if (env->obj)
 	{
-		env->obj = env->obj->next;
 		while (env->obj->next)
 		{
 			putobj2(env->obj);
