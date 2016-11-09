@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:46:23 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/07 15:55:05 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/09 15:55:14 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ void		ft_get_spheres(int fd, t_env *env)
 	{
 		if (ft_strstr(line, "new:"))
 		{
-//			if (env->obj == NULL)
-//				env->obj = ft_get_sphere(fd, rot);
-//			else
-//			{
+			if (env->obj == NULL)
+				env->obj = ft_get_sphere(fd, rot);
+			else
+			{
 				ft_add_obj(env->obj, ft_get_sphere(fd, rot));
-//			}
+			}
 		}
 		free(line);
 		if (ret == -1)

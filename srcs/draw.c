@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/09 09:00:45 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 15:57:16 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static double	calc_lamb(t_env	*env, t_vec	pos)
 	vec = sub_vect(pos, cam);
 	vec = norm_vect(vec);
 	lambert = dot_vect(yo, vec);
-	lambert = lambert < EPSI ? 0 : lambert;
+	if (lambert < EPSI)
+		lambert = 0;
 	return (lambert);
 }
 
