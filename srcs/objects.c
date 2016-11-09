@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/09 15:55:38 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 18:01:20 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,11 @@ t_obj	*ft_intersection(t_env *e, t_obj *node)
 	{
 		if (node->type == 3)
 			dist = ft_cylindre(node, e);
-		else if (node->type == 2)
+		if (node->type == 2)
 			dist = ft_cone(node, e);
-		else if (node->type == 0)
+		if (node->type == 0)
 			dist = ft_plan(node, e);
-		else if (node->type == 1)
+		if (node->type == 1)
 			dist = ft_sphere(node, e);
 		if (dist > EPSI && dist < e->d)
 		{

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 18:45:02 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 17:24:50 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,12 @@ void				ft_deleted_color(t_color color);
 ** cone.c
 */
 t_obj				*ft_get_cone(int fd, t_vec rot);
-void				ft_get_cones(int fd, t_env *env);
+t_obj				*ft_get_cones(int fd, t_env *env);
 /*
 ** cylindre.c
 */
 t_obj				*ft_get_cylind(int fd, t_vec rot);
-void				ft_get_cylinds(int fd, t_env *env);
+t_obj				*ft_get_cylinds(int fd, t_env *env);
 /*
 ** display.c
 */
@@ -150,17 +150,17 @@ t_obj				*ft_intersection(t_env *e, t_obj *node);
 double				ft_plan(t_obj *obj, t_env *e);
 double				ft_sphere(t_obj *obj, t_env *e);
 double				ft_cylindre(t_obj *obj, t_env *e);
-//void				ft_intersections(t_env *e, int x, int y);
+double				ft_cone(t_obj *obj, t_env *e);
 /*
 ** plan.c
 */
 t_obj				*ft_get_plan(int fd, t_vec rot);
-void				ft_get_plans(int fd, t_env *env);
+t_obj				*ft_get_plans(int fd, t_env *env);
 /*
 ** sphere.c
 */
 t_obj	            *ft_get_sphere(int fd, t_vec rot);
-void	            ft_get_spheres(int fd, t_env *env);
+t_obj	            *ft_get_spheres(int fd, t_env *env);
 /*
 ** spots.c
 */

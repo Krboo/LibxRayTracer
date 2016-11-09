@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 13:44:17 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/09 17:03:04 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/09 17:06:17 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	ft_init_scene(char *scene, t_env *env)
 	char	*line;
 	int		fd;
 	int		ret;
-	t_obj		*first;
+//	t_obj		*first;
 
-	env->obj = (t_obj *)malloc(sizeof(t_obj));
+	//env->obj = (t_obj *)malloc(sizeof(t_obj));
 	//env->obj->type = 8;
-	env->obj->next = NULL;
-	first = env->obj;
+//	env->obj->next = NULL;
+//	first = env->obj;
 	fd = open(scene, O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
@@ -44,18 +44,18 @@ void	ft_init_scene(char *scene, t_env *env)
 		else if (ft_strstr(line, "spot:"))
 			env->spots = ft_get_spots(fd);
 		else if (ft_strstr(line, "cone:"))
-			ft_get_cones(fd, env);
+			env->obj = ft_get_cones(fd, env);
 		else if (ft_strstr(line, "cylindre:"))
-			ft_get_cylinds(fd, env);
+			env->obj = ft_get_cylinds(fd, env);
 		else if (ft_strstr(line, "plan:"))
-			ft_get_plans(fd, env);
+			env->obj = ft_get_plans(fd, env);
 		else if (ft_strstr(line, "sphere:"))
-			ft_get_spheres(fd, env);
+			env->obj = ft_get_spheres(fd, env);
 		free(line);
-		env->obj = first;
+//		env->obj = first;
 	}
 	free(line);
 	if (ret == -1)
 		exit (-1);
-	env->obj = first;
+//	env->obj = first;
 }
