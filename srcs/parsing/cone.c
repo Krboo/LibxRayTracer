@@ -6,19 +6,20 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 14:39:39 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/09 18:28:26 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/14 15:44:05 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rtv1.h"
 
-t_obj			*ft_get_cone(int fd, t_vec rot)
+t_obj			*ft_get_cone(int fd)
 {
 	char	*line;
 	double	alpha;
 	int		ret;
 	t_color	color;
 	t_vec	pos;
+	t_vec	rot;
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "--------"))
 	{
@@ -41,6 +42,9 @@ t_obj			*ft_get_cone(int fd, t_vec rot)
 		if (ft_strstr(line, "rot:"))
 		{
 			rot = ft_vector(fd);
+			ft_putnbr(rot.x);
+			ft_putnbr(rot.y);
+			ft_putnbr(rot.z);
 			free(line);
 		}
 	}
@@ -54,22 +58,20 @@ t_obj		*ft_get_cones(int fd, t_env *env)
 {
 	char	*line;
 	int		ret;
-	t_vec	rot;
 	t_obj	*first;
 
 	first = env->obj;
-	rot = new_vec(0.0,0.0,0.0);
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
 		if (ft_strstr(line, "new:"))
 		{
 			if (!env->obj)
 			{
-				env->obj = ft_get_cone(fd, rot);
+				env->obj = ft_get_cone(fd);
 				first = env->obj;
 			}
 			else
-					ft_add_obj(env->obj, ft_get_cone(fd, rot));
+					ft_add_obj(env->obj, ft_get_cone(fd));
 		}
 		free(line);
 		if (ret == -1)

@@ -6,19 +6,20 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:50:13 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/09 18:28:03 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/14 15:35:32 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rtv1.h"
 
-t_obj		*ft_get_cylind(int fd, t_vec rot)
+t_obj		*ft_get_cylind(int fd)
 {
 	char	*line;
 	double	radius;
 	int		ret;
 	t_color	color;
 	t_vec	pos;
+	t_vec	rot;
 
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
 	{
@@ -54,22 +55,20 @@ t_obj			*ft_get_cylinds(int fd, t_env *env)
 {
 	char		*line;
 	int			ret;
-	t_vec		rot;
 	t_obj		*first;
 
 	first = env->obj;
-	rot = new_vec(0.0,0.0,0.0);
 	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
 	{
 		if (ft_strstr(line, "new:"))
 		{
 			if (!env->obj)
 			{
-				env->obj = ft_get_cylind(fd, rot);
+				env->obj = ft_get_cylind(fd);
 				first = env->obj;
 			}
 				else
-				ft_add_obj(env->obj, ft_get_cylind(fd, rot));
+				ft_add_obj(env->obj, ft_get_cylind(fd));
 		}
 		free(line);
 		if (ret == -1)
