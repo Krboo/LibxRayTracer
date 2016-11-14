@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/09 18:01:20 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:32:25 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ double	ft_cylindre(t_obj *node, t_env *e)
 	double	t1;
 
 	dist = sub_vect(e->cam_pos, node->pos);
+	//if (!(node->rot.x == 0 && node->rot.y == 0 && node->rot.z == 0))
 	node->rot = norm_vect(node->rot);
 	a = dot_vect(e->ray_dir, e->ray_dir) - pow(dot_vect(e->ray_dir, node->rot), 2);
 	b = 2 * (dot_vect(e->ray_dir, dist) - dot_vect(e->ray_dir, node->rot) * dot_vect(dist, node->rot));
@@ -86,6 +87,7 @@ double	ft_cone(t_obj *node, t_env *e)
 	double	t1;
 
 	dist = sub_vect(e->cam_pos, node->pos);
+//	if (!(node->rot.x == 0 && node->rot.y == 0 && node->rot.z == 0))
 	node->rot = norm_vect(node->rot);
 	a = dot_vect(e->ray_dir, e->ray_dir) - (1 + pow(tan(node->size), 2)) *
 		pow(dot_vect(e->ray_dir, node->rot), 2);
@@ -114,8 +116,8 @@ t_obj	*ft_intersection(t_env *e, t_obj *node)
 	{
 		if (node->type == 3)
 			dist = ft_cylindre(node, e);
-		if (node->type == 2)
-			dist = ft_cone(node, e);
+	//	if (node->type == 2)
+	//		dist = ft_cone(node, e);
 		if (node->type == 0)
 			dist = ft_plan(node, e);
 		if (node->type == 1)
