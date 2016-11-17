@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:31:49 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/04 19:27:41 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/15 15:20:13 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,12 @@ t_color		ft_new_color(double r, double g, double b)
 	return (c);
 }
 
-t_color		ft_color(int fd)
+t_color		ft_color(char *line)
 {
-	char	*line;
 	double	r;
 	double	g;
 	double	b;
-
-	if (get_next_line(fd, &line) < 1)
-		exit(-1);
+	
 	r = ft_atodouble(&line);
 	g = ft_atodouble(&line);
 	b = ft_atodouble(&line);

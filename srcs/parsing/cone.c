@@ -6,78 +6,52 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 14:39:39 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/14 15:44:05 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/17 18:40:18 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rtv1.h"
 
-t_obj			*ft_get_cone(int fd)
+t_obj			*ft_get_cone(char **line, int i)
 {
-	char	*line;
 	double	alpha;
-	int		ret;
 	t_color	color;
 	t_vec	pos;
 	t_vec	rot;
 
-	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "--------"))
+	while (!ft_strstr(line[i], "-------"))
 	{
-		if (ft_strstr(line, "pos:"))
-		{
-			pos = ft_vector(fd);
-			free(line);
-		}
-		if (ft_strstr(line, "alpha:"))
-		{
-			free(line);
-			ret = get_next_line(fd, &line);
-			alpha = ft_atodouble(&line);
-		}
-		if (ft_strstr(line, "color:"))
-		{
-			color = ft_color(fd);
-			free(line);
-		}
-		if (ft_strstr(line, "rot:"))
-		{
-			rot = ft_vector(fd);
-			ft_putnbr(rot.x);
-			ft_putnbr(rot.y);
-			ft_putnbr(rot.z);
-			free(line);
-		}
+		if (ft_strstr(line[i], "pos:"))
+			pos = ft_vector(line[i + 1]);
+		if (ft_strstr(line[i], "alpha:"))
+			alpha = ft_atodouble(&line[i + 1]);
+		if (ft_strstr(line[i], "color:"))
+			color = ft_color(line[i + 1]);
+		if (ft_strstr(line[i], "rot:"))
+			rot = ft_vector(line[i + 1]);
+		i++;
 	}
-	free(line);
-	if (ret == -1)
-		exit(-1);
 	return (ft_new_obj3(alpha, pos, rot, color));
 }
 
-t_obj		*ft_get_cones(int fd, t_env *env)
+t_obj		*ft_get_cones(char **line, t_env *env, int i)
 {
-	char	*line;
-	int		ret;
 	t_obj	*first;
 
 	first = env->obj;
-	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
+	while (ft_strcmp("-------", line[i]))
 	{
-		if (ft_strstr(line, "new:"))
+		if (ft_strstr(line[i], "new:"))
 		{
 			if (!env->obj)
 			{
-				env->obj = ft_get_cone(fd);
+				env->obj = ft_get_cone(line, i);
 				first = env->obj;
 			}
 			else
-					ft_add_obj(env->obj, ft_get_cone(fd));
+					ft_add_obj(env->obj, ft_get_cone(line, i));
 		}
-		free(line);
-		if (ret == -1)
-			exit(-1);
+		i++;
 	}
-	if (line)
-		free(line);
 	return (first);
 }

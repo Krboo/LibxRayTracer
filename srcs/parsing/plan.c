@@ -6,75 +6,52 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/14 15:35:46 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/17 17:02:17 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rtv1.h"
 
-t_obj			*ft_get_plan(int fd)
+t_obj			*ft_get_plan(char **line, int i)
 {
-	char	*line;
 	double	dis;
-	int		ret;
 	t_color	color;
 	t_vec	pos;
 	t_vec	rot;
 
-	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp(line, "-------"))
+	while (ft_strcmp(line[i], "-------"))
 	{
-		if (ft_strstr(line, "pos:"))
-		{
-			pos = ft_vector(fd);
-			free(line);
-		}
-		if (ft_strstr(line, "dis:"))
-		{
-			free(line);
-			ret = get_next_line(fd, &line);
-			dis = ft_atodouble(&line);
-		}
-		if (ft_strstr(line, "color:"))
-		{
-			color = ft_color(fd);
-			free(line);
-		}
-		if (ft_strstr(line, "rot:"))
-		{
-			rot = ft_vector(fd);
-			free(line);
-		}
+		if (ft_strstr(line[i], "pos:"))
+			pos = ft_vector(line[i + 1]);
+		if (ft_strstr(line[i], "dis:"))
+			dis = ft_atodouble(&line[i + 1]);
+		if (ft_strstr(line[i], "color:"))
+			color = ft_color(line[i + 1]);
+		if (ft_strstr(line[i], "rot:"))
+			rot = ft_vector(line[i + 1]);
+		i++;
 	}
-	free(line);
-	if (ret == -1)
-		exit(-1);
 	return (ft_new_obj(dis, pos, rot, color));
 }
 
-t_obj			*ft_get_plans(int fd, t_env *env)
+t_obj			*ft_get_plans(char **line, t_env *env, int i)
 {
-	char	*line;
-	int		ret;
 	t_obj	*first;
 
 	first = env->obj;
-	while ((ret = get_next_line(fd, &line)) > 0 && ft_strcmp("-------", line))
+	while (ft_strcmp("-------", line[i]))
 	{
-		if (ft_strstr(line, "new:"))
+		if (ft_strstr(line[i], "new:"))
 		{
 			if (!env->obj)
 			{
-				env->obj = ft_get_plan(fd);
+				env->obj = ft_get_plan(line, i);
 				first = env->obj;
 			}
 			else
-				ft_add_obj(env->obj, ft_get_plan(fd));
+				ft_add_obj(env->obj, ft_get_plan(line, i));
 		}
-		free(line);
-		if (ret == -1)
-			exit(-1);
+		i++;
 	}
-	if (line)
-		free(line);
 	return (first);
 }

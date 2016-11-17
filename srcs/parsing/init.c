@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 13:44:17 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/09 18:07:34 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/17 18:50:59 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,26 @@ void	ft_add_spot(t_spot *start, t_spot *new)
 }
 void	ft_init_scene(char *scene, t_env *env)
 {
-	char	*line;
-	int		fd;
-	int		ret;
+	char 	**file;
+	int		i;
 
-	fd = open(scene, O_RDONLY);
-	while ((ret = get_next_line(fd, &line)) > 0)
+	i = 0;
+	file = NULL;
+	file = ft_files(scene, file);
+	while (!ft_strstr(file[i], "END"))
 	{
-		if (ft_strstr(line, "camera:"))
-			ft_get_camera(fd, env);
-		else if (ft_strstr(line, "spot:"))
-			env->spots = ft_get_spots(fd);
-		else if (ft_strstr(line, "cone:"))
-			env->obj = ft_get_cones(fd, env);
-		else if (ft_strstr(line, "cylindre:"))
-			env->obj = ft_get_cylinds(fd, env);
-		else if (ft_strstr(line, "plan:"))
-			env->obj = ft_get_plans(fd, env);
-		else if (ft_strstr(line, "sphere:"))
-			env->obj = ft_get_spheres(fd, env);
-		free(line);
+		if (ft_strstr(file[i], "camera:"))
+			ft_get_camera(file, env, i);
+		if (ft_strstr(file[i], "spot:"))
+			env->spots = ft_get_spots(file, i);
+		if (ft_strstr(file[i], "cone:"))
+			env->obj = ft_get_cones(file, env, i) ;
+		if (ft_strstr(file[i], "cylindre:"))
+			env->obj = ft_get_cylinds(file, env, i);
+		if (ft_strstr(file[i], "plan:"))
+			env->obj = ft_get_plans(file, env, i);
+		if (ft_strstr(file[i], "sphere:"))
+			env->obj = ft_get_spheres(file, env, i);
+		i++;
 	}
-	free(line);
-	if (ret == -1)
-		exit (-1);
 }

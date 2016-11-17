@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/14 15:33:53 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/17 17:04:36 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,12 @@ t_vec				add_vect(t_vec v1, t_vec v2);
 t_vec				norm_vect(t_vec v);
 double				dot_vect(t_vec v1, t_vec v2);
 t_vec				new_vec(double x, double y, double z);
-t_vec				ft_vector(int fd);
+t_vec				ft_vector(char *line);
 t_vec				cross_vect(t_vec v1, t_vec v2);
 /*
 ** camera.c
 */
-void				ft_get_camera(int fd, t_env *env);
+void				ft_get_camera(char **line, t_env *env, int i);
 /*
 ** clear.c
 */
@@ -108,19 +108,19 @@ void				ft_clear_spot(t_spot **start);
 /*
 ** color.c
 */
-t_color				ft_color(int fd);
+t_color				ft_color(char *line);
 t_color				ft_new_color(double r, double g, double b);
 void				ft_deleted_color(t_color color);
 /*
 ** cone.c
 */
-t_obj				*ft_get_cone(int fd);
-t_obj				*ft_get_cones(int fd, t_env *env);
+t_obj				*ft_get_cone(char **line, int i);
+t_obj				*ft_get_cones(char **line, t_env *env, int i);
 /*
 ** cylindre.c
 */
-t_obj				*ft_get_cylind(int fd);
-t_obj				*ft_get_cylinds(int fd, t_env *env);
+t_obj				*ft_get_cylind(char **line, int i);
+t_obj				*ft_get_cylinds(char **line, t_env *env, int i);
 /*
 ** display.c
 */
@@ -154,18 +154,23 @@ double				ft_cone(t_obj *obj, t_env *e);
 /*
 ** plan.c
 */
-t_obj				*ft_get_plan(int fd);
-t_obj				*ft_get_plans(int fd, t_env *env);
+t_obj				*ft_get_plan(char **line, int i);
+t_obj				*ft_get_plans(char **line, t_env *env, int i);
 /*
 ** sphere.c
 */
-t_obj	            *ft_get_sphere(int fd);
-t_obj	            *ft_get_spheres(int fd, t_env *env);
+t_obj	            *ft_get_sphere(char **line, int i);
+t_obj	            *ft_get_spheres(char **line, t_env *env, int i);
 /*
 ** spots.c
 */
-t_spot				*ft_get_spot(int fd);
-t_spot				*ft_get_spots(int fd);
+t_spot				*ft_get_spot(char **line, int i);
+t_spot				*ft_get_spots(char **line, int i);
+/*
+** tools.c
+*/
+char				**ft_files(char *scene, char **file);
+int					ft_countline(char *scene);
 /*
 ** tools_display.c
 */

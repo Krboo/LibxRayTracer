@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/06 14:57:25 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/07 16:57:25 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/15 15:19:18 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_vec	new_vec(double x,double y, double z)
 	vec.y = y;
 	vec.z = z;
 
-	return(vec);
+	return (vec);
 }
 
 t_vec	add_vect(t_vec	v1, t_vec	v2)
@@ -33,15 +33,12 @@ t_vec	add_vect(t_vec	v1, t_vec	v2)
 	return (v3);
 }
 
-t_vec ft_vector(int fd)
+t_vec ft_vector(char *line)
 {
 	double x;
 	double y;
 	double z;
-	char	*line;
 
-	if (get_next_line(fd, &line) < 1)
-		exit(-1);
 	x = ft_atodouble(&line);
 	y = ft_atodouble(&line);
 	z = ft_atodouble(&line);

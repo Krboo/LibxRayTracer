@@ -6,11 +6,11 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/09 15:57:16 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/14 17:18:29 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<../includes/rtv1.h>
+#include	"../includes/rtv1.h"
 
 static void	ft_put_pixel(t_env	*env, int x, int y, int color)
 {
