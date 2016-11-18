@@ -6,11 +6,28 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 16:56:07 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/17 17:54:07 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:19:46 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rtv1.h"
+
+double	ft_data(char *line)
+{
+	return (ft_atodouble(&line));
+}
+
+void	ft_free_tab(char **tab, int c)
+{
+	int i;
+
+	i = 0;
+	while (i <= c)
+	{
+		free(tab[i]);
+		i++;
+	}
+}
 
 int		ft_countline(char *scene)
 {
@@ -45,11 +62,11 @@ char 	**ft_files(char *scene, char **file)
 	file = NULL;
 	j = 0;
 	fd = open(scene, O_RDONLY);
-	if (!(file = (char **)malloc(sizeof(char *) * i + 1)))
+	if (!(file = (char **)malloc(sizeof(char *) * i)))
 		return (NULL);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if (!(file[j] = (char *)malloc(sizeof(char) * ft_strlen(line) + 1)))
+		if (!(file[j] = (char *)malloc(sizeof(char) * ft_strlen(line))))
 			return (NULL);
 			file[j] = ft_strcpy(file[j], line);
 		j++;

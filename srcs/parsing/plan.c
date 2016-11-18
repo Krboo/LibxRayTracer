@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:58:10 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/17 17:02:17 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:07:03 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_obj			*ft_get_plan(char **line, int i)
 		if (ft_strstr(line[i], "pos:"))
 			pos = ft_vector(line[i + 1]);
 		if (ft_strstr(line[i], "dis:"))
-			dis = ft_atodouble(&line[i + 1]);
+			dis = ft_data(line[i + 1]);
 		if (ft_strstr(line[i], "color:"))
 			color = ft_color(line[i + 1]);
 		if (ft_strstr(line[i], "rot:"))

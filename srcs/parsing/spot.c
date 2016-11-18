@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:00:12 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/17 18:17:56 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:07:25 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_spot			*ft_get_spot(char **line, int i)
 		if (ft_strstr(line[i], "color:"))
 			color = ft_color(line[i + 1]);
 		if (ft_strstr(line[i], "size:"))
-			size = ft_atodouble(&line[i + 1]);
+			size = ft_data(line[i + 1]);
 		i++;
 	}
 	return (ft_new_spot(size, pos, color));

@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:50:13 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/17 18:50:17 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:06:18 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_obj		*ft_get_cylind(char **line, int i)
 		if (ft_strstr(line[i], "pos:"))
 			pos = ft_vector(line[i + 1]);
 		if (ft_strstr(line[i], "radius:"))
-			radius = ft_atodouble(&line[i + 1]);
+			radius = ft_data(line[i + 1]);
 		if (ft_strstr(line[i], "color:"))
 			color = ft_color(line[i + 1]);
 		if (ft_strstr(line[i], "rot:"))

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/17 17:04:36 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:11:36 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,9 @@ t_spot				*ft_get_spots(char **line, int i);
 ** tools.c
 */
 char				**ft_files(char *scene, char **file);
+double				ft_data(char *line);
 int					ft_countline(char *scene);
+void				ft_free_tab(char **tab, int i);
 /*
 ** tools_display.c
 */

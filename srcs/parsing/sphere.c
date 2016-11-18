@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 17:46:23 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/17 17:44:22 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/18 18:08:47 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_obj		*ft_get_sphere(char **line, int i)
 		if (ft_strstr(line[i], "pos"))
 			pos = ft_vector(line[i + 1]);
 		if (ft_strstr(line[i], "radius:"))
-			radius = ft_atodouble(&line[i + 1]);
+			radius = ft_data(line[i + 1]);
 		if (ft_strstr(line[i], "color:"))
 			color = ft_color(line[i + 1]);
 		i++;
