@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 13:44:17 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/18 18:16:45 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/21 19:22:32 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ void	ft_init_scene(char *scene, t_env *env)
 		i++;
 	}
 	ft_free_tab(file, i);
+	free(file);
 }
