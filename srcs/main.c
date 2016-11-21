@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/16 20:03:59 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/21 19:40:57 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static t_env *init_env(char *map)
 	e->img = (t_img *)malloc(sizeof(t_img));
 	e->img->img = mlx_new_image(e->mlx, W, H);
 	e->img->data = mlx_get_data_addr(e->img->img, &e->img->bpp, &e->img->s_line, &e->img->endian);
+	e->obj = NULL;
 	ft_init_scene(map, e);
 	ft_putendl("ft_init_scene is OK");
 	return (e);

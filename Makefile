@@ -6,7 +6,7 @@
 #    By: pmartine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/02 15:47:16 by pmartine          #+#    #+#              #
-#    Updated: 2016/11/15 16:58:08 by qduperon         ###   ########.fr        #
+#    Updated: 2016/11/21 19:37:38 by pmartine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	@make -C libft
 	@make -C minilibx_macos
-	@gcc $(CFLAGS) -o $(NAME) $(OBJ) -I libft/includes/libft.h -lmlx \
+	@gcc $(CFLAGS) -o $(NAME) $(OBJ) -L minilibx_macos -lmlx \
 	-framework OpenGl -framework Appkit libft/libft.a minilibx_macos/libmlx.a
 	@echo "Make libmlx.a: \033[1;32m DONE !\033[m"
 	@echo "Make $(NAME) : \033[1;32m DONE !\033[m"
