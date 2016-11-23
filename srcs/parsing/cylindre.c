@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 15:50:13 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/18 18:06:18 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/23 18:35:41 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ t_obj		*ft_get_cylind(char **line, int i)
 	return (ft_new_obj4(radius, pos, rot, color));
 }
 
-t_obj			*ft_get_cylinds(char **line, t_env *env, int i)
+t_obj		*ft_get_cylinds(char **line, t_env *env, int i)
 {
-	t_obj		*first;
+	t_obj	*first;
 
 	first = env->obj;
 	while (!ft_strstr("-------", line[i]))

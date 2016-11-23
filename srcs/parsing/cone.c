@@ -6,13 +6,13 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 14:39:39 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/18 18:06:41 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/23 18:35:18 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rtv1.h"
 
-t_obj			*ft_get_cone(char **line, int i)
+t_obj		*ft_get_cone(char **line, int i)
 {
 	double	alpha;
 	t_color	color;
@@ -49,7 +49,7 @@ t_obj		*ft_get_cones(char **line, t_env *env, int i)
 				first = env->obj;
 			}
 			else
-					ft_add_obj(env->obj, ft_get_cone(line, i));
+				ft_add_obj(env->obj, ft_get_cone(line, i));
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 16:56:07 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/18 18:19:46 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/23 18:38:57 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	ft_free_tab(char **tab, int c)
 
 int		ft_countline(char *scene)
 {
-	char 	*line;
+	char	*line;
 	int		fd;
-	int 	i;
-	int 	ret;
+	int		i;
+	int		ret;
 
 	i = 0;
 	fd = open(scene, O_RDONLY);
@@ -50,13 +50,13 @@ int		ft_countline(char *scene)
 	return (i);
 }
 
-char 	**ft_files(char *scene, char **file)
+char	**ft_files(char *scene, char **file)
 {
 	char	*line;
 	int		i;
-	int 	ret;
-	int 	j;
-	int 	fd;
+	int		ret;
+	int		j;
+	int		fd;
 
 	i = ft_countline(scene);
 	file = NULL;
@@ -68,7 +68,7 @@ char 	**ft_files(char *scene, char **file)
 	{
 		if (!(file[j] = (char *)malloc(sizeof(char) * ft_strlen(line))))
 			return (NULL);
-			file[j] = ft_strcpy(file[j], line);
+		file[j] = ft_strcpy(file[j], line);
 		j++;
 		free(line);
 	}

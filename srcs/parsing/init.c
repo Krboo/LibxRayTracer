@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 13:44:17 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/21 19:22:32 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/11/23 18:37:16 by qduperon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ void	ft_add_spot(t_spot *start, t_spot *new)
 		start = start->next;
 	start->next = new;
 }
+
 void	ft_init_scene(char *scene, t_env *env)
 {
-	char 	**file;
+	char	**file;
 	int		i;
 
 	i = 0;
@@ -40,7 +41,7 @@ void	ft_init_scene(char *scene, t_env *env)
 		if (ft_strstr(file[i], "spot:"))
 			env->spots = ft_get_spots(file, i);
 		if (ft_strstr(file[i], "cone:"))
-			env->obj = ft_get_cones(file, env, i) ;
+			env->obj = ft_get_cones(file, env, i);
 		if (ft_strstr(file[i], "cylindre:"))
 			env->obj = ft_get_cylinds(file, env, i);
 		if (ft_strstr(file[i], "plan:"))
