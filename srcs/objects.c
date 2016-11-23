@@ -116,8 +116,8 @@ t_obj	*ft_intersection(t_env *e, t_obj *node)
 	{
 		if (node->type == 3)
 			dist = ft_cylindre(node, e);
-	//	if (node->type == 2)
-	//		dist = ft_cone(node, e);
+		if (node->type == 2)
+			dist = ft_cone(node, e);
 		if (node->type == 0)
 			dist = ft_plan(node, e);
 		if (node->type == 1)

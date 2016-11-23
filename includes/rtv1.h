@@ -78,7 +78,7 @@ int		draw(t_env *env);
 //double		calc_lamb(t_env *env, t_vec pos);
 //int		lambert_rgb(int r, int g, int b, double lambert);
 //void		ft_put_pixel(t_env *env, int x, int y, int color);
-
+t_vec   normale(t_obj *obj, t_env *env, t_vec cam);
 void		trace(t_env *env, t_obj *node, int x, int y);
 int		ft_error(char *str);
 void		display(t_env *e);

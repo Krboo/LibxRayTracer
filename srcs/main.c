@@ -78,7 +78,7 @@ int		main(int ac,char **av)
 	else if ((env = init_env(av[1])) != NULL)
 	{
 		draw(env);
-		display(env);
+	//	display(env);
 	//	putdisplay(env);
 		mlx_hook(env->win, 2, 1L << 0, ft_keyhook, env);
 		mlx_hook(env->win, 17, (1L << 17), ft_red_cross, 0);

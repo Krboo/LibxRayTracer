@@ -37,7 +37,7 @@ int		ft_keyhook(int	keycode, t_env *env)
 		return (0);
 	}
 	draw(env);
-	display(env);
+//	display(env);
 	return (0);
 }
 
