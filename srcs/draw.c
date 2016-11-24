@@ -51,18 +51,10 @@ static int	lambert_rgb(int r, int g, int b, double lambert)
 {
 	r *= lambert;
 	g *= lambert;
-	b*= lambert;
+	b *= lambert;
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 
-double		ft_clamp(double a, double inf, double sup)
-{
-		if (a < inf)
-			return (inf);
-		if (a > sup)
-			return (sup);
-		return (a);
-}
 /*static double	calc_lamb(t_env	*env, t_vec	pos)
 {
 	t_vec	vec;
@@ -96,9 +88,12 @@ static double	calc_lamb(t_env	*env, t_obj	*obj)
 	norm = normale(obj ,env ,cam);
 	dist = sub_vect(cam, env->spots->pos);
 	dist = norm_vect(dist);
-	lambert = dot_vect(dist, norm);
+	lambert = 0.2;
+	lambert += dot_vect(dist, norm);
 	if (lambert < EPSI)
 		lambert = 0;
+	if (lambert > 1.0)
+		lambert = 1;
 	return (lambert);
 }
 
