@@ -88,7 +88,7 @@ static double	calc_lamb(t_env	*env, t_obj	*obj)
 	norm = normale(obj ,env ,cam);
 	dist = sub_vect(env->spots->pos, cam);
 	dist = norm_vect(dist);
-	lambert = 0.2;
+	lambert = 0;
 	lambert += dot_vect(dist, norm);
 	if (lambert < EPSI)
 		lambert = 0;
@@ -100,13 +100,27 @@ static double	calc_lamb(t_env	*env, t_obj	*obj)
 void	trace(t_env *env, t_obj *node, int x, int y)
 {
 	t_obj	*tmp;
+	double	lambert;
+	t_spot	*first;
 
+	lambert = 0;
+	first = env->spots;
 	tmp = NULL;
 	env->d = 20000.0;
 	create_ray(env, x , y);
 	tmp = ft_intersection(env, node);
 	if (tmp != NULL)
-		ft_put_pixel(env, x, y, lambert_rgb(tmp->col.r,tmp->col.g, tmp->col.b, calc_lamb(env, tmp)));
+	{
+		while (env->spots)
+		{
+						lambert = lambert  > calc_lamb(env, tmp) ? lambert : calc_lamb(env, tmp);
+						lambert = lambert > 1 ? 1.0 : lambert;
+						lambert = lambert < 0.0 ? 0.0 : lambert;
+						env->spots = env->spots->next;
+		}
+		ft_put_pixel(env, x, y, lambert_rgb(tmp->col.r,tmp->col.g, tmp->col.b, lambert));
+	}
+	env->spots = first;
 }
 
 
@@ -116,7 +130,6 @@ int	draw(t_env	*env)
 	int		x;
 	int		y;
 	t_obj 		*node;
-
 
 	node = env->obj;
 	y = -1;

@@ -39,7 +39,7 @@ void	ft_init_scene(char *scene, t_env *env)
 		if (ft_strstr(file[i], "camera:"))
 			ft_get_camera(file, env, i);
 		if (ft_strstr(file[i], "spot:"))
-			env->spots = ft_get_spots(file, i);
+			env->spots = ft_get_spots(file, env, i);
 		if (ft_strstr(file[i], "cone:"))
 			env->obj = ft_get_cones(file, env, i);
 		if (ft_strstr(file[i], "cylindre:"))

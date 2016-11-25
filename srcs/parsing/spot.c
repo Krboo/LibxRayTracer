@@ -31,17 +31,20 @@ t_spot			*ft_get_spot(char **line, int i)
 	return (ft_new_spot(size, pos, color));
 }
 
-t_spot			*ft_get_spots(char **line, int i)
+t_spot			*ft_get_spots(char **line, t_env *env, int i)
 {
 	t_spot	*s;
 
-	s = NULL;
+	s = env->spots;
 	while (!ft_strstr("-------", line[i]))
 	{
 		if (ft_strstr(line[i], "new:"))
 		{
-			if (s == NULL)
-				s = ft_get_spot(line, i);
+			if (!env->spots)
+			{
+			env->spots = ft_get_spot(line, i);
+			s = env->spots;
+			}
 			else
 				ft_add_spot(s, ft_get_spot(line, i));
 		}

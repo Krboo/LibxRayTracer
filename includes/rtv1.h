@@ -165,7 +165,7 @@ t_obj	            *ft_get_spheres(char **line, t_env *env, int i);
 ** spots.c
 */
 t_spot				*ft_get_spot(char **line, int i);
-t_spot				*ft_get_spots(char **line, int i);
+t_spot				*ft_get_spots(char **line,t_env * env, int i);
 /*
 ** tools.c
 */

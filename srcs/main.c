@@ -64,8 +64,11 @@ static t_env *init_env(char *map)
 	e->img->img = mlx_new_image(e->mlx, W, H);
 	e->img->data = mlx_get_data_addr(e->img->img, &e->img->bpp, &e->img->s_line, &e->img->endian);
 	e->obj = NULL;
+	e->spots = NULL;
 	ft_init_scene(map, e);
 	ft_putendl("ft_init_scene is OK");
+	if (e->spots->next != NULL)
+		ft_putendl("multi spots");
 	return (e);
 }
 
