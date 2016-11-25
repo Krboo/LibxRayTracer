@@ -86,7 +86,7 @@ static double	calc_lamb(t_env	*env, t_obj	*obj)
 
 	cam = add_vect(env->ray_pos, scale_vect(env->ray_dir, env->d));
 	norm = normale(obj ,env ,cam);
-	dist = sub_vect(cam, env->spots->pos);
+	dist = sub_vect(env->spots->pos, cam);
 	dist = norm_vect(dist);
 	lambert = 0.2;
 	lambert += dot_vect(dist, norm);
