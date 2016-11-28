@@ -16,6 +16,30 @@ size:
 3
 -------
 -------
+cylindre:
+new:
+pos:
+-50, 0, 50
+radius:
+12
+color:
+146, 210, 189
+rot:
+1 , 1 , 1
+-------
+-------
+cylindre:
+new:
+pos:
+-10, 20, -10
+radius:
+12
+color:
+110, 150, 150
+rot:
+1 , 0 , 1
+-------
+-------
 sphere:
 new:
 pos:
