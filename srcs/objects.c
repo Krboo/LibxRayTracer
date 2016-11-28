@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/14 16:32:25 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/28 14:47:29 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,12 @@ t_obj	*ft_intersection(t_env *e, t_obj *node)
 {
 	t_obj	*tmp;
 	double	dist;
+	t_obj	lum;
 
+	lum.pos = e->spots->pos;
+	lum.size = e->spots->size;
+	lum.type = 5;
+	lum.col = e->spots->col;
 	dist = 0;
 	tmp = NULL;
 	e->d = 20000.0;
@@ -129,5 +134,11 @@ t_obj	*ft_intersection(t_env *e, t_obj *node)
 		}
 		node = node->next;
 	}
+		dist = ft_sphere(&lum, e);
+		if (dist > EPSI && dist < e->d)
+		{
+			tmp = &lum;
+			e->d = dist;
+		}
 	return (tmp);
 }

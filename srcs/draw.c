@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/21 16:49:42 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/11/28 14:27:04 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ static double	calc_lamb(t_env	*env, t_obj	*obj)
 	dist = norm_vect(dist);
 	lambert = 0;
 	lambert += dot_vect(dist, norm);
-	if (lambert < EPSI)
-		lambert = 0;
+	if (lambert < 0.15)
+		lambert = 0.15;
 	if (lambert > 1.0)
 		lambert = 1;
 	return (lambert);
@@ -101,26 +101,17 @@ void	trace(t_env *env, t_obj *node, int x, int y)
 {
 	t_obj	*tmp;
 	double	lambert;
-	t_spot	*first;
 
 	lambert = 0;
-	first = env->spots;
 	tmp = NULL;
 	env->d = 20000.0;
 	create_ray(env, x , y);
 	tmp = ft_intersection(env, node);
 	if (tmp != NULL)
 	{
-		while (env->spots)
-		{
-						lambert = lambert  > calc_lamb(env, tmp) ? lambert : calc_lamb(env, tmp);
-						lambert = lambert > 1 ? 1.0 : lambert;
-						lambert = lambert < 0.0 ? 0.0 : lambert;
-						env->spots = env->spots->next;
-		}
+		lambert = calc_lamb(env, tmp);
 		ft_put_pixel(env, x, y, lambert_rgb(tmp->col.r,tmp->col.g, tmp->col.b, lambert));
 	}
-	env->spots = first;
 }
 
 

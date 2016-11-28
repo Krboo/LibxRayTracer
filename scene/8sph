@@ -1,0 +1,98 @@
+camera:
+new:
+pos:
+0, 0, -250
+dir:
+0, 0, 1
+-------
+-------
+spot:
+new:
+pos:
+0, 150, 0
+color:
+255, 255, 255
+size:
+3
+-------
+-------
+sphere:
+new:
+pos:
+-50, 60, -25
+radius:
+25
+color:
+19, 90, 145
+-------
+-------
+sphere:
+new:
+pos:
+-30, -50, 45
+radius:
+25
+color:
+200, 78, 165
+-------
+-------
+sphere:
+new:
+pos:
+-10, -10, 75
+radius:
+25
+color:
+40, 210, 55
+-------
+-------
+sphere:
+new:
+pos:
+15, -40, 5
+radius:
+15
+color:
+95, 140, 255
+-------
+-------
+sphere:
+new:
+pos:
+45, 0, -55
+radius:
+25
+color:
+0, 255, 255
+-------
+-------
+sphere:
+new:
+pos:
+120, -40, 0
+radius:
+25
+color:
+255, 0, 255
+-------
+-------
+sphere:
+new:
+pos:
+85, -80, 40
+radius:
+25
+color:
+0, 0, 255
+-------
+-------
+sphere:
+new:
+pos:
+90, 90, 90
+radius:
+15
+color:
+100, 100, 100
+-------
+END
