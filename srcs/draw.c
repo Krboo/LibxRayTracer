@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/28 16:39:42 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:17:55 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,48 +55,6 @@ static int	lambert_rgb(int r, int g, int b, double lambert)
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 
-/*static double	calc_lamb(t_env	*env, t_vec	pos)
-{
-	t_vec	vec;
-	t_vec	cam;
-	t_vec	yo;
-	double	lambert;
-
-	cam = scale_vect(env->ray_dir, env->d);
-	cam = add_vect(env->ray_pos, cam);
-	yo = sub_vect(cam, env->spots->pos);
-	yo = norm_vect(yo);
-	vec = sub_vect(pos, cam);
-	vec = norm_vect(vec);
-	lambert = dot_vect(yo, vec);
-	if (lambert < 0.2)
-		lambert = 0.2;
-	if (lambert < EPSI)
-		lambert = 0;
-	return (lambert);
-}
-*/
-
-static double	calc_lamb(t_env	*env, t_obj	*obj)
-{
-	t_vec	dist;
-	t_vec	cam;
-	t_vec	norm;
-	double	lambert;
-
-	cam = add_vect(env->ray_pos, scale_vect(env->ray_dir, env->d));
-	norm = normale(obj ,env ,cam);
-	dist = sub_vect(env->spots->pos, cam);
-	dist = norm_vect(dist);
-	lambert = 0;
-	lambert += dot_vect(dist, norm);
-	if (lambert < 0.15)
-		lambert = 0.15;
-	if (lambert > 1.0)
-		lambert = 1;
-	return (lambert);
-}
-
 void	trace(t_env *env, t_obj *node, int x, int y)
 {
 	t_obj	*tmp;
@@ -109,7 +67,10 @@ void	trace(t_env *env, t_obj *node, int x, int y)
 	tmp = ft_intersection(env, node);
 	if (tmp != NULL)
 	{
-		lambert = calc_lamb(env, tmp);
+		if (tmp->type == 5)
+			lambert = 1.0;
+		else
+			lambert = calc_lamb(env, tmp);
 		ft_put_pixel(env, x, y, lambert_rgb(tmp->col.r,tmp->col.g, tmp->col.b, lambert));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/11/18 18:11:36 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:19:56 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,5 +177,9 @@ void				ft_free_tab(char **tab, int i);
 ** tools_display.c
 */
 void				putdisplay(t_env *env);
-
+/*
+** light.c
+*/
+double				min_max(double numb, double min, double max);
+double				calc_lamb(t_env *env, t_obj *obj);
 #endif
