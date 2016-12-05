@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/05 13:52:18 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/05 18:15:29 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,32 @@ void	trace(t_env *env, t_obj *node, int x, int y)
 {
 	t_obj	*tmp;
 	double	lambert;
+	double	lambert2;
+	t_spot	*first;
 
 	lambert = 0;
+	lambert2 = 0;
 	tmp = NULL;
 	env->d = 20000.0;
 	create_ray(env, x , y);
 	tmp = ft_intersection(env, node);
+	first = env->spots;
 	if (tmp != NULL)
 	{
 		if (tmp->type == 5)
 			lambert = 1.0;
 		else
-			lambert = calc_lamb(env, tmp);
+		{
+			while (env->spots)
+			{
+				lambert2 = calc_lamb(env, tmp);
+				lambert = lambert > lambert2 ? lambert : lambert2;
+				env->spots= env->spots->next;
+			}
+		}
 		ft_put_pixel(env, x, y, lambert_rgb(tmp->col.r,tmp->col.g, tmp->col.b, lambert));
 	}
+	env->spots = first;
 }
 
 
