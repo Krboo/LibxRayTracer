@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:16:04 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/05 18:12:16 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/05 19:33:23 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ double      min_max(double numb, double min, double max)
 	return (numb);
 }
 
-int		shadow(t_env *e, t_obj *obj, t_vec cam)
+double		shadow(t_env *e, t_obj *obj, t_vec cam)
 {
 	t_obj		*node;
 	double	dis;
@@ -55,7 +55,8 @@ int		shadow(t_env *e, t_obj *obj, t_vec cam)
 		{
 			e->cam_pos = st;
 			e->ray_dir = sto;
-			return (1);
+			e->d = yo;
+			return (-0.15);
 		}
 	}
 		node = node->next;
@@ -86,11 +87,11 @@ double   calc_lamb(t_env *env, t_obj *obj)
 	ref = sub_vect(dist, ref);
 	if ((tmp = dot_vect(ref, env->ray_dir)) > 0.0)
 		spec = pow(tmp, 30.0);
-	lambert += dot_vect(dist, norm) * 0.9;
-	lambert = min_max(lambert, 0.15, 1.0) ;
-	if (obj->type != 0)
+	lambert += dot_vect(dist, norm);
+	lambert = min_max(lambert, 0.15, 0.9) ;
+	if (obj->type != 0 && spec > EPSI)
 		lambert += spec ;
-	if (shadow(env, obj, cam) == 1)
-		lambert -= 0.15;
+	lambert += shadow(env, obj, cam);
+	lambert = min_max(lambert, 0.15, 1.5) ;
 	return (lambert);
 }

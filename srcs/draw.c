@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/05 18:15:29 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/05 19:33:31 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void create_ray(t_env *e, int x, int y)
 	v = (H - (double)y * 2.0) / W;
 	v1 = sub_vect(e->cam_dir, e->cam_pos);
 	v1 = norm_vect(v1);
-	v2 = cross_vect(v1, (t_vec){0.0, 1.0, 0.0});
+	v2 = cross_vect(v1, (t_vec){1.0, 0.0, 0.0});
 	v2 = norm_vect(v2);
 	v3 = cross_vect(v2, v1);
 	e->ray_dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * v3.y + FOV * v1.y, u *v2.z + v * v3.z + FOV * v1.z};
@@ -81,7 +81,8 @@ void	trace(t_env *env, t_obj *node, int x, int y)
 			while (env->spots)
 			{
 				lambert2 = calc_lamb(env, tmp);
-				lambert = lambert > lambert2 ? lambert : lambert2;
+			//	lambert = lambert > lambert2 ? lambert : lambert2;
+				lambert += lambert2;
 				env->spots= env->spots->next;
 			}
 		}
@@ -104,7 +105,7 @@ int	draw(t_env	*env)
 	{
 		x = -1;
 		while (++x < W)
-			ft_put_pixel(env, x, y, BLACK);
+			ft_put_pixel(env, x , y , BLACK);
 	}
    	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
 	y = -1;
