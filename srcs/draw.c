@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/02 17:17:55 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/05 13:52:18 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ static int	lambert_rgb(int r, int g, int b, double lambert)
 	r *= lambert;
 	g *= lambert;
 	b *= lambert;
+	r = min_max(r, 0, 255);
+	g = min_max(g, 0, 255);
+	b = min_max(b, 0, 255);
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 

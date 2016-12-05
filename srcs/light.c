@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:16:04 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/05 12:48:11 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/05 13:47:46 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ double   calc_lamb(t_env *env, t_obj *obj)
 	ref = sub_vect(dist, ref);
 	if ((tmp = dot_vect(ref, env->ray_dir)) > 0.0)
 		spec = pow(tmp, 30.0);
-	lambert += dot_vect(dist, norm) * 0.9 + spec;
-	//if (shadow())
-	//	lambert -= 0.1;
+	lambert += dot_vect(dist, norm) * 0.8;
 	lambert = min_max(lambert, 0.15, 1.0) ;
+	if (obj->type != 0)
+		lambert += spec ;
+	//if (shadow())
+	//	lambert = 0.15;
 	return (lambert);
 }
