@@ -30,7 +30,7 @@ int		shadow(t_env *e, t_obj *obj, t_vec cam)
 
 	dir = sub_vect(e->spots->pos, cam);
 	e->d = sqrtf(dot_vect(dir, dir));
-	norm_vect(dir);
+	dir = norm_vect(dir);
 	node = e->obj;
 	st = e->cam_pos;
 	e->ray_dir = dir;
