@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 15:37:59 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/09 16:21:23 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/07 08:01:47 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		putlight(t_env *env)
 	first = env->spots;
 	if (env->spots)
 	{
-		while (env->spots->next)
+		while (env->spots != NULL)
 		{
 			ft_putendl("lights:");
 			ft_putendl("pos:");
@@ -53,15 +53,6 @@ void		putlight(t_env *env)
 			ft_putchar('\n');
 			env->spots = env->spots->next;
 		}
-		ft_putendl("lights:");
-		ft_putendl("pos:");
-		ft_putstr("x:");
-		ft_putdouble(env->spots->pos.x, 4);
-		ft_putstr(" y:");
-		ft_putdouble(env->spots->pos.y, 4);
-		ft_putstr(" z:");
-		ft_putdouble(env->spots->pos.z, 4);
-		ft_putchar('\n');
 	}
 	env->spots = first;
 }

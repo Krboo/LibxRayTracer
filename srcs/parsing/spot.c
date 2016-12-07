@@ -6,7 +6,7 @@
 /*   By: qduperon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:00:12 by qduperon          #+#    #+#             */
-/*   Updated: 2016/11/18 18:07:25 by qduperon         ###   ########.fr       */
+/*   Updated: 2016/12/07 08:42:39 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ t_spot			*ft_get_spots(char **line, t_env *env, int i)
 		{
 			if (!env->spots)
 			{
-			env->spots = ft_get_spot(line, i);
-			s = env->spots;
+				env->spots = ft_get_spot(line, i);
+				s = env->spots;
 			}
 			else
 				ft_add_spot(s, ft_get_spot(line, i));

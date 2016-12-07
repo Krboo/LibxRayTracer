@@ -6,15 +6,15 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 17:14:50 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/05 19:33:31 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/07 08:10:36 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../includes/rtv1.h"
+#include "../includes/rtv1.h"
 
-static void	ft_put_pixel(t_env	*env, int x, int y, int color)
+static void		ft_put_pixel(t_env *env, int x, int y, int color)
 {
-	int		i;
+	int				i;
 	unsigned int	p;
 
 	i = 0;
@@ -27,7 +27,7 @@ static void	ft_put_pixel(t_env	*env, int x, int y, int color)
 	}
 }
 
-static void create_ray(t_env *e, int x, int y)
+static void		create_ray(t_env *e, int x, int y)
 {
 	t_vec	v1;
 	t_vec	v2;
@@ -42,12 +42,13 @@ static void create_ray(t_env *e, int x, int y)
 	v2 = cross_vect(v1, (t_vec){1.0, 0.0, 0.0});
 	v2 = norm_vect(v2);
 	v3 = cross_vect(v2, v1);
-	e->ray_dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * v3.y + FOV * v1.y, u *v2.z + v * v3.z + FOV * v1.z};
+	e->ray_dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * v3.y \
+		+ FOV * v1.y, u * v2.z + v * v3.z + FOV * v1.z};
 	e->ray_dir = norm_vect(e->ray_dir);
 	e->ray_pos = e->cam_pos;
 }
 
-static int	lambert_rgb(int r, int g, int b, double lambert)
+static int		lambert_rgb(int r, int g, int b, double lambert)
 {
 	r *= lambert;
 	g *= lambert;
@@ -58,46 +59,39 @@ static int	lambert_rgb(int r, int g, int b, double lambert)
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 
-void	trace(t_env *env, t_obj *node, int x, int y)
+void			trace(t_env *env, t_obj *node, int x, int y)
 {
 	t_obj	*tmp;
 	double	lambert;
-	double	lambert2;
 	t_spot	*first;
 
 	lambert = 0;
-	lambert2 = 0;
 	tmp = NULL;
-	env->d = 20000.0;
-	create_ray(env, x , y);
-	tmp = ft_intersection(env, node);
 	first = env->spots;
+	env->d = 20000.0;
+	create_ray(env, x, y);
+	tmp = ft_intersection(env, node);
 	if (tmp != NULL)
 	{
 		if (tmp->type == 5)
 			lambert = 1.0;
 		else
-		{
 			while (env->spots)
 			{
-				lambert2 = calc_lamb(env, tmp);
-			//	lambert = lambert > lambert2 ? lambert : lambert2;
-				lambert += lambert2;
-				env->spots= env->spots->next;
+				lambert += calc_lamb(env, tmp);
+				env->spots = env->spots->next;
 			}
-		}
-		ft_put_pixel(env, x, y, lambert_rgb(tmp->col.r,tmp->col.g, tmp->col.b, lambert));
+		ft_put_pixel(env, x, y, \
+				lambert_rgb(tmp->col.r, tmp->col.g, tmp->col.b, lambert));
 	}
 	env->spots = first;
 }
 
-
-
-int	draw(t_env	*env)
+int				draw(t_env *env)
 {
 	int		x;
 	int		y;
-	t_obj 		*node;
+	t_obj	*node;
 
 	node = env->obj;
 	y = -1;
@@ -105,9 +99,9 @@ int	draw(t_env	*env)
 	{
 		x = -1;
 		while (++x < W)
-			ft_put_pixel(env, x , y , BLACK);
+			ft_put_pixel(env, x, y, BLACK);
 	}
-   	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
+	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
 	y = -1;
 	while (++y < H)
 	{
@@ -115,6 +109,6 @@ int	draw(t_env	*env)
 		while (++x < W)
 			trace(env, node, x, y);
 	}
-   	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
-   	return (0);
+	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
+	return (0);
 }
