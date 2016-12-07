@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/07 08:53:41 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/07 10:04:05 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static t_env	*init_env(char *map)
 			&e->img->s_line, &e->img->endian);
 	e->obj = NULL;
 	e->spots = NULL;
+	e->dist = 0;
 	ft_init_scene(map, e);
 	ft_putendl("ft_init_scene is OK");
 	if (e->spots->next != NULL)

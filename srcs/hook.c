@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/04 17:00:42 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/07 08:12:22 by pmartine         ###   ########.fr       */
+/*   Created: 2016/12/07 10:07:34 by pmartine          #+#    #+#             */
+/*   Updated: 2016/12/07 10:07:37 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		ft_keyhook(int keycode, t_env *env)
 		return (0);
 	}
 	draw(env);
+	display(env);
 	return (0);
 }
 

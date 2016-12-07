@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 17:16:04 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/07 08:16:24 by pmartine         ###   ########.fr       */
+/*   Created: 2016/12/07 10:07:09 by pmartine          #+#    #+#             */
+/*   Updated: 2016/12/07 10:07:12 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,48 +21,54 @@ double		min_max(double numb, double min, double max)
 	return (numb);
 }
 
+double		shadow_loop(t_obj *node, t_env *e, double yo, t_calc calc)
+{
+	double	dis;
+
+	dis = 0;
+	if (node->type == 3)
+		dis = ft_cylindre(node, e);
+	else if (node->type == 2)
+		dis = ft_cone(node, e);
+	else if (node->type == 0)
+		dis = ft_plan(node, e);
+	else if (node->type == 1)
+		dis = ft_sphere(node, e);
+	if (dis > EPSI && dis < e->d)
+	{
+		e->cam_pos = calc.v2;
+		e->ray_dir = calc.v3;
+		e->d = yo;
+		return (-0.15);
+	}
+	else
+		return (0);
+}
+
 double		shadow(t_env *e, t_obj *obj, t_vec cam)
 {
 	t_obj		*node;
-	double		dis;
-	t_vec		dir;
-	t_vec		st;
-	t_vec		sto;
 	double		yo;
+	t_calc		calc;
 
 	yo = e->d;
-	dir = sub_vect(e->spots->pos, cam);
-	e->d = sqrtf(dot_vect(dir, dir));
-	dir = norm_vect(dir);
+	calc.v1 = sub_vect(e->spots->pos, cam);
+	e->d = sqrtf(dot_vect(calc.v1, calc.v1));
+	calc.v1 = norm_vect(calc.v1);
 	node = e->obj;
-	st = e->cam_pos;
-	sto = e->ray_dir;
-	e->ray_dir = dir;
+	calc.v2 = e->cam_pos;
+	calc.v3 = e->ray_dir;
+	e->ray_dir = calc.v1;
 	e->cam_pos = cam;
 	while (node != NULL)
 	{
 		if (obj != node)
-		{
-			if (node->type == 3)
-				dis = ft_cylindre(node, e);
-			if (node->type == 2)
-				dis = ft_cone(node, e);
-			if (node->type == 0)
-				dis = ft_plan(node, e);
-			if (node->type == 1)
-				dis = ft_sphere(node, e);
-			if (dis > EPSI && dis < e->d)
-			{
-				e->cam_pos = st;
-				e->ray_dir = sto;
-				e->d = yo;
+			if (shadow_loop(node, e, yo, calc) == (-0.15))
 				return (-0.15);
-			}
-		}
 		node = node->next;
 	}
-	e->cam_pos = st;
-	e->ray_dir = sto;
+	e->cam_pos = calc.v2;
+	e->ray_dir = calc.v3;
 	e->d = yo;
 	return (0);
 }
@@ -70,28 +76,26 @@ double		shadow(t_env *e, t_obj *obj, t_vec cam)
 double		calc_lamb(t_env *env, t_obj *obj)
 {
 	t_vec	dist;
-	t_vec	cam;
-	t_vec	norm;
+	t_calc	c;
 	double	lambert;
 	double	tmp;
 	double	spec;
-	t_vec	ref;
 
-	cam = add_vect(env->cam_pos, scale_vect(env->ray_dir, env->d));
-	norm = normale(obj, env, cam);
-	dist = sub_vect(env->spots->pos, cam);
+	c.v1 = add_vect(env->cam_pos, scale_vect(env->ray_dir, env->d));
+	c.v2 = normale(obj, env, c.v1);
+	dist = sub_vect(env->spots->pos, c.v1);
 	dist = norm_vect(dist);
 	lambert = 0.0;
 	spec = 0.0;
-	ref = scale_vect(norm, (2.0 * dot_vect(norm, dist)));
-	ref = sub_vect(dist, ref);
-	if ((tmp = dot_vect(ref, env->ray_dir)) > 0.0)
+	c.v3 = scale_vect(c.v2, (2.0 * dot_vect(c.v2, dist)));
+	c.v3 = sub_vect(dist, c.v3);
+	if ((tmp = dot_vect(c.v3, env->ray_dir)) > 0.0)
 		spec = pow(tmp, 30.0);
-	lambert += dot_vect(dist, norm);
+	lambert += dot_vect(dist, c.v2);
 	lambert = min_max(lambert, 0.15, 0.9);
 	if (obj->type != 0 && spec > EPSI)
 		lambert += spec;
-	lambert += shadow(env, obj, cam);
+	lambert += shadow(env, obj, c.v1);
 	lambert = min_max(lambert, 0.15, 1.5);
 	return (lambert);
 }

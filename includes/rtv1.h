@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/07 09:02:28 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/07 10:14:30 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ typedef struct		s_obj
 	struct s_obj	*next;
 }					t_obj;
 
+typedef	struct		s_calc
+{
+	t_vec			v1;
+	t_vec			v2;
+	t_vec			v3;
+}					t_calc;
+
 typedef struct		s_spot
 {
 	t_color			col;
@@ -72,6 +79,7 @@ typedef struct		s_env
 	t_vec			cam_dir;
 	t_vec			ray_dir;
 	t_vec			ray_pos;
+	double			dist;
 }					t_env;
 
 int					draw(t_env *env);
@@ -171,8 +179,9 @@ double				ft_data(char *line);
 int					ft_countline(char *scene);
 void				ft_free_tab(char **tab, int i);
 /*
-** tools_display.c
+** tools.c
 */
+t_obj				*inter_loop(t_obj *node, t_env *e, t_obj *tmp, t_obj lum);
 void				putdisplay(t_env *env);
 /*
 ** light.c

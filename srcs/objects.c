@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 12:15:56 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/07 08:27:27 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/07 10:14:15 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ double		ft_cylindre(t_obj *node, t_env *e)
 	double	b;
 	double	c;
 	t_vec	dist;
-	double	t0;
-	double	t1;
 
 	dist = sub_vect(e->cam_pos, node->pos);
 	node->rot = norm_vect(node->rot);
@@ -64,11 +62,9 @@ double		ft_cylindre(t_obj *node, t_env *e)
 	disc = b * b - 4 * a * c;
 	if (disc < 0)
 		return (-1);
-	t0 = (-b + sqrtf(disc)) / (2 * a);
-	t1 = (-b - sqrtf(disc)) / (2 * a);
-	if (t0 > t1)
-		t0 = t1;
-	return (t0);
+	c = (-b + sqrtf(disc)) / (2 * a);
+	c = (-b - sqrtf(disc)) / (2 * a) < c ? ((-b - sqrtf(disc)) / (2 * a)) : c;
+	return (c);
 }
 
 double		ft_cone(t_obj *node, t_env *e)
@@ -78,8 +74,6 @@ double		ft_cone(t_obj *node, t_env *e)
 	double	b;
 	double	c;
 	t_vec	dist;
-	double	t0;
-	double	t1;
 
 	dist = sub_vect(e->cam_pos, node->pos);
 	node->rot = norm_vect(node->rot);
@@ -92,48 +86,22 @@ double		ft_cone(t_obj *node, t_env *e)
 	disc = b * b - 4 * a * c;
 	if (disc < 0)
 		return (-1);
-	t0 = (-b + sqrtf(disc)) / (2 * a);
-	t1 = (-b - sqrtf(disc)) / (2 * a);
-	if (t0 > t1)
-		t0 = t1;
-	return (t0);
+	c = (-b + sqrtf(disc)) / (2 * a);
+	c = (-b - sqrtf(disc)) / (2 * a) < c ? ((-b - sqrtf(disc)) / (2 * a)) : c;
+	return (c);
 }
 
 t_obj		*ft_intersection(t_env *e, t_obj *node)
 {
 	t_obj	*tmp;
-	double	dist;
 	t_obj	lum;
 
+	e->dist = 0;
 	lum.pos = e->spots->pos;
 	lum.size = e->spots->size;
 	lum.type = 5;
 	lum.col = e->spots->col;
-	dist = 0;
 	tmp = NULL;
 	e->d = 20000.0;
-	while (node != NULL)
-	{
-		if (node->type == 3)
-			dist = ft_cylindre(node, e);
-		if (node->type == 2)
-			dist = ft_cone(node, e);
-		if (node->type == 0)
-			dist = ft_plan(node, e);
-		if (node->type == 1)
-			dist = ft_sphere(node, e);
-		if (dist > EPSI && dist < e->d)
-		{
-			tmp = node;
-			e->d = dist;
-		}
-		node = node->next;
-	}
-	dist = ft_sphere(&lum, e);
-	if (dist > EPSI && dist < e->d)
-	{
-		tmp = &lum;
-		e->d = dist;
-	}
-	return (tmp);
+	return (inter_loop(node, e, tmp, lum));
 }
