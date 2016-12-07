@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:42:19 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/07 08:21:14 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/07 08:53:41 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int				ft_error(char *str)
 	exit(0);
 }
 
-/*void			display(t_env	*e)
+void			display(t_env *e)
 {
 	t_obj		*node;
 	char		*str;
@@ -36,22 +36,10 @@ int				ft_error(char *str)
 	free(str);
 	mlx_string_put(e->mlx, e->win, 95, 45, RED, str = ft_itoa(e->spots->pos.z));
 	free(str);
-	mlx_string_put(e->mlx, e->win, 5, 100, RED, "sphere x: ");
-	mlx_string_put(e->mlx, e->win, 5, 115, RED, "sphere y: ");
-	mlx_string_put(e->mlx, e->win, 5, 130, RED, "sphere z: ");
-	mlx_string_put(e->mlx, e->win, 5, 145, RED, "sphere r: ");
-	mlx_string_put(e->mlx, e->win, 95, 100, RED, str = ft_itoa(node->pos.x));
-	free(str);
-	mlx_string_put(e->mlx, e->win, 95, 115, RED, str = ft_itoa(node->pos.y));
-	free(str);
-	mlx_string_put(e->mlx, e->win, 95, 130, RED, str = ft_itoa(node->pos.z));
-	free(str);
-	mlx_string_put(e->mlx, e->win, 95, 145, RED, str = ft_itoa(node->size));
-	free(str);
 	mlx_string_put(e->mlx, e->win, 5, 175, RED, "cam_pos z: ");
 	mlx_string_put(e->mlx, e->win, 105, 175, RED, str = ft_itoa(e->cam_pos.z));
 	free(str);
-}*/
+}
 
 static t_env	*init_env(char *map)
 {
@@ -83,6 +71,7 @@ int				main(int ac, char **av)
 	else if ((env = init_env(av[1])) != NULL)
 	{
 		draw(env);
+		display(env);
 		mlx_hook(env->win, 2, 1L << 0, ft_keyhook, env);
 		mlx_hook(env->win, 17, (1L << 17), ft_red_cross, 0);
 		mlx_loop(env->mlx);

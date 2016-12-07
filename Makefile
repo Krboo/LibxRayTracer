@@ -6,7 +6,7 @@
 #    By: pmartine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/02 15:47:16 by pmartine          #+#    #+#              #
-#    Updated: 2016/12/02 17:20:31 by pmartine         ###   ########.fr        #
+#    Updated: 2016/12/07 08:57:32 by pmartine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC = srcs/parsing/camera.c srcs/parsing/clear.c srcs/parsing/color.c \
 	  srcs/parsing/plan.c srcs/parsing/sphere.c srcs/parsing/tools.c\
 	  srcs/parsing/spot.c srcs/parsing/new.c srcs/display.c srcs/tools_display.c\
 	  srcs/draw.c srcs/hook.c srcs/main.c srcs/objects.c srcs/vectors.c\
-	srcs/norm.c srcs/light.c
+	srcs/vectors2.c srcs/norm.c srcs/light.c
 
 OBJ = $(SRC:.c=.o)
 

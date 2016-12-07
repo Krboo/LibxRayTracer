@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:37:15 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/02 17:19:56 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/07 09:02:28 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,13 @@ typedef struct		s_env
 	t_vec			ray_pos;
 }					t_env;
 
-int		draw(t_env *env);
-//double		calc_lamb(t_env *env, t_vec pos);
-//int		lambert_rgb(int r, int g, int b, double lambert);
-//void		ft_put_pixel(t_env *env, int x, int y, int color);
-t_vec   normale(t_obj *obj, t_env *env, t_vec cam);
-void		trace(t_env *env, t_obj *node, int x, int y);
-int		ft_error(char *str);
-void		display(t_env *e);
-int		ft_keyhook(int keycode, t_env *env);
-int		ft_red_cross(int keycode, t_env *env);
+int					draw(t_env *env);
+t_vec				normale(t_obj *obj, t_env *env, t_vec cam);
+void				trace(t_env *env, t_obj *node, int x, int y);
+int					ft_error(char *str);
+void				display(t_env *e);
+int					ft_keyhook(int keycode, t_env *env);
+int					ft_red_cross(int keycode, t_env *env);
 /*
 ** vectors.c
 */
@@ -136,13 +133,13 @@ void				ft_add_obj(t_obj *start, t_obj *new);
 void				ft_add_spot(t_spot *start, t_spot *new);
 void				ft_init_scene(char *scene, t_env *env);
 /*
-* new.c
+** new.c
 */
-t_obj				*ft_new_obj(double size, t_vec pos, t_vec rot, t_color col);
-t_obj				*ft_new_obj2(double size, t_vec pos, t_vec rot, t_color col);
-t_obj				*ft_new_obj3(double size, t_vec pos, t_vec rot, t_color col);
-t_obj				*ft_new_obj4(double size, t_vec pos, t_vec rot, t_color col);
-t_spot				*ft_new_spot(double size, t_vec pos, t_color col);
+t_obj				*ft_new_obj(double size, t_vec pos, t_vec rot, t_color c);
+t_obj				*ft_new_obj2(double size, t_vec pos, t_vec rot, t_color c);
+t_obj				*ft_new_obj3(double size, t_vec pos, t_vec rot, t_color c);
+t_obj				*ft_new_obj4(double size, t_vec pos, t_vec rot, t_color c);
+t_spot				*ft_new_spot(double size, t_vec pos, t_color c);
 /*
 ** objects.c
 */
@@ -159,13 +156,13 @@ t_obj				*ft_get_plans(char **line, t_env *env, int i);
 /*
 ** sphere.c
 */
-t_obj	            *ft_get_sphere(char **line, int i);
-t_obj	            *ft_get_spheres(char **line, t_env *env, int i);
+t_obj				*ft_get_sphere(char **line, int i);
+t_obj				*ft_get_spheres(char **line, t_env *env, int i);
 /*
 ** spots.c
 */
 t_spot				*ft_get_spot(char **line, int i);
-t_spot				*ft_get_spots(char **line,t_env * env, int i);
+t_spot				*ft_get_spots(char **line, t_env *env, int i);
 /*
 ** tools.c
 */
