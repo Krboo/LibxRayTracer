@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:22:09 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/13 12:51:31 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:49:42 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ double		calc_lamb(t_env *env, t_obj *obj)
 	if (spec > EPSI && obj->type != 0)
 		lambert += spec;
 	if (shadow(env, obj, c.v1) == (1))
-		return (0.2);
+		return (0.15);
 	return (min_max(lambert, 0.15, 1.5));
 }

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:22:24 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/12 16:09:48 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:39:40 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_env	*init_env(char *map)
 	if (!(e = (t_env *)malloc(sizeof(t_env))))
 		return (NULL);
 	e->mlx = mlx_init();
-	e->win = mlx_new_window(e->mlx, W, H, "Rtv1");
+	e->win = mlx_new_window(e->mlx, W, H, "rtv1");
 	e->img = (t_img *)malloc(sizeof(t_img));
 	e->img->img = mlx_new_image(e->mlx, W, H);
 	e->img->data = mlx_get_data_addr(e->img->img, &e->img->bpp, \
@@ -67,9 +67,9 @@ int				main(int ac, char **av)
 
 	fd = 0;
 	if (ac != 2 || (fd = open(av[1], O_RDONLY)) == -1)
-		ft_error("Usage : ./RTv1 scene_file (ex: ./RTv1 scene/demo.1)", 0);
+		ft_error("Usage : ./rtv1 scene_file (ex: ./rtv1 scene/demo.1)", 0);
 	if (close(fd) == -1)
-		ft_error("Usage : ./RTv1 scene_file (ex: ./RTv1 scene/demo.1)", 0);
+		ft_error("Usage : ./rtv1 scene_file (ex: ./rtv1 scene/demo.1)", 0);
 	else if ((env = init_env(av[1])) != NULL)
 	{
 		draw(env);

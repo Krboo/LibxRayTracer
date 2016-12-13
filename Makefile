@@ -6,11 +6,11 @@
 #    By: pmartine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/02 15:47:16 by pmartine          #+#    #+#              #
-#    Updated: 2016/12/07 10:26:42 by pmartine         ###   ########.fr        #
+#    Updated: 2016/12/13 15:39:49 by pmartine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Rtv1
+NAME = rtv1
 
 CFLAGS = -Wall -Werror -Wextra -I include -g3
 
