@@ -16,11 +16,11 @@ size:
 1
 -------
 -------
-cylindre:
+cone:
 new:
 pos:
 -30, 0, 0
-radius:
+alpha:
 10
 color:
 250, 150, 150

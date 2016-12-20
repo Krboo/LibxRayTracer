@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:22:09 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/13 15:49:42 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/20 21:19:56 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ double		shadow(t_env *e, t_obj *obj, t_vec cam)
 	t_obj		*node;
 	double		yo;
 	t_calc		calc;
-
+	(void)obj;
 	yo = e->d;
 	calc.v1 = sub_vect(e->spots->pos, cam);
 	e->d = sqrtf(dot_vect(calc.v1, calc.v1));
@@ -73,6 +73,15 @@ double		shadow(t_env *e, t_obj *obj, t_vec cam)
 	return (0);
 }
 
+t_vec	sym(t_vec vector, t_obj *obj)
+{
+	t_vec	new;
+
+	new = sub_vect(scale_vect(obj->pos, 2) , vector);
+	new = norm_vect(new);
+	return (new);
+}
+
 double		calc_lamb(t_env *env, t_obj *obj)
 {
 	t_vec	dist;
@@ -89,13 +98,13 @@ double		calc_lamb(t_env *env, t_obj *obj)
 	spec = 0;
 	c.v3 = scale_vect(c.v2, (2.0 * dot_vect(c.v2, dist)));
 	c.v3 = sub_vect(dist, c.v3);
+	lambert = dot_vect(dist, c.v2);
 	if ((tmp = dot_vect(c.v3, env->ray_dir)) > 0.0)
 		spec = pow(tmp, 30.0);
-	lambert += dot_vect(dist, c.v2);
-	lambert = min_max(lambert, 0.15, 0.84);
+	lambert = min_max(lambert, 0.00, 0.85);
 	if (spec > EPSI && obj->type != 0)
 		lambert += spec;
-	if (shadow(env, obj, c.v1) == (1))
-		return (0.15);
-	return (min_max(lambert, 0.15, 1.5));
+	if (shadow(env, obj, c.v1) == 1)
+		return (0.00);
+	return (min_max(lambert, 0.00, 1.5));
 }

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:21:28 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/13 15:40:41 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/20 20:46:15 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		create_ray(t_env *e, int x, int y)
 	v = (H - (double)y * 2.0) / W;
 	v1 = sub_vect(e->cam_dir, e->cam_pos);
 	v1 = norm_vect(v1);
-	v2 = cross_vect(v1, e->cam_dir);
+	v2 = cross_vect(v1, (t_vec){0, 1, 0});
 	v2 = norm_vect(v2);
 	v3 = cross_vect(v2, v1);
 	e->ray_dir = (t_vec){u * v2.x + v * v3.x + FOV * v1.x, u * v2.y + v * v3.y \
@@ -81,6 +81,7 @@ void			trace(t_env *env, t_obj *node, int x, int y)
 				lambert += calc_lamb(env, tmp);
 				env->spots = env->spots->next;
 			}
+		lambert = min_max(lambert, 0.15, 2.0);
 		ft_put_pixel(env, x, y, \
 				lambert_rgb(tmp->col.r, tmp->col.g, tmp->col.b, lambert));
 	}

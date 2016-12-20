@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:21:52 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/12 14:59:33 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/20 20:47:04 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int		ft_red_cross(int keycode, t_env *env)
 {
 	(void)keycode;
 	(void)env;
-	mlx_destroy_window(env->mlx, env->win);
+	//mlx_destroy_window(env->mlx, env->win);
 	exit(0);
 }
