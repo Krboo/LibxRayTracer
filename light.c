@@ -21,10 +21,10 @@ double		min_max(double numb, double min, double max)
 	return (numb);
 }
 
-double		shadow_loop(t_obj *node, t_env *e, double temp, t_calc calc)
+double		shadow_loop(t_obj *node, t_env *e, double yo, t_calc calc)
 {
 	double	dis;
-	
+
 	dis = 0;
 	if (node->type == 3)
 		dis = ft_cylindre(node, e);
@@ -38,7 +38,7 @@ double		shadow_loop(t_obj *node, t_env *e, double temp, t_calc calc)
 	{
 		e->cam_pos = calc.v2;
 		e->ray_dir = calc.v3;
-		e->d = temp;
+		e->d = yo;
 		return (1);
 	}
 	else
@@ -50,7 +50,7 @@ double		shadow(t_env *e, t_obj *obj, t_vec cam)
 	t_obj		*node;
 	double		yo;
 	t_calc		calc;
-	
+	(void)obj;
 	yo = e->d;
 	calc.v1 = sub_vect(e->spots->pos, cam);
 	e->d = sqrtf(dot_vect(calc.v1, calc.v1));

@@ -183,6 +183,9 @@ void				ft_free_tab(char **tab, int i);
 */
 t_obj				*inter_loop(t_obj *node, t_env *e, t_obj *tmp, t_obj lum);
 void				putdisplay(t_env *env);
+double			deg_to_rad(double deg);
+t_vec				inv(t_vec norm);
+t_obj				*fonct_plan(t_obj *obj);
 /*
 ** light.c
 */
