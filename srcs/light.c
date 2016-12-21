@@ -60,7 +60,7 @@ double		shadow(t_env *e, t_obj *obj, t_vec cam)
 	double		yo;
 	t_calc		calc;
 	t_obj		co;
-
+	(void)obj;
 	e->dist = 20000.0;
 	yo = e->d;
 	calc.v1 = sub_vect(e->spots->pos, cam);

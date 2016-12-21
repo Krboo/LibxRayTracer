@@ -24,17 +24,17 @@ int		ft_keyhook(int keycode, t_env *env)
 	if (keycode == PAGEDOWN)
 		env->spots->pos.z -= 10;
 	if (keycode == UP)
-		env->spots->pos.y += 10;
+		env->cam_pos.y += 30;
 	if (keycode == DOWN)
-		env->spots->pos.y -= 10;
+		env->cam_pos.y -= 30;
 	if (keycode == DEZOOM)
-		env->cam_pos.z -= 10;
+		env->cam_pos.z -= 30;
 	if (keycode == ZOOM)
-		env->cam_pos.z += 10;
+		env->cam_pos.z += 30;
 	if (keycode == RIGHT)
-		env->spots->pos.x += 10;
+		env->cam_pos.x += 30;
 	if (keycode == LEFT)
-		env->spots->pos.x -= 10;
+		env->cam_pos.x -= 30;
 	if (keycode == PRINT)
 		putdisplay(env);
 	draw(env);

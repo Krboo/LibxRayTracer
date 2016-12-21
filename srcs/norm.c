@@ -18,9 +18,16 @@ t_vec		normale(t_obj *obj, t_env *env, t_vec cam)
 	t_vec	tmp;
 	t_vec	temp;
 
-	(void)env;
 	if (obj->type == 0)
+	{
 		result = obj->rot;
+		if (env->cam_pos.y > obj->pos.y) 
+			result.y *= -1;
+		if (env->cam_pos.x < obj->pos.x) 
+			result.x *= -1;
+		if (env->cam_pos.z > obj->pos.z) 
+			result.z *= -1;
+	}
 	else
 	{
 		if (obj->type == 1)

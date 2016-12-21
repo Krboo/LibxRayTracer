@@ -60,11 +60,11 @@ t_vec		inv(t_vec	norm)
 
 t_obj		*fonct_plan(t_obj *obj)
 {
-	if ((obj->rot.x * obj->pos.x) > 0)
+	//if ((obj->rot.x * obj->pos.x) > 0)
 			obj->rot.x = obj->rot.x * -1;
-	if ((obj->rot.y * obj->pos.y) > 0)
+	//if ((obj->rot.y * obj->pos.y) > 0)
 			obj->rot.y = obj->rot.y * -1;
-	if ((obj->rot.z * obj->pos.z) > 0)
+	//if ((obj->rot.z * obj->pos.z) > 0)
 			obj->rot.z = obj->rot.z * -1;
 	return (obj);
 }

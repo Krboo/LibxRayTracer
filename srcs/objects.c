@@ -39,12 +39,11 @@ double		ft_plan(t_obj *obj, t_env *env)
 	double	t;
 	t_obj		*node;
 
-	//node = fonct_plan(obj);
 	node = obj;
-	t = ((dot_vect(node->rot, node->pos) - dot_vect(node->rot, env->cam_pos)) /
-		dot_vect(node->rot, env->ray_dir));
+//	node = fonct_plan(node);
+	t = ((dot_vect(node->rot, node->pos) - dot_vect(node->rot, env->cam_pos)) / dot_vect(node->rot, env->ray_dir));
 	if (t < 0)
-		return (-1);
+			return (-1);
 	return (t);
 }
 
