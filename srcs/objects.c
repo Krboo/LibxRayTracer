@@ -29,7 +29,7 @@ double		ft_sphere(t_obj *obj, t_env *e)
 	discr = ((-b - sqrtf(discr)) / (2 * a));
 	if (discr > c)
 		discr = c;
-	if (discr < EPSI)
+	if (discr < 0)
 		return (-1);
 	return (discr);
 }
@@ -39,11 +39,11 @@ double		ft_plan(t_obj *obj, t_env *env)
 	double	t;
 	t_obj		*node;
 
-	node = fonct_plan(obj);
+	//node = fonct_plan(obj);
 	node = obj;
 	t = ((dot_vect(node->rot, node->pos) - dot_vect(node->rot, env->cam_pos)) /
 		dot_vect(node->rot, env->ray_dir));
-	if (t < EPSI)
+	if (t < 0)
 		return (-1);
 	return (t);
 }
@@ -54,6 +54,7 @@ double		ft_cylindre(t_obj *node, t_env *e)
 	double	a;
 	double	b;
 	double	c;
+	double d;
 	t_vec	dist;
 
 	dist = sub_vect(e->cam_pos, node->pos);
@@ -65,11 +66,14 @@ double		ft_cylindre(t_obj *node, t_env *e)
 	c = dot_vect(dist, dist) - powf(dot_vect(dist, node->rot), 2) - \
 		pow(node->size, 2);
 	disc = b * b - 4 * a * c;
-	if (disc < EPSI)
+	if (disc < 0)
 		return (-1);
 	c = (-b + sqrtf(disc)) / (2 * a);
-	c = (-b - sqrtf(disc)) / (2 * a) < c ? ((-b - sqrtf(disc)) / (2 * a)) : c;
-	return (c);
+	d = (-b - sqrtf(disc)) / (2 * a);
+	if (c > EPSI && c < d)
+		return (c);
+	else
+	return (d);
 }
 
 double		ft_cone(t_obj *node, t_env *e)
@@ -78,6 +82,7 @@ double		ft_cone(t_obj *node, t_env *e)
 	double	a;
 	double	b;
 	double	c;
+	double d;
 	t_vec	dist;
 
 	dist = sub_vect(e->cam_pos, node->pos);
@@ -89,11 +94,14 @@ double		ft_cone(t_obj *node, t_env *e)
 	c = dot_vect(dist, dist) - (1 + powf(tanf(deg_to_rad(node->size)), 2)) * \
 		pow(dot_vect(dist, node->rot), 2);
 	disc = b * b - 4 * a * c;
-	if (disc < EPSI)
+	if (disc < 0)
 		return (-1);
 	c = (-b + sqrtf(disc)) / (2 * a);
-	c = (-b - sqrtf(disc)) / (2 * a) < c ? ((-b - sqrtf(disc)) / (2 * a)) : c;
-	return (c);
+	d = (-b - sqrtf(disc)) / (2 * a);
+	if (c > EPSI && c < d)
+		return (c);
+	else
+		return (d);
 }
 
 t_obj		*ft_intersection(t_env *e, t_obj *node)
@@ -101,12 +109,12 @@ t_obj		*ft_intersection(t_env *e, t_obj *node)
 	t_obj	*tmp;
 	t_obj	lum;
 
-	e->dist = 0;
+	e->dist = 0.0;
 	lum.pos = e->spots->pos;
 	lum.size = e->spots->size;
 	lum.type = 5;
 	lum.col = e->spots->col;
 	tmp = NULL;
-	e->d = 200000.0;
+	e->d = 20000.0;
 	return (inter_loop(node, e, tmp, lum));
 }

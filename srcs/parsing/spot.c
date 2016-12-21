@@ -21,7 +21,12 @@ t_spot			*ft_get_spot(char **line, int i)
 	while (!ft_strstr(line[i], "-------"))
 	{
 		if (ft_strstr(line[i], "pos:"))
-			pos = ft_vector(line[i + 1]);
+	{
+		pos = ft_vector(line[i + 1]);
+		pos.x += 0.15;
+		pos.y += 0.15;
+		pos.z += 0.15;
+	}
 		if (ft_strstr(line[i], "color:"))
 			color = ft_color(line[i + 1]);
 		if (ft_strstr(line[i], "size:"))

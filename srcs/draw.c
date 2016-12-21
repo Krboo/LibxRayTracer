@@ -92,7 +92,7 @@ int				draw(t_env *env)
 {
 	int		x;
 	int		y;
-	t_obj	*node;
+	t_obj		*node;
 
 	node = env->obj;
 	y = -1;
