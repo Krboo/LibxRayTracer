@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:23:05 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/22 16:27:20 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/22 16:47:54 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,14 @@ double		deg_to_rad(double deg)
 
 t_vec		inv(t_vec result, t_env *env, t_obj *obj)
 {
-	if (env->cam_pos.y > obj->pos.y && obj->rot.y < 0)
+	if ((env->cam_pos.y > obj->pos.y && obj->rot.y < 0) \
+			|| (env->cam_pos.y < obj->pos.y && obj->rot.y > 0))
 		result.y *= -1;
-	if (env->cam_pos.x < obj->pos.x)
+	if ((env->cam_pos.x < obj->pos.x && obj->rot.x > 0) || \
+			(env->cam_pos.x > obj->pos.x && obj->rot.x < 0))
 		result.x *= -1;
-	if (env->cam_pos.z > obj->pos.z)
+	if ((env->cam_pos.z > obj->pos.z && obj->rot.z < 0) || \
+			(env->cam_pos.z < obj->pos.z && obj->rot.z > 0))
 		result.z *= -1;
 	return (result);
 }
