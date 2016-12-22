@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:22:24 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/13 15:39:40 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/22 15:57:57 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int				main(int ac, char **av)
 	int			fd;
 
 	fd = 0;
-	if (ac != 2 || (fd = open(av[1], O_RDONLY)) == -1)
+	if (ac != 2 || (fd = open(av[1], O_RDONLY)) == -1 || (ft_strcmp(av[1], \
+		"scene") == 0))
 		ft_error("Usage : ./rtv1 scene_file (ex: ./rtv1 scene/demo.1)", 0);
 	if (close(fd) == -1)
 		ft_error("Usage : ./rtv1 scene_file (ex: ./rtv1 scene/demo.1)", 0);

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:22:09 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/20 21:19:56 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/22 16:06:55 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,27 @@ double		shadow_loop(t_obj *node, t_env *e, double temp, t_calc calc)
 		return (0);
 }
 
-//t_vec		sym(t_vec obj, t_vec lum)
-//{
-//	t_vec	res;
+int			special_test(t_env *e, t_obj *node, double num, t_calc calc)
+{
+	t_obj		co;
 
-//	res = add_vect(scale_vect(obj, 2), lum);
-//	res = norm_vect(res);
-//	return (res);
-//}
+	co.pos = node->pos;
+	co.size = node->size - 1;
+	co.rot = node->rot;
+	co.type = 2;
+	co.col = node->col;
+	if (shadow_loop(&co, e, num, calc) == 1)
+		return (1);
+	else
+		return (0);
+}
 
 double		shadow(t_env *e, t_obj *obj, t_vec cam)
 {
 	t_obj		*node;
 	double		yo;
 	t_calc		calc;
-	t_obj		co;
-	(void)obj;
+
 	e->dist = 20000.0;
 	yo = e->d;
 	calc.v1 = sub_vect(e->spots->pos, cam);
@@ -73,21 +78,9 @@ double		shadow(t_env *e, t_obj *obj, t_vec cam)
 	e->cam_pos = cam;
 	while (node != NULL)
 	{
-		if (obj != node)
-		{
-			if (shadow_loop(node, e, yo, calc) == 1)
-				return (1);
-		}
-		else if (node->type == 2)
-		{
-			co.pos = node->pos;
-			co.size = node->size - 1;
-			co.rot = node->rot;
-			co.type = 2;
-			co.col = node->col;
-			if (shadow_loop(&co, e, yo, calc) == 1)
-				return (1);
-			}
+		if ((obj != node && shadow_loop(node, e, yo, calc) == 1) || \
+			(node->type == 2 && special_test(e, node, yo, calc) == 1))
+			return (1);
 		node = node->next;
 	}
 	e->cam_pos = calc.v2;

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:28:34 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/12 14:50:21 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/22 15:38:52 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # define PAGEUP 121
 # define ESC 53
 # define PRINT 71
+# define KEY8 91
+# define KEY2 84
+# define KEY4 86
+# define KEY6 88
 
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000

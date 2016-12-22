@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:22:38 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/07 10:22:40 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/22 16:20:03 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,7 @@ t_vec		normale(t_obj *obj, t_env *env, t_vec cam)
 	if (obj->type == 0)
 	{
 		result = obj->rot;
-		if (env->cam_pos.y > obj->pos.y) 
-			result.y *= -1;
-		if (env->cam_pos.x < obj->pos.x) 
-			result.x *= -1;
-		if (env->cam_pos.z > obj->pos.z) 
-			result.z *= -1;
+		result = inv(result, env, obj);
 	}
 	else
 	{
@@ -37,11 +32,11 @@ t_vec		normale(t_obj *obj, t_env *env, t_vec cam)
 			temp = scale_vect(obj->rot, dot_vect(env->ray_dir, obj->rot) * \
 				env->d + dot_vect(sub_vect(env->cam_pos, obj->pos), obj->rot));
 			if (obj->type == 2)
-				temp = scale_vect(temp, (1 + powf(tanf(deg_to_rad(obj->size)), 2)));
+				temp = scale_vect(temp, \
+						(1 + powf(tanf(deg_to_rad(obj->size)), 2)));
 			tmp = sub_vect(cam, obj->pos);
 			result = sub_vect(tmp, temp);
 		}
 	}
-	result = norm_vect(result);
-	return (result);
+	return (norm_vect(result));
 }

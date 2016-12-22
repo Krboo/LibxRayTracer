@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:28:26 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/12 15:43:54 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/22 16:28:07 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,8 @@ void				ft_free_tab(char **tab, int i);
 */
 t_obj				*inter_loop(t_obj *node, t_env *e, t_obj *tmp, t_obj lum);
 void				putdisplay(t_env *env);
-double			deg_to_rad(double deg);
-t_vec				inv(t_vec norm);
+double				deg_to_rad(double deg);
+t_vec				inv(t_vec norm, t_env *env, t_obj *obj);
 t_obj				*fonct_plan(t_obj *obj);
 /*
 ** light.c

@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:21:28 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/20 20:46:15 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/22 15:54:59 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int				draw(t_env *env)
 {
 	int		x;
 	int		y;
-	t_obj		*node;
+	t_obj	*node;
 
 	node = env->obj;
 	y = -1;

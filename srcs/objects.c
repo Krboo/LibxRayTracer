@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:22:53 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/12 14:02:04 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/22 16:26:05 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ double		ft_sphere(t_obj *obj, t_env *e)
 double		ft_plan(t_obj *obj, t_env *env)
 {
 	double	t;
-	t_obj		*node;
+	t_obj	*node;
 
 	node = obj;
-//	node = fonct_plan(node);
-	t = ((dot_vect(node->rot, node->pos) - dot_vect(node->rot, env->cam_pos)) / dot_vect(node->rot, env->ray_dir));
+	t = ((dot_vect(node->rot, node->pos) - dot_vect(node->rot, env->cam_pos)) \
+			/ dot_vect(node->rot, env->ray_dir));
 	if (t < 0)
-			return (-1);
+		return (-1);
 	return (t);
 }
 
@@ -53,7 +53,6 @@ double		ft_cylindre(t_obj *node, t_env *e)
 	double	a;
 	double	b;
 	double	c;
-	double d;
 	t_vec	dist;
 
 	dist = sub_vect(e->cam_pos, node->pos);
@@ -61,18 +60,18 @@ double		ft_cylindre(t_obj *node, t_env *e)
 	a = dot_vect(e->ray_dir, e->ray_dir) - \
 		pow(dot_vect(e->ray_dir, node->rot), 2);
 	b = 2 * (dot_vect(e->ray_dir, dist) - dot_vect(e->ray_dir, node->rot) * \
-		dot_vect(dist, node->rot));
+			dot_vect(dist, node->rot));
 	c = dot_vect(dist, dist) - powf(dot_vect(dist, node->rot), 2) - \
 		pow(node->size, 2);
 	disc = b * b - 4 * a * c;
 	if (disc < 0)
 		return (-1);
 	c = (-b + sqrtf(disc)) / (2 * a);
-	d = (-b - sqrtf(disc)) / (2 * a);
-	if (c > EPSI && c < d)
+	disc = (-b - sqrtf(disc)) / (2 * a);
+	if (c > EPSI && c < disc)
 		return (c);
 	else
-	return (d);
+		return (disc);
 }
 
 double		ft_cone(t_obj *node, t_env *e)
@@ -81,14 +80,14 @@ double		ft_cone(t_obj *node, t_env *e)
 	double	a;
 	double	b;
 	double	c;
-	double d;
 	t_vec	dist;
 
 	dist = sub_vect(e->cam_pos, node->pos);
 	node->rot = norm_vect(node->rot);
-	a = dot_vect(e->ray_dir, e->ray_dir) - (1 + powf(tanf(deg_to_rad(node->size)), 2)) *
-		pow(dot_vect(e->ray_dir, node->rot), 2);
-	b = 2 * (dot_vect(e->ray_dir, dist) - (1 + powf(tanf(deg_to_rad(node->size)), 2)) *
+	a = dot_vect(e->ray_dir, e->ray_dir) - (1 + powf(tanf(\
+		deg_to_rad(node->size)), 2)) * pow(dot_vect(e->ray_dir, node->rot), 2);
+	b = 2 * (dot_vect(e->ray_dir, dist) - \
+			(1 + powf(tanf(deg_to_rad(node->size)), 2)) * \
 			dot_vect(e->ray_dir, node->rot) * dot_vect(dist, node->rot));
 	c = dot_vect(dist, dist) - (1 + powf(tanf(deg_to_rad(node->size)), 2)) * \
 		pow(dot_vect(dist, node->rot), 2);
@@ -96,11 +95,11 @@ double		ft_cone(t_obj *node, t_env *e)
 	if (disc < 0)
 		return (-1);
 	c = (-b + sqrtf(disc)) / (2 * a);
-	d = (-b - sqrtf(disc)) / (2 * a);
-	if (c > EPSI && c < d)
+	disc = (-b - sqrtf(disc)) / (2 * a);
+	if (c > EPSI && c < disc)
 		return (c);
 	else
-		return (d);
+		return (disc);
 }
 
 t_obj		*ft_intersection(t_env *e, t_obj *node)

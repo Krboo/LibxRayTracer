@@ -6,7 +6,7 @@
 /*   By: pmartine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:25:22 by pmartine          #+#    #+#             */
-/*   Updated: 2016/12/07 10:25:25 by pmartine         ###   ########.fr       */
+/*   Updated: 2016/12/22 16:18:06 by pmartine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ t_spot			*ft_get_spot(char **line, int i)
 	while (!ft_strstr(line[i], "-------"))
 	{
 		if (ft_strstr(line[i], "pos:"))
-	{
-		pos = ft_vector(line[i + 1]);
-//		pos.x += 0.15;
-//		pos.y += 0.15;
-//		pos.z += 0.15;
-	}
+		{
+			pos = ft_vector(line[i + 1]);
+			pos.x += 0.15;
+			pos.y += 0.15;
+			pos.z += 0.15;
+		}
 		if (ft_strstr(line[i], "color:"))
 			color = ft_color(line[i + 1]);
 		if (ft_strstr(line[i], "size:"))
